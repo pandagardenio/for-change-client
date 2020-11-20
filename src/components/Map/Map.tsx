@@ -5,14 +5,19 @@ import { MapContainerProps } from 'react-leaflet/types/MapContainer';
 import { Place, PlaceType } from '../../models/Place';
 import { MapFilters, MapFiltersValues } from './MapFilters';
 import { MapMarker, MapMarkerProps } from './MapMarker';
+import { MapSearch } from './MapSearch';
 
 import './Map.css'
-import { MapSearch } from './MapSearch';
 
 export type MapProps = MapContainerProps & {
     Marker?: React.FunctionComponent<MapMarkerProps>
     places: Place[];
 };
+
+export type MapPlaceFiltersValues = {
+    [PlaceType.CLOTHING]: boolean;
+    [PlaceType.GROCERIES]: boolean;
+}
 
 export const Map: React.FunctionComponent<MapProps> = ({ Marker = MapMarker, ...rest}: MapProps): JSX.Element => {
     const [places, setPlaces] = useState(rest.places);
@@ -32,7 +37,7 @@ export const Map: React.FunctionComponent<MapProps> = ({ Marker = MapMarker, ...
         return true;
     }), [mapFiltersValues]);
 
-    const onMapFiltersChange = (mapFiltersValues: MapFiltersValues): void => {
+    const onMapFiltersChange = (mapFiltersValues: MapFiltersValues<MapPlaceFiltersValues>): void => {
         setMapFiltersValues(mapFiltersValues);
         setPlaces(filterPlaces(rest.places));
     };
@@ -41,6 +46,11 @@ export const Map: React.FunctionComponent<MapProps> = ({ Marker = MapMarker, ...
         setPlaces(places.length ? places : filterPlaces(rest.places));
     }
 
+    const initialMapFiltersValues = {
+        [PlaceType.CLOTHING]: true,
+        [PlaceType.GROCERIES]: true
+    };
+
     useEffect((): void => {
         setPlaces(filterPlaces(rest.places));
     }, [rest.places, filterPlaces]);
@@ -48,7 +58,7 @@ export const Map: React.FunctionComponent<MapProps> = ({ Marker = MapMarker, ...
     return (
         <>
             <MapSearch places={filterPlaces(rest.places)} onSelect={onMapSearchSelect}/>
-            <MapFilters onChange={onMapFiltersChange}/>
+            <MapFilters onChange={onMapFiltersChange} mapFiltersValues={initialMapFiltersValues}/>
             <MapContainer {...rest} center={[40.385063, -3.700218]} zoom={13} scrollWheelZoom={false}>
                 <TileLayer
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

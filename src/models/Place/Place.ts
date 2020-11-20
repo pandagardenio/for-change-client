@@ -5,6 +5,8 @@ export type Place = {
         lat: number;
         lng: number;
     };
+    isOnline: boolean;
+    isPhysical: boolean;
     name: string;
     type: PlaceType;
 }
