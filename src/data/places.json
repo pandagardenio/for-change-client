@@ -1,8 +1,17 @@
 [{
+    "id": "1",
     "location": {
         "lat": 40.385063,
         "lng": -3.700218
     },
     "name": "https://www.sayebrand.com/",
     "type": "clothing"
+},{
+    "id": "2",
+    "location": {
+        "lat": 40.385063,
+        "lng": -3.700218
+    },
+    "name": "https://www.pandapanda.com/",
+    "type": "groceries"
 }]
