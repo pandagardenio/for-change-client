@@ -1,5 +1,6 @@
 import { makeStyles, Theme } from '@material-ui/core';
 import React, { useEffect, useState, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 
@@ -35,6 +36,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 export const Map: React.FunctionComponent<MapProps> = ({ Marker = MapMarker, ...rest}: MapProps): JSX.Element => {
+    const { t } = useTranslation();
     const [places, setPlaces] = useState(rest.places);
     const [placeDimensionFiltersValues, setPlaceDimensionFiltersValues] = useState({
         [PlaceDimension.ONLINE]: true,
@@ -107,11 +109,11 @@ export const Map: React.FunctionComponent<MapProps> = ({ Marker = MapMarker, ...
         [PlaceDimension.PHYSICAL]: true
     };
 
+    const classes = useStyles();
+
     useEffect((): void => {
         setPlaces(filterPlaces(rest.places));
     }, [rest.places, filterPlaces]);
-
-    const classes = useStyles();
 
     return (
         <>
@@ -119,8 +121,16 @@ export const Map: React.FunctionComponent<MapProps> = ({ Marker = MapMarker, ...
                 <header className={classes.header}>
                     <MapMenu>
                         <MapSearch places={filterPlaces(rest.places)} onSelect={onMapSearchSelect}/>
-                        <MapFilters onChange={onPlaceDimensionFilterChange} mapFiltersValues={initialPlaceDimensionFiltersValues}/>
-                        <MapFilters onChange={onPlaceTypeFilterChange} mapFiltersValues={initialPlaceTypeFiltersValues}/>
+                        <MapFilters
+                            mapFiltersValues={initialPlaceDimensionFiltersValues}
+                            onChange={onPlaceDimensionFilterChange}
+                            title={t('map.filters.title.place-dimension')}
+                        />
+                        <MapFilters
+                            mapFiltersValues={initialPlaceTypeFiltersValues}
+                            onChange={onPlaceTypeFilterChange}
+                            title={t('map.filters.title.place-type')}
+                        />
                     </MapMenu>     
                 </header>
                 <MapContainer center={[40.385063, -3.700218]} className={classes.leafletContainer} zoom={13} scrollWheelZoom={false}>

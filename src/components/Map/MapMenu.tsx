@@ -1,5 +1,6 @@
 import { Button, Dialog, DialogTitle, DialogContent, DialogActions } from '@material-ui/core';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export type MapMenuProps = {
     children: React.ReactNode;
@@ -8,6 +9,7 @@ export type MapMenuProps = {
 export const MapMenu: React.FunctionComponent<MapMenuProps> = (
     { children }: MapMenuProps
 ): JSX.Element => {
+    const { t } = useTranslation();
     const [isOpened, setIsOpened] = useState(false);
 
     const handleClose = () => { setIsOpened(false); };
@@ -16,7 +18,7 @@ export const MapMenu: React.FunctionComponent<MapMenuProps> = (
     return (
         <>
             <Button variant="outlined" color="primary" onClick={toggleMenu}>
-                Filters
+                {t('map.menu.cta')}
             </Button>
             <Dialog
                 aria-labelledby="map-menu-title"
@@ -25,13 +27,13 @@ export const MapMenu: React.FunctionComponent<MapMenuProps> = (
                 onClose={handleClose}
                 open={isOpened}
             >
-                <DialogTitle id="map-menu-title">Apply Filters</DialogTitle>
+                <DialogTitle id="map-menu-title">{t('map.menu.dialog.title')}</DialogTitle>
                 <DialogContent>
                     {children}
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} color="primary">
-                        Close
+                        {t('map.menu.dialog.close')}
                     </Button>
                 </DialogActions>
             </Dialog>

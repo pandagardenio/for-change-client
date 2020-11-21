@@ -1,15 +1,15 @@
 import { CssBaseline, ThemeProvider } from '@material-ui/core';
 import React from 'react';
 
-import { Home } from './pages/Home';
-import { theme } from './theme';
-
+import { AppRouter } from './utils/Router';
+import { theme } from './utils/theme';
+import './utils/i18n';
 
 function App() {
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline/>
-            <Home/>
+            <AppRouter/>
         </ThemeProvider>
     );
 }

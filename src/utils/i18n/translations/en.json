@@ -1,0 +1,33 @@
+{
+    "footer": {
+        "with-love": "From Madrid with ❤"
+    },
+    "header": {
+        "subtitle": "Find Climate Change events near you"
+    },
+    "map": {
+        "filters": {
+            "labels": {
+                "online": "Is online",
+                "physical": "Is physical",
+                "clothing": "Clothing",
+                "groceries": "Groceries"
+            },
+            "title": {
+                "place-dimension": "By place dimension",
+                "place-type": "By place type"
+            }
+        },
+        "menu": {
+            "cta": "Filter",
+            "dialog": {
+                "close": "Close",
+                "title": "Apply filters"
+            }
+        },
+        "search": {
+            "label": "Places",
+            "placeholder": "Filter individual places"
+        }
+    }
+}
