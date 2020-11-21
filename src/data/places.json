@@ -1,7 +1,7 @@
 [{
     "id": "1",
-    "isOnline": true,
-    "isPhysical": true,
+    "online": true,
+    "physical": true,
     "location": {
         "lat": 40.385063,
         "lng": -3.700218
@@ -10,8 +10,8 @@
     "type": "clothing"
 },{
     "id": "2",
-    "isOnline": true,
-    "isPhysical": true,
+    "online": true,
+    "physical": true,
     "location": {
         "lat": 40.385063,
         "lng": -3.700218
