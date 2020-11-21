@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import { MapContainerProps } from 'react-leaflet/types/MapContainer';
+import MarkerClusterGroup from 'react-leaflet-markercluster';
 
 import { Place, PlaceType } from '../../models/Place';
 import { MapFilters, MapFiltersValues } from './MapFilters';
@@ -112,7 +113,10 @@ export const Map: React.FunctionComponent<MapProps> = ({ Marker = MapMarker, ...
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                {places.map((place: Place, i: number) => <Marker key={i} place={place}/>)}
+                {/*@ts-ignore*/}
+                <MarkerClusterGroup>
+                    {places.map((place: Place, i: number) => <Marker key={i} place={place}/>)}
+                </MarkerClusterGroup>
             </MapContainer>
         </>
     );
