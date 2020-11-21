@@ -3,7 +3,7 @@ import { Autocomplete } from '@material-ui/lab';
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Place } from '../../../models/Place';
+import { Place } from '../../../sdk/models/Place';
 import { MapSearchOption } from './MapSearchOption';
 
 export type MapSearchProps = {

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Marker, MarkerProps } from './Marker';
-import { Place, PlaceType } from '../../../models/Place';
+import { Place, PlaceType } from '../../../sdk/models/Place';
 import { ClothingMarker } from './ClothingMarker';
 
 export type PlaceMarkerProps = Omit<MarkerProps, 'position'> & {

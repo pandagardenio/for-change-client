@@ -1,7 +1,7 @@
 import { Checkbox } from '@material-ui/core';
 import React from 'react';
 
-import { Place } from '../../../models/Place';
+import { Place } from '../../../sdk/models/Place';
 
 export type MapSearchOptionProps = {
     place: Place;

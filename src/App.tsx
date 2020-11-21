@@ -4,13 +4,20 @@ import React from 'react';
 import { AppRouter } from './utils/Router';
 import { theme } from './utils/theme';
 import './utils/i18n';
+import { ApiClient, SdkProvider, Sdk } from './sdk';
 
 function App() {
+    const sdk = new Sdk(new ApiClient({
+        baseUrl: '/'
+    }));
+
     return (
-        <ThemeProvider theme={theme}>
-            <CssBaseline/>
-            <AppRouter/>
-        </ThemeProvider>
+        <SdkProvider sdk={sdk}>
+            <ThemeProvider theme={theme}>
+                <CssBaseline/>
+                <AppRouter/>
+            </ThemeProvider>
+        </SdkProvider>
     );
 }
 

@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 
-import { Place, PlaceDimension, PlaceType } from '../../models/Place';
+import { Place, PlaceDimension, PlaceType } from '../../sdk/models/Place';
 import { MapFilters, MapFiltersValues } from './MapFilters';
 import { MapMarker, MapMarkerProps } from './MapMarker';
 import { MapMenu } from './MapMenu';
