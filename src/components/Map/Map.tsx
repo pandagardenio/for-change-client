@@ -1,6 +1,6 @@
+import { makeStyles, Theme } from '@material-ui/core';
 import React, { useEffect, useState, useCallback } from 'react';
 import { MapContainer, TileLayer } from 'react-leaflet';
-import { MapContainerProps } from 'react-leaflet/types/MapContainer';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 
 import { Place, PlaceDimension, PlaceType } from '../../models/Place';
@@ -9,9 +9,7 @@ import { MapMarker, MapMarkerProps } from './MapMarker';
 import { MapMenu } from './MapMenu';
 import { MapSearch } from './MapSearch';
 
-import './Map.css'
-
-export type MapProps = MapContainerProps & {
+export type MapProps = {
     Marker?: React.FunctionComponent<MapMarkerProps>
     places: Place[];
 };
@@ -25,6 +23,16 @@ export type PlaceTypeFiltersValues = {
     [PlaceType.CLOTHING]: boolean;
     [PlaceType.GROCERIES]: boolean;
 }
+
+const useStyles = makeStyles((theme: Theme) => ({
+    header: {
+        padding: theme.spacing(3)
+    },
+    leafletContainer: {
+        height: theme.spacing(60),
+        maxHeight: '80vh'
+    }
+}));
 
 export const Map: React.FunctionComponent<MapProps> = ({ Marker = MapMarker, ...rest}: MapProps): JSX.Element => {
     const [places, setPlaces] = useState(rest.places);
@@ -103,15 +111,19 @@ export const Map: React.FunctionComponent<MapProps> = ({ Marker = MapMarker, ...
         setPlaces(filterPlaces(rest.places));
     }, [rest.places, filterPlaces]);
 
+    const classes = useStyles();
+
     return (
         <>
-            <section className="map">
-                <MapMenu>
-                    <MapSearch places={filterPlaces(rest.places)} onSelect={onMapSearchSelect}/>
-                    <MapFilters onChange={onPlaceDimensionFilterChange} mapFiltersValues={initialPlaceDimensionFiltersValues}/>
-                    <MapFilters onChange={onPlaceTypeFilterChange} mapFiltersValues={initialPlaceTypeFiltersValues}/>
-                </MapMenu>
-                <MapContainer {...rest} center={[40.385063, -3.700218]} zoom={13} scrollWheelZoom={false}>
+            <section>
+                <header className={classes.header}>
+                    <MapMenu>
+                        <MapSearch places={filterPlaces(rest.places)} onSelect={onMapSearchSelect}/>
+                        <MapFilters onChange={onPlaceDimensionFilterChange} mapFiltersValues={initialPlaceDimensionFiltersValues}/>
+                        <MapFilters onChange={onPlaceTypeFilterChange} mapFiltersValues={initialPlaceTypeFiltersValues}/>
+                    </MapMenu>     
+                </header>
+                <MapContainer center={[40.385063, -3.700218]} className={classes.leafletContainer} zoom={13} scrollWheelZoom={false}>
                     <TileLayer
                         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
