@@ -12,7 +12,9 @@ export const Layout: React.FunctionComponent<LayoutProps> = (
 ): JSX.Element => (
     <>
         <Header/>
-        {children}
+        <main className="app">
+            {children}
+        </main>
         <Footer/>
     </>
 )

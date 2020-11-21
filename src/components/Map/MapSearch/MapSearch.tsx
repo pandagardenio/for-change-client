@@ -32,7 +32,6 @@ export const MapSearch: React.FunctionComponent<MapSearchProps> = (
             getOptionLabel={(place: Place) => place.name}
             onChange={handleChange}
             renderOption={(place, { selected }) => (<MapSearchOption place={place} selected={selected}/>)}
-            style={{ width: 500 }}
             renderInput={(params) => (
                 <TextField {...params} variant="outlined" label="Places" placeholder="My favourite place"/>
             )}
