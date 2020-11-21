@@ -29,5 +29,13 @@
             "label": "Places",
             "placeholder": "Filter individual places"
         }
+    },
+    "place": {
+        "directions": {
+            "cta": "Get directions to {{name}}"
+        },
+        "url": {
+            "cta": "Go to {{name}}"
+        }
     }
 }

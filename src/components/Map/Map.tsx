@@ -133,7 +133,7 @@ export const Map: React.FunctionComponent<MapProps> = ({ Marker = MapMarker, ...
                         />
                     </MapMenu>     
                 </header>
-                <MapContainer center={[40.385063, -3.700218]} className={classes.leafletContainer} zoom={13} scrollWheelZoom={false}>
+                <MapContainer center={[40.385063, -3.700218]} className={classes.leafletContainer} zoom={6} scrollWheelZoom={false}>
                     <TileLayer
                         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

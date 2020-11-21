@@ -2,6 +2,7 @@ import { PlaceDimension } from './PlaceDimension';
 import { PlaceType } from "./PlaceType";
 
 export type Place = {
+    description: string;
     location: {
         lat: number;
         lng: number;
@@ -9,5 +10,6 @@ export type Place = {
     [PlaceDimension.ONLINE]: boolean;
     [PlaceDimension.PHYSICAL]: boolean;
     name: string;
+    url: string;
     type: PlaceType;
 }

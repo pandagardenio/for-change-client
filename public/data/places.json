@@ -1,21 +1,25 @@
 [{
     "id": "1",
+    "description": "Zapatillas que hacen crecer bosques",
+    "location": {
+        "lat": 41.3983,
+        "lng": 2.159796
+    },
+    "name": "Saye Brand",
     "online": true,
     "physical": true,
-    "location": {
-        "lat": 40.385063,
-        "lng": -3.700218
-    },
-    "name": "https://www.sayebrand.com/",
-    "type": "clothing"
+    "type": "clothing",
+    "url": "https://www.sayebrand.com"
 },{
     "id": "2",
+    "description": "Veritas, cadena líder nacional de supermercados ecológicos",
+    "location": {
+        "lat": 40.421772,
+        "lng": -3.6973
+    },
+    "name": "Veritas Calle Libertad",
     "online": true,
     "physical": true,
-    "location": {
-        "lat": 40.385063,
-        "lng": -3.700218
-    },
-    "name": "https://www.pandapanda.com/",
-    "type": "groceries"
+    "type": "groceries",
+    "url": "https://www.veritas.es"
 }]
