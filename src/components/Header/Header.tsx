@@ -1,10 +1,9 @@
-import { makeStyles, Theme } from '@material-ui/core';
+import { Link, makeStyles, Theme } from '@material-ui/core';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 
 import { AppRoutes } from '../../utils/Router';
-import { LanguageSelector } from '../LanguageSelector';
 
 export type HeaderProps = {};
 
@@ -15,6 +14,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     main: {
         display: 'flex',
         justifyContent: 'space-between'
+    },
+    navElements: {
+        display: 'flex',
+        listStyle: 'none'
     }
 }));
 
@@ -26,9 +29,18 @@ export const Header: React.FunctionComponent<HeaderProps> = (): JSX.Element => {
         <header className={classes.root}>
             <div className={classes.main}>
                 <h1>
-                    <Link to={AppRoutes.HOME}>ForChange.org</Link>
+                    <RouterLink to={AppRoutes.HOME}>ForChange.org</RouterLink>
                 </h1>
-                <LanguageSelector/>
+                <nav>
+                    <ul className={classes.navElements}>
+                        <li>
+                            <Link href={`${AppRoutes.HOME}#who-we-are`}>{t('header.nav.who-we-are')}</Link>
+                        </li>
+                        <li>
+                            <Link href={`${AppRoutes.HOME}#what-is-this`}>{t('header.nav.what-is-this')}</Link>
+                        </li>
+                    </ul>  
+                </nav>
             </div>
             <h2>{t('header.subtitle')}</h2>
         </header>

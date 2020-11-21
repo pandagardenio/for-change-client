@@ -4,6 +4,8 @@ import { Layout } from '../../components/Layout';
 import { Map } from '../../components/Map';
 import { Place } from '../../sdk/models/Place';
 import { useSdk } from '../../sdk';
+import { WhoWeAre } from './WhoWeAre';
+import { WhatIsThis } from './WhatIsThis';
 
 export const Home: React.FunctionComponent = (): JSX.Element => {
     const [places, setPlaces] = useState<Place[]>([]);
@@ -16,6 +18,8 @@ export const Home: React.FunctionComponent = (): JSX.Element => {
     return (
         <Layout>
             <Map places={places}/>
+            <WhatIsThis/>
+            <WhoWeAre/>
         </Layout>
     )
 };
