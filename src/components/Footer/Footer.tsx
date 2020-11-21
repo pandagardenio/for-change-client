@@ -4,6 +4,6 @@ export type FooterProps = {};
 
 export const Footer: React.FunctionComponent<FooterProps> = (): JSX.Element => (
     <header>
-        <h1>From Madrid with LOVE</h1>
+        <p>From Madrid with ❤</p>
     </header>
 )

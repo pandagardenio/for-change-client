@@ -3,13 +3,13 @@ import { MapContainer, TileLayer } from 'react-leaflet';
 import { MapContainerProps } from 'react-leaflet/types/MapContainer';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 
-import { Place, PlaceType } from '../../models/Place';
+import { Place, PlaceDimension, PlaceType } from '../../models/Place';
 import { MapFilters, MapFiltersValues } from './MapFilters';
 import { MapMarker, MapMarkerProps } from './MapMarker';
+import { MapMenu } from './MapMenu';
 import { MapSearch } from './MapSearch';
 
 import './Map.css'
-import { PlaceDimension } from '../../models/Place/PlaceDimension';
 
 export type MapProps = MapContainerProps & {
     Marker?: React.FunctionComponent<MapMarkerProps>
@@ -105,19 +105,23 @@ export const Map: React.FunctionComponent<MapProps> = ({ Marker = MapMarker, ...
 
     return (
         <>
-            <MapSearch places={filterPlaces(rest.places)} onSelect={onMapSearchSelect}/>
-            <MapFilters onChange={onPlaceDimensionFilterChange} mapFiltersValues={initialPlaceDimensionFiltersValues}/>
-            <MapFilters onChange={onPlaceTypeFilterChange} mapFiltersValues={initialPlaceTypeFiltersValues}/>
-            <MapContainer {...rest} center={[40.385063, -3.700218]} zoom={13} scrollWheelZoom={false}>
-                <TileLayer
-                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                {/*@ts-ignore*/}
-                <MarkerClusterGroup>
-                    {places.map((place: Place, i: number) => <Marker key={i} place={place}/>)}
-                </MarkerClusterGroup>
-            </MapContainer>
+            <section className="map">
+                <MapMenu>
+                    <MapSearch places={filterPlaces(rest.places)} onSelect={onMapSearchSelect}/>
+                    <MapFilters onChange={onPlaceDimensionFilterChange} mapFiltersValues={initialPlaceDimensionFiltersValues}/>
+                    <MapFilters onChange={onPlaceTypeFilterChange} mapFiltersValues={initialPlaceTypeFiltersValues}/>
+                </MapMenu>
+                <MapContainer {...rest} center={[40.385063, -3.700218]} zoom={13} scrollWheelZoom={false}>
+                    <TileLayer
+                        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    />
+                    {/*@ts-ignore*/}
+                    <MarkerClusterGroup>
+                        {places.map((place: Place, i: number) => <Marker key={i} place={place}/>)}
+                    </MarkerClusterGroup>
+                </MapContainer>
+            </section>
         </>
     );
 };
