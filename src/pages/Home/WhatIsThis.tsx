@@ -18,8 +18,8 @@ export const WhatIsThis: React.FunctionComponent = (): JSX.Element => {
             <header>
                 <Typography variant="h2">{t('home.what-is-this.title')}</Typography>
             </header>
-            <Typography>{t('home.what-is-this.paragraph1')}</Typography>
-            <Typography>{t('home.what-is-this.paragraph2')}</Typography>
+            <Typography variant="body1">{t('home.what-is-this.paragraph1')}</Typography>
+            <Typography variant="body1">{t('home.what-is-this.paragraph2')}</Typography>
         </section>
     )
 };
