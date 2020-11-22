@@ -44,16 +44,20 @@
             "placeholder": "Filter individual places"
         }
     },
+    "meta": {
+        "description": "ForChange, find places that make a social impact",
+        "title": "ForChange, find places that make a social impact"
+    },
     "place": {
         "type": {
             "clothing": "Clothing",
             "groceries": "Groceries"
         },
         "directions": {
-            "cta": "Get directions to {{name}}"
+            "label": "Get directions to {{name}}"
         },
         "url": {
-            "cta": "Go to {{name}}"
+            "label": "Go to {{name}}"
         }
     }
 }

@@ -4,6 +4,7 @@ import DirectionsIcon from '@material-ui/icons/Directions';
 import LanguageIcon from '@material-ui/icons/Language';
 // import ShareIcon from '@material-ui/icons/Share';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Place } from '../../sdk/models/Place';
 import { red } from '@material-ui/core/colors';
@@ -27,6 +28,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export const PlaceCard: React.FunctionComponent<PlaceCardProps> = (
     { place, raised = true }: PlaceCardProps
 ): JSX.Element => {
+    const { t } = useTranslation();
     const classes = useStyles();
     const getDirectionsUrl = (): string => 
         `https://www.google.com/maps/dir/?api=1&destination=${place.location.lat},${place.location.lng}`;
@@ -36,16 +38,16 @@ export const PlaceCard: React.FunctionComponent<PlaceCardProps> = (
             <CardHeader
                 avatar={<Avatar aria-label="place" className={classes.avatar}>R</Avatar>}
                 title={place.name}
-                subheader={place.type}
+                subheader={t(`place.type.${place.type}`)}
             />
             <CardContent>
                 <Typography variant="body2" color="textSecondary" component="p">{place.description}</Typography>
             </CardContent>
             <CardActions disableSpacing>
-                {place.location && <IconButton aria-label="Get Directions" component={Link} href={getDirectionsUrl()} target="_blank" rel="noopener">
+                {place.location && <IconButton aria-label={t('place.directions.label', { name: place.name })} component={Link} href={getDirectionsUrl()} target="_blank" rel="noopener">
                     <DirectionsIcon/>
                 </IconButton>}
-                {place.url && <IconButton aria-label="get directions" component={Link} href={place.url} target="_blank" rel="noopener">
+                {place.url && <IconButton aria-label={t('place.url.label', { name: place.name })} component={Link} href={place.url} target="_blank" rel="noopener">
                     <LanguageIcon/>
                 </IconButton>}
                 {/* <IconButton aria-label="add to favorites">
