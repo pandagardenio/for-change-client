@@ -31,7 +31,6 @@
                 "groceries": "Groceries"
             },
             "title": {
-                "place-dimension": "By place dimension",
                 "place-type": "By place type"
             }
         },

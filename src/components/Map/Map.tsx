@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 
-import { Place, PlaceDimension, PlaceType } from '../../sdk/models/Place';
+import { Place, PlaceType } from '../../sdk/models/Place';
 import { MapFilters, MapFiltersValues } from './MapFilters';
 import { MapMarker, MapMarkerProps } from './MapMarker';
 import { MapMenu } from './MapMenu';
@@ -14,11 +14,6 @@ export type MapProps = {
     Marker?: React.FunctionComponent<MapMarkerProps>
     places: Place[];
 };
-
-export type PlaceDimensionFiltersValues = {
-    [PlaceDimension.ONLINE]: boolean;
-    [PlaceDimension.PHYSICAL]: boolean;
-}
 
 export type PlaceTypeFiltersValues = {
     [PlaceType.CLOTHING]: boolean;
@@ -38,18 +33,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 export const Map: React.FunctionComponent<MapProps> = ({ Marker = MapMarker, ...rest}: MapProps): JSX.Element => {
     const { t } = useTranslation();
     const [places, setPlaces] = useState(rest.places);
-    const [placeDimensionFiltersValues, setPlaceDimensionFiltersValues] = useState({
-        [PlaceDimension.ONLINE]: true,
-        [PlaceDimension.PHYSICAL]: true
-    });
+
     const [placeTypeFiltersValues, setPlaceTypeFiltersValues] = useState({
         [PlaceType.CLOTHING]: true,
         [PlaceType.GROCERIES]: true
     });
-    const showPlaceDimensionFilter = useCallback(
-        (place: Place, filter: PlaceDimension): boolean =>
-            place[filter] && placeDimensionFiltersValues[filter]
-    , [placeDimensionFiltersValues]);
 
     const filterPlaces = useCallback((placesToFilter: Place[]): Place[] => placesToFilter.filter((place: Place): boolean => {
         if (
@@ -59,39 +47,11 @@ export const Map: React.FunctionComponent<MapProps> = ({ Marker = MapMarker, ...
             return false;
         }
 
-        if (
-            place.online &&
-            !showPlaceDimensionFilter(place, PlaceDimension.ONLINE) &&
-            !showPlaceDimensionFilter(place, PlaceDimension.PHYSICAL)
-        ) {
-            return false;
-        }
-
-        if (
-            place.physical &&
-            !showPlaceDimensionFilter(place, PlaceDimension.PHYSICAL) &&
-            !showPlaceDimensionFilter(place, PlaceDimension.ONLINE)
-        ) {
-            return false;
-        }
-
-        if (
-            !showPlaceDimensionFilter(place, PlaceDimension.PHYSICAL) &&
-            !showPlaceDimensionFilter(place, PlaceDimension.ONLINE)
-        ) {
-            return false;
-        }
-
         return true;
-    }), [placeTypeFiltersValues, showPlaceDimensionFilter]);
+    }), [placeTypeFiltersValues]);
 
     const onPlaceTypeFilterChange = (mapFiltersValues: MapFiltersValues<PlaceTypeFiltersValues>): void => {
         setPlaceTypeFiltersValues(mapFiltersValues);
-        setPlaces(filterPlaces(rest.places));
-    };
-
-    const onPlaceDimensionFilterChange = (mapFiltersValues: MapFiltersValues<PlaceDimensionFiltersValues>): void => {
-        setPlaceDimensionFiltersValues(mapFiltersValues);
         setPlaces(filterPlaces(rest.places));
     };
 
@@ -102,11 +62,6 @@ export const Map: React.FunctionComponent<MapProps> = ({ Marker = MapMarker, ...
     const initialPlaceTypeFiltersValues = {
         [PlaceType.CLOTHING]: true,
         [PlaceType.GROCERIES]: true
-    };
-
-    const initialPlaceDimensionFiltersValues = {
-        [PlaceDimension.ONLINE]: true,
-        [PlaceDimension.PHYSICAL]: true
     };
 
     const classes = useStyles();
@@ -121,11 +76,6 @@ export const Map: React.FunctionComponent<MapProps> = ({ Marker = MapMarker, ...
                 <header className={classes.header}>
                     <MapMenu>
                         <MapSearch places={filterPlaces(rest.places)} onSelect={onMapSearchSelect}/>
-                        <MapFilters
-                            mapFiltersValues={initialPlaceDimensionFiltersValues}
-                            onChange={onPlaceDimensionFilterChange}
-                            title={t('map.filters.title.place-dimension')}
-                        />
                         <MapFilters
                             mapFiltersValues={initialPlaceTypeFiltersValues}
                             onChange={onPlaceTypeFilterChange}

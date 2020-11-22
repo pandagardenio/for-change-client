@@ -4,3 +4,28 @@ id,name,description,type,online,url,physical,lat,lng
 3,L'envers,Sustainable knitwear collection,clothing,YES,https://www.lenversfashion.com/,NO,,
 4,Boden,"Women’s, men’s, & children’s apparel, accessories",clothing,YES,https://www.bodenusa.com/,NO,,
 5,Pact,Sustainable fashion for the whole family,clothing,YES,https://wearpact.com/,NO,,
+6,Eileen Fisher,Organic linen clothing: A simple wardrobe. A sustainable life,clothing,YES,https://www.eileenfisher.com/,YES,,
+7,Sézane,Dresses & blouses: for every responsible shopper who values beauty and quality. ,clothing,YES,https://www.sezane.com/,YES,48.88146973,2.31787467
+8,Able,"Women’s apparel, shoes, accessories: Feminist brand supporting women",clothing,YES,https://www.livefashionable.com/,YES,,
+9,Tradlands,Ethical blouses: hold social welfare and production quality to the highest standards,clothing,YES,https://tradlands.com/,NO,,
+10,Outerknown,"The California-cool aesthetic for both men and women, matched with the brand’s ethics",clothing,YES,https://www.outerknown.com/,YES,,
+11,Genuins,Footwear with sustainable seal: cork sandals with an anatomical sole (BIO) began,clothing,YES,https://genuins.com/,YES,,
+12,PLA,It deals with dresses and tops made with fabric whose pattern is a matter of making the most to give value to the work done by hand and that each piece is uniqu,clothing,YES,https://pla.org.es/,YES,39.6425972,3.009786367
+13,Mireia Playà,"Cruelty Free shoes are not only a trend, but part of a way of life that bets on the freedom of animals.",clothing,YES,https://mireiaplaya.com/,YES,40.52736664,
+14,Urban Fawn,Jewelry: all the metals they use to make their jewelry come from responsible mines,clothing,YES,https://www.urbanfawn.com/,NO,,
+15,Ecoalf,Ecoalf goal is to create the first generation of fashion products made with recycled materials,clothing,YES,https://ecoalf.com/,YES,40.42703247,-3.698680639
+16,Lifegist,Ropa con materiales con certificado GOTS (Global Organic Textile Standard),clothing,YES,https://www.lifegist.es/,YES,40.3245597,-3.7673156
+17,Ecoology,"Ecoology works with natural, ecological and recycled fabrics",clothing,YES,https://ecoology.es/,NO,,
+18,The circular project shop,Mucho más que una tienda de moda sostenible,clothing,YES,https://thecircularproject.com/,YES,40.4244884,-3.7144509
+19,Tiralahilacha,We are organic! All items of our recent women and kids clothing lines are manufactured with fair trade certified organic cotton.,clothing,YES,https://www.tiralahilacha.com/,YES,40.4107666,-3.700704813
+20,Brava Fabrics,Sustainably & fairly produced organic cotton fashion made in Spain & Portugal,clothing,YES,https://es.bravafabrics.com/,YES,40.42427063,-3.701254606
+21,Momoc Shoes,Vegan and Sustainable shoes for WOMEN 100% Made in Spain using recycled materials,clothing,YES,https://www.momocshoes.com/,NO,,
+22,Back to eco,"Store: “go back to the eco” of earlier times, where the lifecycle of our items was extended by repairing, reconverting and reusing.",clothing,YES,https://www.infinitdenim.com/,YES,41.3894654,2.175787
+23,Mercado Productores,"Un mercado donde se fomenta la importancia de consumir productos de cercanía, artesanos y de calidad",groceries,YES,https://mercadoproductores.es/,YES,40.39207077,-3.698374033
+24,Cocomero,"Tienda con productos ecológicos certificados, suministrados por pequeños productores locales",groceries,YES,https://cocomero.es/,YES,40.38653564,-3.689926147
+25,Pepito y Grano,Tienda Granel de productos ecológicos y naturales,groceries,YES,https://pepitaygrano.com/,YES,40.40093613,-3.710091114
+26,Casa Ruiz Granel,Venta a granel con productos de proximidad,groceries,YES,https://casaruizgranel.com/,YES,40.42606354,-3.67796874
+27,Bio c’Bon,Supermarkets that distribute organic labeled products,groceries,YES,https://www.bio-c-bon.eu/,YES,48.8862256,2.3840029
+28,Herbolario Navarro,"Alimentación más saludable: supermercado tradicional, pero en versión ecológica y natural",groceries,YES,https://www.herbolarionavarro.es/,YES,40.4310093,-3.7031789
+29,El Huerto de Lucas,"Proyecto ecogastrocultural: productos 100% orgánicos, libres de tóxicos y que han sido cultivados con un uso racional de los recursos naturales",groceries,YES,https://elhuertodelucas.com/,YES,40.4237721,-3.6959906
+30,Organic Food & Market,"Organic Market and Food Restaurant is a part of the community promoting a healthy lifestyle, predominantly plant-based, organic-eating and chemical-free approach to improve health and wellness.",groceries,YES,https://organicmarketfood.com/,YES,36.5154,-4.8858

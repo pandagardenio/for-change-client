@@ -25,13 +25,10 @@
     "map": {
         "filters": {
             "labels": {
-                "online": "Is online",
-                "physical": "Is physical",
                 "clothing": "Clothing",
                 "groceries": "Groceries"
             },
             "title": {
-                "place-dimension": "By place dimension",
                 "place-type": "By place type"
             }
         },
@@ -48,6 +45,10 @@
         }
     },
     "place": {
+        "type": {
+            "clothing": "Clothing",
+            "groceries": "Groceries"
+        },
         "directions": {
             "cta": "Get directions to {{name}}"
         },
