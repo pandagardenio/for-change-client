@@ -1,3 +1,4 @@
+import { Typography } from '@material-ui/core';
 import React from 'react';
 
 import { Place } from '../../../../sdk/models/Place';
@@ -11,7 +12,7 @@ export const PlacePopupHeader: React.FunctionComponent<PlacePopupHeaderProps> = 
 ): JSX.Element => {
     return (
         <header>
-            <h3>{place.name}</h3>
+            <Typography variant="h5">{place.name}</Typography>
         </header>
     )
 };

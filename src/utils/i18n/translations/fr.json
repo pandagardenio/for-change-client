@@ -3,7 +3,24 @@
         "with-love": "De Madrid avec ❤"
     },
     "header": {
-        "subtitle": "Find Climate Change events near you"
+        "nav": {
+            "what-is-this": "What is this?",
+            "who-we-are": "Who we are?"
+        }
+    },
+    "home": {
+        "what-is-this": {
+            "paragraph1": "Find places that work hard to fight Climate Change.",
+            "paragraph2": "Get involved with your local community and start fighting Climate Change.",
+            "title": "What Is This?"
+        },
+        "who-we-are": {
+            "paragraph1": "We are volunteers who develop and mantain this platform.",
+            "paragraph2": "We are volunteers who search places, events and projects that figh Climate Change.",
+            "paragraph3": "Want to Collaborate? Get in touch here",
+            "paragraph4": "You want to appear in the map? Tell us about you here",
+            "title": "Who We Are?"
+        }
     },
     "map": {
         "filters": {
@@ -28,6 +45,14 @@
         "search": {
             "label": "Places",
             "placeholder": "Filter individual places"
+        }
+    },
+    "place": {
+        "directions": {
+            "cta": "Get directions to {{name}}"
+        },
+        "url": {
+            "cta": "Go to {{name}}"
         }
     }
 }

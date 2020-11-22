@@ -1,3 +1,4 @@
+import { Typography } from '@material-ui/core';
 import React from 'react';
 
 import { Place } from '../../../../sdk/models/Place';
@@ -10,6 +11,6 @@ export const PlacePopupDescription: React.FunctionComponent<PlacePopupDescriptio
     { place }: PlacePopupDescriptionProps
 ): JSX.Element => {
     return (
-        <p>{place.description}</p>
+        <Typography variant="body1">{place.description}</Typography>
     );
 };
