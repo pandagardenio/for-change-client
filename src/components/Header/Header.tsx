@@ -42,7 +42,7 @@ export const Header: React.FunctionComponent<HeaderProps> = (): JSX.Element => {
     return (
         <header className={classes.root}>
             <Typography className={classes.rootLink} variant="h3" component={RouterLink} to={AppRoutes.HOME}>
-                ForChange.org
+                ForChange
             </Typography>
             <nav>
                 <ul className={classes.navElements}>

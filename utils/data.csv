@@ -1,0 +1,6 @@
+id,name,description,type,online,url,physical,lat,lng
+1,Saye Brand,Zapatillas que hacen crecer bosques,clothing,YES,https://www.sayebrand.com,YES,41.3983,2.159796
+2,Veritas Calle Libertad,"Veritas, cadena líder nacional de supermercados ecológicos",groceries,YES,https://www.veritas.es,YES,40.421772,-3.6973
+3,L'envers,Sustainable knitwear collection,clothing,YES,https://www.lenversfashion.com/,NO,,
+4,Boden,"Women’s, men’s, & children’s apparel, accessories",clothing,YES,https://www.bodenusa.com/,NO,,
+5,Pact,Sustainable fashion for the whole family,clothing,YES,https://wearpact.com/,NO,,

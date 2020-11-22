@@ -17,7 +17,7 @@ export const Home: React.FunctionComponent = (): JSX.Element => {
 
     return (
         <Layout>
-            <Map places={places}/>
+            <Map places={places.filter((place: Place) => place.physical)}/>
             <WhatIsThis/>
             <WhoWeAre/>
         </Layout>

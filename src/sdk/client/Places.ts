@@ -9,7 +9,7 @@ export class Places {
     ) {}
 
     async all(): Promise<Place[]> {
-        return this.apiClient.get<Place[]>('data/places.json')
+        return this.apiClient.get<Place[]>('places.json')
             .then((response: AxiosResponse<Place[]>) => response.data);
     }
 }
