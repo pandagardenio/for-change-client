@@ -4,7 +4,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { theme } from '../../utils/theme';
-import { Place, PlaceType } from '../../sdk/models/Place';
+import { Place, PlaceType, PlaceDimension } from '../../sdk/models/Place';
 import { useSdk } from '../../sdk';
 import { PhysicalPlaces } from './PhysicalPlaces';
 import { OnlinePlaces } from './OnlinePlaces';
@@ -20,7 +20,7 @@ export type PlaceTypeFiltersValues = {
 
 export const Places: React.FunctionComponent = (): JSX.Element => {
     const [places, setPlaces] = useState<Place[]>([]);
-    const [value, setValue] = React.useState('1');
+    const [dimension, setDimension] = React.useState(PlaceDimension.PHYSICAL);
     const [placeTypeFiltersValues, setPlaceTypeFiltersValues] = useState({
         [PlaceType.CLOTHING]: true,
         [PlaceType.GROCERIES]: true
@@ -30,8 +30,8 @@ export const Places: React.FunctionComponent = (): JSX.Element => {
     const { t } = useTranslation();
     const sdk = useSdk();
 
-    const handleChange = (_event: React.ChangeEvent<{}>, newValue: string) => {
-        setValue(newValue);
+    const handleChange = (_event: React.ChangeEvent<{}>, newDimension: string) => {
+        setDimension(newDimension as PlaceDimension);
     };
 
     const getPlaces = useCallback(
@@ -59,7 +59,7 @@ export const Places: React.FunctionComponent = (): JSX.Element => {
     return (
         <>
             <section>
-                <TabContext value={value}>
+                <TabContext value={dimension}>
                     <header>
                         <PlacesMenu>
                             <PlacesSearch places={places} onSelect={onPlacesSearchSelect}/>
@@ -70,14 +70,14 @@ export const Places: React.FunctionComponent = (): JSX.Element => {
                             />
                         </PlacesMenu>
                         <TabList onChange={handleChange} aria-label="simple tabs example">
-                            <Tab label="Physical Places and Events" value="1" />
-                            <Tab label="Online Places and Events" value="2" />
+                            <Tab label="Physical Places and Events" value={PlaceDimension.PHYSICAL} />
+                            <Tab label="Online Places and Events" value={PlaceDimension.ONLINE} />
                         </TabList>
                     </header>
-                    <TabPanel value="1" dir={theme.direction}>
+                    <TabPanel value={PlaceDimension.PHYSICAL} dir={theme.direction}>
                         <PhysicalPlaces places={places.filter((place: Place) => place.physical)}/>
                     </TabPanel>
-                    <TabPanel value="2" dir={theme.direction}>
+                    <TabPanel value={PlaceDimension.ONLINE} dir={theme.direction}>
                         <OnlinePlaces places={places.filter((place: Place) => place.online)}/>
                     </TabPanel>
                 </TabContext>
