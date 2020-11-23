@@ -4,15 +4,15 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Place } from '../../../sdk/models/Place';
-import { MapSearchOption } from './MapSearchOption';
+import { PlacesSearchOption } from './PlacesSearchOption';
 
-export type MapSearchProps = {
+export type PlacesSearchProps = {
     onSelect: (places: Place[]) => void;
     places: Place[];
 }
 
-export const MapSearch: React.FunctionComponent<MapSearchProps> = (
-    props: MapSearchProps
+export const PlacesSearch: React.FunctionComponent<PlacesSearchProps> = (
+    props: PlacesSearchProps
 ): JSX.Element => {
     const { t } = useTranslation();
     const [places, setPlaces] = useState(props.places);
@@ -33,9 +33,9 @@ export const MapSearch: React.FunctionComponent<MapSearchProps> = (
             disableCloseOnSelect
             getOptionLabel={(place: Place) => place.name}
             onChange={handleChange}
-            renderOption={(place, { selected }) => (<MapSearchOption place={place} selected={selected}/>)}
+            renderOption={(place, { selected }) => (<PlacesSearchOption place={place} selected={selected}/>)}
             renderInput={(params) => (
-                <TextField {...params} variant="outlined" label={t('map.search.label')} placeholder={t('map.search.placeholder')}/>
+                <TextField {...params} variant="outlined" label={t('places.search.label')} placeholder={t('places.search.placeholder')}/>
             )}
         />
     );

@@ -22,7 +22,23 @@
             "title": "Who We Are?"
         }
     },
-    "map": {
+    "meta": {
+        "description": "ForChange, find places that make a social impact",
+        "title": "ForChange, find places that make a social impact"
+    },
+    "place": {
+        "type": {
+            "clothing": "Clothing",
+            "groceries": "Groceries"
+        },
+        "directions": {
+            "label": "Get directions to {{name}}"
+        },
+        "url": {
+            "label": "Go to {{name}}"
+        }
+    },
+    "places": {
         "filters": {
             "labels": {
                 "clothing": "Clothing",
@@ -42,22 +58,6 @@
         "search": {
             "label": "Places",
             "placeholder": "Filter individual places"
-        }
-    },
-    "meta": {
-        "description": "ForChange, find places that make a social impact",
-        "title": "ForChange, find places that make a social impact"
-    },
-    "place": {
-        "type": {
-            "clothing": "Clothing",
-            "groceries": "Groceries"
-        },
-        "directions": {
-            "label": "Get directions to {{name}}"
-        },
-        "url": {
-            "label": "Go to {{name}}"
         }
     }
 }

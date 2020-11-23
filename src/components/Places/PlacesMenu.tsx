@@ -2,12 +2,12 @@ import { Button, Dialog, DialogTitle, DialogContent, DialogActions } from '@mate
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-export type MapMenuProps = {
+export type PlacesMenuProps = {
     children: React.ReactNode;
 }
 
-export const MapMenu: React.FunctionComponent<MapMenuProps> = (
-    { children }: MapMenuProps
+export const PlacesMenu: React.FunctionComponent<PlacesMenuProps> = (
+    { children }: PlacesMenuProps
 ): JSX.Element => {
     const { t } = useTranslation();
     const [isOpened, setIsOpened] = useState(false);
@@ -18,22 +18,22 @@ export const MapMenu: React.FunctionComponent<MapMenuProps> = (
     return (
         <>
             <Button variant="outlined" color="primary" onClick={toggleMenu}>
-                {t('map.menu.cta')}
+                {t('places.menu.cta')}
             </Button>
             <Dialog
-                aria-labelledby="map-menu-title"
+                aria-labelledby="places-menu-title"
                 fullWidth={true}
                 maxWidth="xl"
                 onClose={handleClose}
                 open={isOpened}
             >
-                <DialogTitle id="map-menu-title">{t('map.menu.dialog.title')}</DialogTitle>
+                <DialogTitle id="places-menu-title">{t('places.menu.dialog.title')}</DialogTitle>
                 <DialogContent>
                     {children}
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} color="primary">
-                        {t('map.menu.dialog.close')}
+                        {t('places.menu.dialog.close')}
                     </Button>
                 </DialogActions>
             </Dialog>

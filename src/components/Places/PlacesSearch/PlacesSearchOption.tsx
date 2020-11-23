@@ -3,13 +3,13 @@ import React from 'react';
 
 import { Place } from '../../../sdk/models/Place';
 
-export type MapSearchOptionProps = {
+export type PlacesSearchOptionProps = {
     place: Place;
     selected: boolean;
 }
 
-export const MapSearchOption: React.FunctionComponent<MapSearchOptionProps> = (
-    { place, selected }: MapSearchOptionProps
+export const PlacesSearchOption: React.FunctionComponent<PlacesSearchOptionProps> = (
+    { place, selected }: PlacesSearchOptionProps
 ): JSX.Element => (
     <>
         <Checkbox
