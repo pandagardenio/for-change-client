@@ -56,13 +56,15 @@ export const OnlinePlaces: React.FunctionComponent<OnlinePlacesProps> = (
         }, {});
     };
 
+    const groupedPlacesByType = getGroupedPlacesByType();
+
     return (
         <>
-            {Object.keys(getGroupedPlacesByType()).map((placeType: string): JSX.Element => (
+            {Object.keys(groupedPlacesByType).map((placeType: string): JSX.Element => (
                 <>
                     <Typography variant="h4">{t(`place.type.${placeType}`)}</Typography>
                     <ul className={classes.root}>
-                        {places.map((place: Place) => <li className={classes.element}><PlaceCard place={place}/></li>)}
+                        {(groupedPlacesByType[placeType as PlaceType] as Place[]).map((place: Place) => <li className={classes.element}><PlaceCard place={place}/></li>)}
                     </ul>
                 </>
             ))}

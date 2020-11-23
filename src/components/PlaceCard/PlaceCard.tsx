@@ -7,7 +7,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Place } from '../../sdk/models/Place';
-import { red } from '@material-ui/core/colors';
+import { PlaceIcon } from '../PlaceIcon';
 
 export type PlaceCardProps = {
     place: Place;
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
             height: '100%',
         },
         avatar: {
-            backgroundColor: red[500],
+            backgroundColor: theme.palette.primary.main,
         },
     }),
 );
@@ -36,7 +36,7 @@ export const PlaceCard: React.FunctionComponent<PlaceCardProps> = (
     return (
         <Card className={classes.root} raised={raised}>
             <CardHeader
-                avatar={<Avatar aria-label="place" className={classes.avatar}>R</Avatar>}
+                avatar={<Avatar aria-label="place" className={classes.avatar}><PlaceIcon place={place}/></Avatar>}
                 title={place.name}
                 subheader={t(`place.type.${place.type}`)}
             />
