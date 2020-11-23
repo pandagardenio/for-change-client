@@ -10,6 +10,7 @@ import { Place } from '../../sdk/models/Place';
 import { PlaceIcon } from '../PlaceIcon';
 
 export type PlaceCardProps = {
+    className?: string;
     place: Place;
     raised?: boolean;
 }
@@ -26,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export const PlaceCard: React.FunctionComponent<PlaceCardProps> = (
-    { place, raised = true }: PlaceCardProps
+    { className, place, raised = true }: PlaceCardProps
 ): JSX.Element => {
     const { t } = useTranslation();
     const classes = useStyles();
@@ -34,7 +35,7 @@ export const PlaceCard: React.FunctionComponent<PlaceCardProps> = (
         `https://www.google.com/maps/dir/?api=1&destination=${place.location.lat},${place.location.lng}`;
 
     return (
-        <Card className={classes.root} raised={raised}>
+        <Card className={[classes.root, className].join(' ')} raised={raised}>
             <CardHeader
                 avatar={<Avatar aria-label="place" className={classes.avatar}><PlaceIcon place={place}/></Avatar>}
                 title={place.name}

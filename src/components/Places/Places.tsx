@@ -20,7 +20,7 @@ export type PlaceTypeFiltersValues = {
 
 const useStyles = makeStyles((theme: Theme) => ({
     root: {
-        margin: `0 -${theme.spacing(3)}px`
+        padding: `${theme.spacing(3)}px 0`
     }
 }));
 
