@@ -40,6 +40,10 @@
     },
     "places": {
         "filters": {
+            "dimensions": {
+                "physical": "Physical",
+                "online": "Online"
+            },
             "labels": {
                 "clothing": "Clothing",
                 "groceries": "Groceries"

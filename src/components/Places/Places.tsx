@@ -1,4 +1,4 @@
-import { Tab } from '@material-ui/core';
+import { Tab, makeStyles, Theme } from '@material-ui/core';
 import { TabPanel, TabContext, TabList } from '@material-ui/lab';
 import React, { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -17,6 +17,12 @@ export type PlaceTypeFiltersValues = {
     [PlaceType.CLOTHING]: boolean;
     [PlaceType.GROCERIES]: boolean;
 }
+
+const useStyles = makeStyles((theme: Theme) => ({
+    root: {
+        margin: `0 -${theme.spacing(3)}px`
+    }
+}));
 
 export const Places: React.FunctionComponent = (): JSX.Element => {
     const [places, setPlaces] = useState<Place[]>([]);
@@ -48,6 +54,8 @@ export const Places: React.FunctionComponent = (): JSX.Element => {
         setSelectedPlaces(places.map((place: Place) => place.id));
     }
 
+    const classes = useStyles();
+
     useEffect((): void => {
         getPlaces({
             ...placeTypeFiltersValues,
@@ -70,11 +78,11 @@ export const Places: React.FunctionComponent = (): JSX.Element => {
                             />
                         </PlacesMenu>
                         <TabList onChange={handleChange} aria-label="simple tabs example">
-                            <Tab label="Physical Places and Events" value={PlaceDimension.PHYSICAL} />
-                            <Tab label="Online Places and Events" value={PlaceDimension.ONLINE} />
+                            <Tab label={t('places.filters.dimensions.physical')} value={PlaceDimension.PHYSICAL} />
+                            <Tab label={t('places.filters.dimensions.online')} value={PlaceDimension.ONLINE} />
                         </TabList>
                     </header>
-                    <TabPanel value={PlaceDimension.PHYSICAL} dir={theme.direction}>
+                    <TabPanel classes={classes} value={PlaceDimension.PHYSICAL} dir={theme.direction}>
                         <PhysicalPlaces places={places.filter((place: Place) => place.physical)}/>
                     </TabPanel>
                     <TabPanel value={PlaceDimension.ONLINE} dir={theme.direction}>

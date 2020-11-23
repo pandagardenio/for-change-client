@@ -1,10 +1,16 @@
-import { Button, Dialog, DialogTitle, DialogContent, DialogActions } from '@material-ui/core';
+import { Button, Dialog, DialogTitle, DialogContent, DialogActions, makeStyles, Theme } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 export type PlacesMenuProps = {
     children: React.ReactNode;
 }
+
+const useStyles = makeStyles((theme: Theme) => ({
+    cta: {
+        margin: `0 ${theme.spacing(3)}px`
+    }
+}));
 
 export const PlacesMenu: React.FunctionComponent<PlacesMenuProps> = (
     { children }: PlacesMenuProps
@@ -15,11 +21,15 @@ export const PlacesMenu: React.FunctionComponent<PlacesMenuProps> = (
     const handleClose = () => { setIsOpened(false); };
     const toggleMenu = () => { setIsOpened(!isOpened); };
 
+    const classes = useStyles();
+
     return (
         <>
-            <Button variant="outlined" color="primary" onClick={toggleMenu}>
-                {t('places.menu.cta')}
-            </Button>
+            <div className={classes.cta}>
+                <Button variant="outlined" color="primary" onClick={toggleMenu}>
+                    {t('places.menu.cta')}
+                </Button>
+            </div>
             <Dialog
                 aria-labelledby="places-menu-title"
                 fullWidth={true}
