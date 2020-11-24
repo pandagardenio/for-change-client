@@ -16,11 +16,11 @@ export const PlacesFilters = <T extends { [key: string]: boolean; }, >(
     const { t } = useTranslation();
     const [placesFiltersValues, setPlacesFiltersValues] = useState<PlacesFiltersValues<T>>(props.placesFiltersValues);
 
-    const onChange = (key: string): (event: React.ChangeEvent<HTMLInputElement>) => void =>
-        (event: React.ChangeEvent<HTMLInputElement>): void => {
+    const onChange = (key: string): (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => void =>
+        (event: React.ChangeEvent<HTMLInputElement>, checked: boolean): void => {
             const newPlacesFiltersValues = {
                 ...placesFiltersValues,
-                [key]: event.currentTarget.checked
+                [key]: checked
             };
             setPlacesFiltersValues(newPlacesFiltersValues);
             props.onChange(newPlacesFiltersValues);

@@ -1,7 +1,8 @@
-import { Tab, makeStyles, Theme } from '@material-ui/core';
+import { Tab, makeStyles, Theme, FormControlLabel, FormGroup, Switch } from '@material-ui/core';
 import { TabPanel, TabContext, TabList } from '@material-ui/lab';
 import React, { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 
 import { theme } from '../../utils/theme';
 import { Place, PlaceType, PlaceDimension } from '../../sdk/models/Place';
@@ -12,6 +13,7 @@ import { PlacesMenu } from './PlacesMenu';
 import { PlacesSearch } from './PlacesSearch';
 import { PlacesFilters, PlacesFiltersValues } from './PlacesFilters';
 import { PlaceListParams } from '../../sdk/dto';
+import { getLovedPlaces } from '../../store/selectors';
 
 export type PlaceTypeFiltersValues = {
     [PlaceType.CLOTHING]: boolean;
@@ -32,6 +34,8 @@ export const Places: React.FunctionComponent = (): JSX.Element => {
         [PlaceType.GROCERIES]: true
     });
     const [selectedPlaces, setSelectedPlaces] = React.useState<string[]>([]);
+    const [showOnlyLovedPlaces, setShowOnlyLovedPlaces] = React.useState<boolean>(false);
+    const lovedPlaces = useSelector(getLovedPlaces);
 
     const { t } = useTranslation();
     const sdk = useSdk();
@@ -46,6 +50,10 @@ export const Places: React.FunctionComponent = (): JSX.Element => {
         [sdk.places]
     );
 
+    const onShowOnlyLovedPlacesChange = (_event: React.ChangeEvent<HTMLInputElement>, checked: boolean): void => {
+        setShowOnlyLovedPlaces(checked);
+    };
+
     const onPlaceTypeFilterChange = (mapFiltersValues: PlacesFiltersValues<PlaceTypeFiltersValues>): void => {
         setPlaceTypeFiltersValues(mapFiltersValues);
     };
@@ -57,12 +65,16 @@ export const Places: React.FunctionComponent = (): JSX.Element => {
     const classes = useStyles();
 
     useEffect((): void => {
-        getPlaces({
-            ...placeTypeFiltersValues,
-            places: selectedPlaces
-        })
-        .then((places: Place[]) => { setPlaces(places); });
-    }, [getPlaces, placeTypeFiltersValues, selectedPlaces]);
+        if (showOnlyLovedPlaces) {
+            setPlaces(lovedPlaces);
+        } else {
+            getPlaces({
+                ...placeTypeFiltersValues,
+                places: selectedPlaces
+            })
+            .then((places: Place[]) => { setPlaces(places); });
+        }
+    }, [getPlaces, lovedPlaces, placeTypeFiltersValues, selectedPlaces, showOnlyLovedPlaces]);
 
     return (
         <>
@@ -77,6 +89,12 @@ export const Places: React.FunctionComponent = (): JSX.Element => {
                                 title={t('places.filters.title.place-type')}
                             />
                         </PlacesMenu>
+                        <FormGroup>
+                            <FormControlLabel
+                                control={<Switch checked={showOnlyLovedPlaces} onChange={onShowOnlyLovedPlacesChange}/>}
+                                label={t(`places.filters.labels.loved`)}
+                            />
+                        </FormGroup>
                         <TabList onChange={handleChange} aria-label="simple tabs example">
                             <Tab label={t('places.filters.dimensions.physical')} value={PlaceDimension.PHYSICAL} />
                             <Tab label={t('places.filters.dimensions.online')} value={PlaceDimension.ONLINE} />
