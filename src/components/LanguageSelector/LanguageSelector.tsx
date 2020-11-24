@@ -2,6 +2,8 @@ import { Select, MenuItem } from '@material-ui/core';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { fallbackLanguage } from '../../utils/i18n';
+
 const languageLabels: Record<string, string> = {
     en: 'English',
     fr: 'Français'
@@ -16,9 +18,11 @@ export const LanguageSelector: React.FunctionComponent = (): JSX.Element => {
         i18n.changeLanguage(event.target.value as string);
     };
 
+    const getLanguage = () => languageLabels[i18n.language] ? i18n.language : fallbackLanguage;
+
     return (
         <Select
-            value={i18n.language}
+            value={getLanguage()}
             onChange={onChange}
         >
             {Object.keys(i18n.services.resourceStore.data).map((language: string) =>

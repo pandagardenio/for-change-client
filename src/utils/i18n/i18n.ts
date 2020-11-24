@@ -14,12 +14,14 @@ const resources = {
     }
 };
 
+export const fallbackLanguage = 'en';
+
 i18n
     .use(LanguageDetector)
     .use(initReactI18next)
     .init({
         resources,
-        fallbackLng: 'en',
+        fallbackLng: fallbackLanguage,
         interpolation: {
             escapeValue: false
         }
