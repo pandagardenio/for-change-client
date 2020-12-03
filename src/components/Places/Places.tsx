@@ -1,5 +1,5 @@
-import { Tab, makeStyles, Theme, FormControlLabel, FormGroup, Switch } from '@material-ui/core';
-import { TabPanel, TabContext, TabList } from '@material-ui/lab';
+import { makeStyles, Theme, FormControlLabel, FormGroup, Switch } from '@material-ui/core';
+import { TabPanel, TabContext } from '@material-ui/lab';
 import React, { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -9,11 +9,12 @@ import { Place, PlaceType, PlaceDimension } from '../../sdk/models/Place';
 import { useSdk } from '../../sdk';
 import { PhysicalPlaces } from './PhysicalPlaces';
 import { OnlinePlaces } from './OnlinePlaces';
-import { PlacesMenu } from './PlacesMenu';
-import { PlacesSearch } from './PlacesSearch';
-import { PlacesFilters, PlacesFiltersValues } from './PlacesFilters';
+import { PlacesFiltersValues, PlacesFilters } from './PlacesFilters';
 import { PlaceListParams } from '../../sdk/dto';
 import { getLovedPlaces } from '../../store/selectors';
+import { PlacesMenu } from '.';
+import { PlacesSearch } from './PlacesSearch';
+import { getPlaceDimension } from '../../store/selectors/status';
 
 export type PlaceTypeFiltersValues = {
     [PlaceType.CLOTHING]: boolean;
@@ -28,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export const Places: React.FunctionComponent = (): JSX.Element => {
     const [places, setPlaces] = useState<Place[]>([]);
-    const [dimension, setDimension] = React.useState(PlaceDimension.PHYSICAL);
+    const placeDimension = useSelector(getPlaceDimension);
     const [placeTypeFiltersValues, setPlaceTypeFiltersValues] = useState({
         [PlaceType.CLOTHING]: true,
         [PlaceType.GROCERIES]: true
@@ -39,10 +40,6 @@ export const Places: React.FunctionComponent = (): JSX.Element => {
 
     const { t } = useTranslation();
     const sdk = useSdk();
-
-    const handleChange = (_event: React.ChangeEvent<{}>, newDimension: string) => {
-        setDimension(newDimension as PlaceDimension);
-    };
 
     const getPlaces = useCallback(
         (placeListParams?: Partial<PlaceListParams>): Promise<Place[]> =>
@@ -79,7 +76,7 @@ export const Places: React.FunctionComponent = (): JSX.Element => {
     return (
         <>
             <section>
-                <TabContext value={dimension}>
+                <TabContext value={placeDimension}>
                     <header>
                         <PlacesMenu>
                             <PlacesSearch places={places} onSelect={onPlacesSearchSelect}/>
@@ -95,10 +92,6 @@ export const Places: React.FunctionComponent = (): JSX.Element => {
                                 label={t(`places.filters.labels.loved`)}
                             />
                         </FormGroup>
-                        <TabList onChange={handleChange} aria-label="simple tabs example">
-                            <Tab label={t('places.filters.dimensions.physical')} value={PlaceDimension.PHYSICAL} />
-                            <Tab label={t('places.filters.dimensions.online')} value={PlaceDimension.ONLINE} />
-                        </TabList>
                     </header>
                     <TabPanel classes={classes} value={PlaceDimension.PHYSICAL} dir={theme.direction}>
                         <PhysicalPlaces places={places.filter((place: Place) => place.physical)}/>

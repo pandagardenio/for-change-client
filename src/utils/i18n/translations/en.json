@@ -3,9 +3,18 @@
         "with-love": "From Madrid with ❤"
     },
     "header": {
+        "menu": {
+            "label": "Menu",
+            "nav": {
+                "what-is-this": "What is this?",
+                "who-we-are": "Who we are?"
+            }
+        },
         "nav": {
-            "what-is-this": "What is this?",
-            "who-we-are": "Who we are?"
+            "dimensions": {
+                "online": "Online",
+                "physical": "Physical"
+            }
         }
     },
     "home": {
@@ -43,10 +52,6 @@
     },
     "places": {
         "filters": {
-            "dimensions": {
-                "physical": "Physical",
-                "online": "Online"
-            },
             "labels": {
                 "clothing": "Clothing",
                 "groceries": "Groceries",
