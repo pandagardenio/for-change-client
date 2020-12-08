@@ -1,4 +1,4 @@
-import { makeStyles, Theme, AppBar, Toolbar } from '@material-ui/core';
+import { makeStyles, Theme, AppBar, Toolbar, Container } from '@material-ui/core';
 import React from 'react';
 
 import { Menu } from './Menu';
@@ -7,6 +7,10 @@ import { Nav } from './Nav';
 export type HeaderProps = {};
 
 const useStyles = makeStyles((theme: Theme) => ({
+    container: {
+        paddingTop: `${theme.spacing(3)}px`,
+        textAlign: 'right'
+    },
     root: {
         backgroundColor: theme.palette.grey[100],
         borderBottom: `1px solid ${theme.palette.grey[300]}`,
@@ -19,10 +23,12 @@ export const Header: React.FunctionComponent<HeaderProps> = (): JSX.Element => {
 
     return (
         <AppBar className={classes.root} position="static">
-            <Toolbar>
-                <Menu/>
-                <Nav/>
-            </Toolbar>
+            <Container maxWidth="xl">
+                <Toolbar disableGutters={true}>
+                    <Menu/>
+                    <Nav/>
+                </Toolbar>
+            </Container>
         </AppBar>
     );
 };

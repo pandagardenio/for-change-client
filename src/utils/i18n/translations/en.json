@@ -62,10 +62,19 @@
             }
         },
         "menu": {
-            "cta": "Filter",
-            "dialog": {
-                "close": "Close",
-                "title": "Apply filters"
+            "actions": {
+                "apply": "Apply filters",
+                "close": "Close"
+            },
+            "label": "Filter Places",
+            "tabs": {
+                "categories": {
+                    "label": "Categories"
+                },
+                "label": "Change filters",
+                "places": {
+                    "label": "Places"
+                }
             }
         },
         "search": {

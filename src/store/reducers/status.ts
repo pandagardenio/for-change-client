@@ -6,7 +6,7 @@ export interface StatusState {
 }
 
 export const initialState: StatusState = {
-    placeDimension: PlaceDimension.PHYSICAL
+    placeDimension: PlaceDimension.ONLINE
 };
 
 export const reducer = (state: StatusState = initialState, action: StatusAction): StatusState => {

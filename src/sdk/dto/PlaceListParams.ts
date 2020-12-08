@@ -6,5 +6,4 @@ export type PlaceListParams = {
     [PlaceType.EVENTS]: boolean;
     [PlaceType.GROCERIES]: boolean;
     [PlaceType.SHOPPING]: boolean;
-    places: string[];
 }

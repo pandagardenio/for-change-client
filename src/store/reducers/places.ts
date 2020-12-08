@@ -1,12 +1,16 @@
-import { ADD_LOVED_PLACE, PlacesAction, REMOVE_LOVED_PLACE, SET_LOVED_PLACES } from '../actions/places';
+import {
+    ADD_LOVED_PLACE, PlacesAction, REMOVE_LOVED_PLACE, SET_LOVED_PLACES, SET_SELECTED_PLACES
+} from '../actions/places';
 import { Place } from '../../sdk/models';
 
 export interface PlacesState {
     love: Place[];
+    selected: Place[];
 }
 
 export const initialState: PlacesState = {
-    love: []
+    love: [],
+    selected: []
 };
 
 export const reducer = (state: PlacesState = initialState, action: PlacesAction): PlacesState => {
@@ -28,6 +32,12 @@ export const reducer = (state: PlacesState = initialState, action: PlacesAction)
             return {
                 ...state,
                 love: action.payload
+            }
+        }
+        case SET_SELECTED_PLACES: {
+            return {
+                ...state,
+                selected: action.payload
             }
         }
         default:

@@ -7,7 +7,6 @@ export type PlacesFiltersValues<T> = T;
 export type PlacesFiltersProps<T> = {
     placesFiltersValues: PlacesFiltersValues<T>;
     onChange: (placesFiltersValues: PlacesFiltersValues<T>) => void;
-    title: string;
 };
 
 export const PlacesFilters = <T extends { [key: string]: boolean; }, >(
@@ -17,7 +16,7 @@ export const PlacesFilters = <T extends { [key: string]: boolean; }, >(
     const [placesFiltersValues, setPlacesFiltersValues] = useState<PlacesFiltersValues<T>>(props.placesFiltersValues);
 
     const onChange = (key: string): (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => void =>
-        (event: React.ChangeEvent<HTMLInputElement>, checked: boolean): void => {
+        (_event: React.ChangeEvent<HTMLInputElement>, checked: boolean): void => {
             const newPlacesFiltersValues = {
                 ...placesFiltersValues,
                 [key]: checked
@@ -27,17 +26,14 @@ export const PlacesFilters = <T extends { [key: string]: boolean; }, >(
         };
 
     return (
-        <>
-            <h3>{props.title}</h3>
-            <FormGroup>
-                {Object.keys(placesFiltersValues).map((key: string, i: number) => (
-                    <FormControlLabel
-                        control={<Switch checked={placesFiltersValues[key]} onChange={onChange(key)}/>}
-                        key={i}
-                        label={t(`places.filters.labels.${key}`)}
-                    />
-                ))}
-            </FormGroup>
-        </>
+        <FormGroup>
+            {Object.keys(placesFiltersValues).map((key: string, i: number) => (
+                <FormControlLabel
+                    control={<Switch checked={placesFiltersValues[key]} onChange={onChange(key)}/>}
+                    key={i}
+                    label={t(`places.filters.labels.${key}`)}
+                />
+            ))}
+        </FormGroup>
     );
 };

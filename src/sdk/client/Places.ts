@@ -23,12 +23,6 @@ export class Places {
                     ) {
                         return false;
                     }
-
-                    if (
-                        placeListParams.places && placeListParams.places.length
-                    ) {
-                        return placeListParams.places.indexOf(place.id) > -1;
-                    }
     
                     return true;
                 });
