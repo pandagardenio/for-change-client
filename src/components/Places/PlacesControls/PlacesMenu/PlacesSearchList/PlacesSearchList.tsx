@@ -17,6 +17,11 @@ export type PlacesSearchListProps = {
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
+    root: {
+        display: 'flex',
+        flexDirection: 'column',
+        maxHeight: '80vh'
+    },
     actions: {
         display: 'flex'
     },
@@ -76,7 +81,7 @@ export const PlacesSearchList: React.FunctionComponent<PlacesSearchListProps> = 
     };
 
     return (
-        <section>
+        <section className={classes.root}>
             <header>
                 <ul className={classes.chipList}>
                     {selectedPlaces.map((place: Place): JSX.Element => (

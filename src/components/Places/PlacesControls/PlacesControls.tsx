@@ -9,6 +9,7 @@ export type PlacesControlsOnChange = PlacesMenuOnChange;
 
 export type PlacesControlsProps = {
     onChange: PlacesControlsOnChange;
+    originalSelectedPlaces: Place[];
     places: Place[];
 };
 
@@ -25,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 export const PlacesControls: React.FunctionComponent<PlacesControlsProps> = (
-    { onChange, places }: PlacesControlsProps
+    { onChange, originalSelectedPlaces, places }: PlacesControlsProps
 ): JSX.Element => {
     const [menuState, setMenuState] = useState<{ open: boolean, searchQuery: string, tab: PlacesMenuTab }>({
         open: false,
@@ -64,6 +65,7 @@ export const PlacesControls: React.FunctionComponent<PlacesControlsProps> = (
                 onChange={onChange}
                 onChangeTab={onChangeTab}
                 onChangeOpen={onChangeOpen}
+                originalSelectedPlaces={originalSelectedPlaces}
                 places={places}
             />
         </div>

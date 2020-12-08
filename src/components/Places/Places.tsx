@@ -85,7 +85,11 @@ export const Places: React.FunctionComponent = (): JSX.Element => {
             <TabContext value={placeDimension}>
                 <header>
                     <Container className={classes.container} maxWidth="xl">
-                        <PlacesControls places={places} onChange={onPlacesControlsChange}/>
+                        <PlacesControls
+                            places={places}
+                            onChange={onPlacesControlsChange}
+                            originalSelectedPlaces={selectedPlaces}
+                        />
                         <FormGroup>
                             <FormControlLabel
                                 control={<Switch checked={showOnlyLovedPlaces} onChange={onShowOnlyLovedPlacesChange}/>}

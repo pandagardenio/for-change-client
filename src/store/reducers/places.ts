@@ -4,12 +4,12 @@ import {
 import { Place } from '../../sdk/models';
 
 export interface PlacesState {
-    love: Place[];
+    loved: Place[];
     selected: Place[];
 }
 
 export const initialState: PlacesState = {
-    love: [],
+    loved: [],
     selected: []
 };
 
@@ -18,20 +18,20 @@ export const reducer = (state: PlacesState = initialState, action: PlacesAction)
         case ADD_LOVED_PLACE: {
             return {
                 ...state,
-                love: [...state.love, action.payload]
+                loved: [...state.loved, action.payload]
             }
 
         }
         case REMOVE_LOVED_PLACE: {
             return {
                 ...state,
-                love: state.love.filter((place: Place) => place.id !== action.payload)
+                loved: state.loved.filter((place: Place) => place.id !== action.payload)
             }
         }
         case SET_LOVED_PLACES: {
             return {
                 ...state,
-                love: action.payload
+                loved: action.payload
             }
         }
         case SET_SELECTED_PLACES: {

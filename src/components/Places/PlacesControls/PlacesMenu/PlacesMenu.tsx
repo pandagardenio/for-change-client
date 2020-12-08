@@ -29,6 +29,7 @@ export type PlacesMenuProps = {
     onChangeOpen: (open: boolean) => void;
     onChangeTab: (tab: PlacesMenuTab) => void;
     open: boolean;
+    originalSelectedPlaces: Place[];
     places: Place[];
     searchQuery: string;
     tab: PlacesMenuTab;
@@ -38,8 +39,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     placesList: {
         maxHeight: '300px',
         overflow: 'auto',
-        padding: theme.spacing(3),
-        paddingTop: 0
+        padding: `0 ${theme.spacing(3)}px`
     },
     placesListTabPanel: {
         padding: 0
@@ -51,11 +51,14 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 export const PlacesMenu: React.FunctionComponent<PlacesMenuProps> = (
-    { className, onChange, onChangeOpen, onChangeTab, open, places, searchQuery, tab }: PlacesMenuProps
+    {
+        className, onChange, onChangeOpen, onChangeTab, open,
+        originalSelectedPlaces, places, searchQuery, tab
+    }: PlacesMenuProps
 ): JSX.Element => {
     const { t } = useTranslation();
     const anchorEl = useRef<HTMLButtonElement | null>(null);
-    const [selectedPlaces, setselectedPlaces] = useState<Place[]>([]);
+    const [selectedPlaces, setSelectedPlaces] = useState<Place[]>([]);
     const [placeTypeFiltersValues, setPlaceTypeFiltersValues] = useState({
         [PlaceType.CLOTHING]: true,
         [PlaceType.GROCERIES]: true
@@ -63,10 +66,12 @@ export const PlacesMenu: React.FunctionComponent<PlacesMenuProps> = (
 
     const handleClick = (): void => {
         onChangeOpen(true);
+        setSelectedPlaces(originalSelectedPlaces);
     };
 
     const handleClose = (): void => {
         onChangeOpen(false);
+        setSelectedPlaces(originalSelectedPlaces);
     };
 
     const handleTabChange = (_event: React.ChangeEvent<{}>, newTabValue: string): void => {
@@ -83,7 +88,7 @@ export const PlacesMenu: React.FunctionComponent<PlacesMenuProps> = (
     };
 
     const onChangeSelectedPlaces = (places: Place[]): void => {
-        setselectedPlaces(places);
+        setSelectedPlaces(places);
     };
 
     const applySelectedPlaces = (): void => {
@@ -124,7 +129,7 @@ export const PlacesMenu: React.FunctionComponent<PlacesMenuProps> = (
                 }}
             >
                 <TabContext value={tab}>
-                    <TabList onChange={handleTabChange} aria-label={t('places.menu.tabs.label')}>
+                    <TabList onChange={handleTabChange} aria-label={t('places.menu.tabs.label')} variant="fullWidth">
                         <Tab label={t('places.menu.tabs.categories.label')} value={PlacesMenuTab.CATEGORIES}/>
                         <Tab label={t('places.menu.tabs.places.label')} value={PlacesMenuTab.PLACES}/>
                     </TabList>

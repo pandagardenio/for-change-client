@@ -28,7 +28,7 @@ export type AppAction = PlacesAction;
 const persistConfig = {
     key: 'root',
     storage: localForage,
-    whitelist: ['places']
+    whitelist: ['places.loved']
 };
 
 const rootReducer = persistCombineReducers<AppState>(persistConfig, {
