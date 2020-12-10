@@ -11,10 +11,7 @@ import { Place, PlaceType } from '../../../../sdk/models';
 import { PlacesFilters, PlacesFiltersValues } from './PlacesFilters';
 import { PlacesSearchList } from './PlacesSearchList';
 
-export type PlaceTypeFiltersValues = {
-    [PlaceType.CLOTHING]: boolean;
-    [PlaceType.GROCERIES]: boolean;
-}
+export type PlaceTypeFiltersValues = Record<PlaceType, boolean>;
 
 export enum PlacesMenuTab {
     CATEGORIES = 'CATEGORIES',
@@ -59,9 +56,14 @@ export const PlacesMenu: React.FunctionComponent<PlacesMenuProps> = (
     const { t } = useTranslation();
     const anchorEl = useRef<HTMLButtonElement | null>(null);
     const [selectedPlaces, setSelectedPlaces] = useState<Place[]>([]);
-    const [placeTypeFiltersValues, setPlaceTypeFiltersValues] = useState({
+    const [placeTypeFiltersValues, setPlaceTypeFiltersValues] = useState<PlaceTypeFiltersValues>({
+        [PlaceType.ASSOCIATION]: true,
+        [PlaceType.CAFE]: true,
         [PlaceType.CLOTHING]: true,
-        [PlaceType.GROCERIES]: true
+        [PlaceType.EVENT]: true,
+        [PlaceType.GROCERIES]: true,
+        [PlaceType.HOUSING]: true,
+        [PlaceType.SHOPPING]: true
     });
 
     const handleClick = (): void => {

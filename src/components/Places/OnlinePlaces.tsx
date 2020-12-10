@@ -2,7 +2,7 @@ import { makeStyles, Theme, createStyles, Typography } from '@material-ui/core';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Place, PlaceType } from '../../sdk/models/Place';
+import { Place, PlaceType, getGroupedPlacesByType } from '../../sdk/models/Place';
 import { PlaceCard } from '../PlaceCard';
 
 export type OnlinePlacesProps = {
@@ -25,38 +25,13 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-type GroupedPlacesByType = {
-    [PlaceType.ASSOCIATIONS]?: Place[];
-    [PlaceType.CLOTHING]?: Place[];
-    [PlaceType.EVENTS]?: Place[];
-    [PlaceType.GROCERIES]?: Place[];
-    [PlaceType.SHOPPING]?: Place[];
-}
-
 export const OnlinePlaces: React.FunctionComponent<OnlinePlacesProps> = (
     { places }: OnlinePlacesProps
 ): JSX.Element => {
     const classes = useStyles();
     const { t } = useTranslation();
 
-    const getGroupedPlacesByType = (): GroupedPlacesByType => {
-        return places.reduce((groupedPlacesByType: GroupedPlacesByType, place: Place): Partial<GroupedPlacesByType> => {
-            let placesByPlaceType = groupedPlacesByType[place.type];
-
-            if (!placesByPlaceType) {
-                placesByPlaceType = [];
-            }
-
-            placesByPlaceType.push(place);
-
-            return {
-                ...groupedPlacesByType,
-                [place.type]: placesByPlaceType
-            }
-        }, {});
-    };
-
-    const groupedPlacesByType = getGroupedPlacesByType();
+    const groupedPlacesByType = getGroupedPlacesByType(places);
 
     return (
         <>

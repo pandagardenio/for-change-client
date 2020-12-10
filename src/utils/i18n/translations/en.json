@@ -37,8 +37,13 @@
     },
     "place": {
         "type": {
+            "association": "Association",
+            "cafe": "Cafe",
             "clothing": "Clothing",
-            "groceries": "Groceries"
+            "event": "Event",
+            "groceries": "Groceries",
+            "housing": "Housing",
+            "shopping": "Shopping"
         },
         "directions": {
             "label": "Get directions to {{name}}"
@@ -53,8 +58,13 @@
     "places": {
         "filters": {
             "labels": {
+                "association": "Association",
+                "cafe": "Cafe",
                 "clothing": "Clothing",
+                "event": "Event",
                 "groceries": "Groceries",
+                "housing": "Housing",
+                "shopping": "Shopping",
                 "loved": "Show only loved places"
             },
             "title": {

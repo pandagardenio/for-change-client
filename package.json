@@ -1,5 +1,5 @@
 {
-  "name": "local-change",
+  "name": "@pandagardenio/for-change",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

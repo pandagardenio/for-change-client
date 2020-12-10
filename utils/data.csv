@@ -4,14 +4,14 @@ id,name,description,type,online,url,physical,lat,lng
 3,L'envers,Sustainable knitwear collection,clothing,YES,https://www.lenversfashion.com/,NO,,
 4,Boden,"Women’s, men’s, & children’s apparel, accessories",clothing,YES,https://www.bodenusa.com/,NO,,
 5,Pact,Sustainable fashion for the whole family,clothing,YES,https://wearpact.com/,NO,,
-6,Eileen Fisher,Organic linen clothing: A simple wardrobe. A sustainable life,clothing,YES,https://www.eileenfisher.com/,YES,,
+6,Eileen Fisher,Organic linen clothing: A simple wardrobe. A sustainable life,clothing,YES,https://www.eileenfisher.com/,NO,,
 7,Sézane,Dresses & blouses: for every responsible shopper who values beauty and quality. ,clothing,YES,https://www.sezane.com/,YES,48.88146973,2.31787467
-8,Able,"Women’s apparel, shoes, accessories: Feminist brand supporting women",clothing,YES,https://www.livefashionable.com/,YES,,
+8,Able,"Women’s apparel, shoes, accessories: Feminist brand supporting women",clothing,YES,https://www.livefashionable.com/,NO,,
 9,Tradlands,Ethical blouses: hold social welfare and production quality to the highest standards,clothing,YES,https://tradlands.com/,NO,,
-10,Outerknown,"The California-cool aesthetic for both men and women, matched with the brand’s ethics",clothing,YES,https://www.outerknown.com/,YES,,
-11,Genuins,Footwear with sustainable seal: cork sandals with an anatomical sole (BIO) began,clothing,YES,https://genuins.com/,YES,,
+10,Outerknown,"The California-cool aesthetic for both men and women, matched with the brand’s ethics",clothing,YES,https://www.outerknown.com/,NO,,
+11,Genuins,Footwear with sustainable seal: cork sandals with an anatomical sole (BIO) began,clothing,YES,https://genuins.com/,NO,,
 12,PLA,It deals with dresses and tops made with fabric whose pattern is a matter of making the most to give value to the work done by hand and that each piece is uniqu,clothing,YES,https://pla.org.es/,YES,39.6425972,3.009786367
-13,Mireia Playà,"Cruelty Free shoes are not only a trend, but part of a way of life that bets on the freedom of animals.",clothing,YES,https://mireiaplaya.com/,YES,40.52736664,
+13,Mireia Playà,"Cruelty Free shoes are not only a trend, but part of a way of life that bets on the freedom of animals.",clothing,YES,https://mireiaplaya.com/,NO,,
 14,Urban Fawn,Jewelry: all the metals they use to make their jewelry come from responsible mines,clothing,YES,https://www.urbanfawn.com/,NO,,
 15,Ecoalf,Ecoalf goal is to create the first generation of fashion products made with recycled materials,clothing,YES,https://ecoalf.com/,YES,40.42703247,-3.698680639
 16,Lifegist,Ropa con materiales con certificado GOTS (Global Organic Textile Standard),clothing,YES,https://www.lifegist.es/,YES,40.3245597,-3.7673156
@@ -29,3 +29,13 @@ id,name,description,type,online,url,physical,lat,lng
 28,Herbolario Navarro,"Alimentación más saludable: supermercado tradicional, pero en versión ecológica y natural",groceries,YES,https://www.herbolarionavarro.es/,YES,40.4310093,-3.7031789
 29,El Huerto de Lucas,"Proyecto ecogastrocultural: productos 100% orgánicos, libres de tóxicos y que han sido cultivados con un uso racional de los recursos naturales",groceries,YES,https://elhuertodelucas.com/,YES,40.4237721,-3.6959906
 30,Organic Food & Market,"Organic Market and Food Restaurant is a part of the community promoting a healthy lifestyle, predominantly plant-based, organic-eating and chemical-free approach to improve health and wellness.",groceries,YES,https://organicmarketfood.com/,YES,36.5154,-4.8858
+31,Unpacked Shop,UnPacked nace con el objetivo de acercarnos a una nueva forma de consumir más consciente y respetuosa con el medio ambiente. Facilitando el proceso de compra sostenible a nuestros clientes.,groceries,YES,https://www.unpackedshop.es/,YES,40.4211859,-3.6762155
+32,Casa Terra,"CASA TERRA, Alimentación a granel con tienda física y online. En Casa Terra encontrarás legumbres, arroces, frutos secos, miel, especias, pastas y un sinfín de productos maravillosos.",groceries,YES,https://casaterra.es/,YES,40.420315,-3.698182
+33,Entrepatios,"Una cooperativa de vivienda en derecho de uso, ecológica y social",housing,YES,https://www.entrepatios.org/,NO,,
+34,La Magdalena de Proust,Supermercado ecológico. Pan artesanal Bio. Comida para llevar Bio. ,groceries,YES,https://www.lamagdalenadeproust.com/,YES,40.42526,-3.69063
+35,La Tienda Ecológica Madrid Almanatur,"Tienda Ecológica Madrid es una empresa familiar que trata de vivir la vida acorde a unos principios que creemos son beneficiosos no sólo para nosotros, sino también para la sociedad y para la salud. Nuestra filosofía es ofrecer y consumir productos ecológicos, cuidar el medio ambiente, potenciar el consumo de productos locales y comprar directo al productor, agricultor y ganadero cercanos.",groceries,YES,https://www.tiendaecologicamadrid.es/,NO,,
+36,Veggie Room,"Somos Veggie Room, un pequeño comercio en el centro de Madrid donde podéis comprar productos veganos  (cien por cien vegetales) y libres de explotación.",groceries,YES,https://veggieroom.es/,YES,40.42578888,-3.704014778
+37,Rayo verde Agricultura,Cooperativa de alimentación ecológica,groceries,YES,http://www.rayoverdeagricultura.com/,YES,40.4110938,-3.7098246
+38,La Biotika,Restaurante y Tienda Ecológica,groceries,YES,https://labiotika.es/,YES,40.4131803,-3.6982035
+39,Planeta Vegano,Tienda vegana,groceries,YES,https://www.planetavegano.com/,YES,40.4099203,-3.701053
+40,Abonavida,"Un espacio único con variedad de productos ecológicos, artesanos y de comercio justo, y firme apuesta cultural.",cafe,YES,http://www.abonavida.com/,YES,40.4191439,-3.7065685

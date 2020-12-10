@@ -18,8 +18,13 @@ export class Places {
                 }
                 return places.filter((place: Place) => {
                     if (
-                        (place.type === PlaceType.CLOTHING && !placeListParams.clothing) ||
-                        (place.type === PlaceType.GROCERIES && !placeListParams.groceries)
+                        (place.type === PlaceType.ASSOCIATION && !placeListParams[PlaceType.ASSOCIATION]) ||
+                        (place.type === PlaceType.CAFE && !placeListParams[PlaceType.CAFE]) ||
+                        (place.type === PlaceType.CLOTHING && !placeListParams[PlaceType.CLOTHING]) ||
+                        (place.type === PlaceType.EVENT && !placeListParams[PlaceType.EVENT]) ||
+                        (place.type === PlaceType.GROCERIES && !placeListParams[PlaceType.GROCERIES]) ||
+                        (place.type === PlaceType.HOUSING && !placeListParams[PlaceType.HOUSING]) ||
+                        (place.type === PlaceType.SHOPPING && !placeListParams[PlaceType.SHOPPING])
                     ) {
                         return false;
                     }

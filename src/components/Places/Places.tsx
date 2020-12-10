@@ -28,9 +28,14 @@ const useStyles = makeStyles((theme: Theme) => ({
 export const Places: React.FunctionComponent = (): JSX.Element => {
     const [places, setPlaces] = useState<Place[]>([]);
     const placeDimension = useSelector(getPlaceDimension);
-    const [placeTypeFiltersValues, setPlaceTypeFiltersValues] = useState({
+    const [placeTypeFiltersValues, setPlaceTypeFiltersValues] = useState<Record<PlaceType, boolean>>({
+        [PlaceType.ASSOCIATION]: true,
+        [PlaceType.CAFE]: true,
         [PlaceType.CLOTHING]: true,
-        [PlaceType.GROCERIES]: true
+        [PlaceType.EVENT]: true,
+        [PlaceType.GROCERIES]: true,
+        [PlaceType.HOUSING]: true,
+        [PlaceType.SHOPPING]: true
     });
     const [showOnlyLovedPlaces, setShowOnlyLovedPlaces] = React.useState<boolean>(false);
     const lovedPlaces = useSelector(getLovedPlaces);
