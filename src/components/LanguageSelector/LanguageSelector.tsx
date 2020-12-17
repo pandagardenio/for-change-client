@@ -6,6 +6,7 @@ import { fallbackLanguage } from '../../utils/i18n';
 
 const languageLabels: Record<string, string> = {
     en: 'English',
+    es: 'Español',
     fr: 'Français'
 };
 
