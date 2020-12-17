@@ -40,10 +40,14 @@
             "association": "Association",
             "cafe": "Cafe",
             "clothing": "Clothing",
+            "community": "Community",
             "event": "Event",
+            "farming": "Farming",
             "groceries": "Groceries",
             "housing": "Housing",
-            "shopping": "Shopping"
+            "projects": "Projects",
+            "shopping": "Shopping",
+            "urban_garden": "Urban Garden"
         },
         "directions": {
             "label": "Get directions to {{name}}"
@@ -61,10 +65,14 @@
                 "association": "Association",
                 "cafe": "Cafe",
                 "clothing": "Clothing",
+                "community": "Community",
                 "event": "Event",
+                "farming": "Farming",
                 "groceries": "Groceries",
                 "housing": "Housing",
+                "projects": "Projects",
                 "shopping": "Shopping",
+                "urban_garden": "Urban Garden",
                 "loved": "Show only loved places"
             },
             "title": {

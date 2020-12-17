@@ -35,7 +35,14 @@ export const Map: React.FunctionComponent<MapProps> = ({ places, Marker = MapMar
                     <LocateControl/>
                     {/*@ts-ignore*/}
                     <MarkerClusterGroup>
-                        {places.map((place: Place, i: number) => <Marker key={i} place={place}/>)}
+                        {places.filter((place: Place) => {
+                            return place.physical ?
+                                place.location.lat &&
+                                place.location.lat as number | '-' !== '-' &&
+                                place.location.lng &&
+                                place.location.lng as number | '-' !== '-' :
+                                false
+                        }).map((place: Place, i: number) => <Marker key={i} place={place}/>)}
                     </MarkerClusterGroup>
                 </MapContainer>
             </section>

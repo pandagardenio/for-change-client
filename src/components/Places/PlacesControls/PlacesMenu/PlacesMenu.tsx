@@ -60,10 +60,14 @@ export const PlacesMenu: React.FunctionComponent<PlacesMenuProps> = (
         [PlaceType.ASSOCIATION]: true,
         [PlaceType.CAFE]: true,
         [PlaceType.CLOTHING]: true,
+        [PlaceType.COMMUNITY]: true,
         [PlaceType.EVENT]: true,
+        [PlaceType.FARMING]: true,
         [PlaceType.GROCERIES]: true,
         [PlaceType.HOUSING]: true,
-        [PlaceType.SHOPPING]: true
+        [PlaceType.PROJECTS]: true,
+        [PlaceType.SHOPPING]: true,
+        [PlaceType.URBAN_GARDEN]: true
     });
 
     const handleClick = (): void => {
