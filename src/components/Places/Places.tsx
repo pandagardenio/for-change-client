@@ -33,13 +33,15 @@ export const Places: React.FunctionComponent = (): JSX.Element => {
         [PlaceType.CAFE]: true,
         [PlaceType.CLOTHING]: true,
         [PlaceType.COMMUNITY]: true,
+        [PlaceType.COSMETICS]: true,
         [PlaceType.EVENT]: true,
         [PlaceType.FARMING]: true,
         [PlaceType.GROCERIES]: true,
         [PlaceType.HOUSING]: true,
         [PlaceType.PROJECTS]: true,
         [PlaceType.SHOPPING]: true,
-        [PlaceType.URBAN_GARDEN]: true
+        [PlaceType.URBAN_GARDEN]: true,
+        [PlaceType.WINE_CELLAR]: true
     });
     const [showOnlyLovedPlaces, setShowOnlyLovedPlaces] = React.useState<boolean>(false);
     const lovedPlaces = useSelector(getLovedPlaces);

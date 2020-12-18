@@ -41,13 +41,15 @@
             "cafe": "Cafe",
             "clothing": "Clothing",
             "community": "Community",
+            "cosmetics": "Cosmetics",
             "event": "Event",
             "farming": "Farming",
             "groceries": "Groceries",
             "housing": "Housing",
             "projects": "Projects",
             "shopping": "Shopping",
-            "urban_garden": "Urban Garden"
+            "urban_garden": "Urban Garden",
+            "wine_cellar": "Wine Cellar"
         },
         "directions": {
             "label": "Get directions to {{name}}"
@@ -66,6 +68,7 @@
                 "cafe": "Cafe",
                 "clothing": "Clothing",
                 "community": "Community",
+                "cosmetics": "Cosmetics",
                 "event": "Event",
                 "farming": "Farming",
                 "groceries": "Groceries",
@@ -73,6 +76,7 @@
                 "projects": "Projects",
                 "shopping": "Shopping",
                 "urban_garden": "Urban Garden",
+                "wine_cellar": "Wine Cellar",
                 "loved": "Show only loved places"
             },
             "title": {

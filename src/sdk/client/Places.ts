@@ -23,13 +23,15 @@ export class Places {
                         (place.type === PlaceType.CAFE && !placeListParams[PlaceType.CAFE]) ||
                         (place.type === PlaceType.CLOTHING && !placeListParams[PlaceType.CLOTHING]) ||
                         (place.type === PlaceType.COMMUNITY && !placeListParams[PlaceType.COMMUNITY]) ||
+                        (place.type === PlaceType.COSMETICS && !placeListParams[PlaceType.COSMETICS]) ||
                         (place.type === PlaceType.EVENT && !placeListParams[PlaceType.EVENT]) ||
                         (place.type === PlaceType.FARMING && !placeListParams[PlaceType.FARMING]) ||
                         (place.type === PlaceType.GROCERIES && !placeListParams[PlaceType.GROCERIES]) ||
                         (place.type === PlaceType.HOUSING && !placeListParams[PlaceType.HOUSING]) ||
                         (place.type === PlaceType.PROJECTS && !placeListParams[PlaceType.PROJECTS]) ||
                         (place.type === PlaceType.SHOPPING && !placeListParams[PlaceType.SHOPPING]) ||
-                        (place.type === PlaceType.URBAN_GARDEN && !placeListParams[PlaceType.URBAN_GARDEN])
+                        (place.type === PlaceType.URBAN_GARDEN && !placeListParams[PlaceType.URBAN_GARDEN]) ||
+                        (place.type === PlaceType.WINE_CELLAR && !placeListParams[PlaceType.WINE_CELLAR])
                     ) {
                         return false;
                     }
