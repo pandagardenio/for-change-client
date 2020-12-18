@@ -46,28 +46,34 @@ sheets.spreadsheets.values.get({
     }
     const rows = res.data.values;
     const headers = rows.shift();
-    const data = rows.map(row => {
-        const place = row.reduce((rowData, cellValue, index) => {
-            const key = headers[index];
-            rowData[key] = parseValue(key, cellValue);
-            return rowData;
-        }, {});
-
-        if (place.physical) {
-            place.location = {
-                lat: place.lat,
-                lng: place.lng
-            };
+    const data = rows.map((row, rowIndex) => {
+        try {
+            const place = row.reduce((rowData, cellValue, index) => {
+                const key = headers[index];
+                rowData[key] = parseValue(key, cellValue);
+                return rowData;
+            }, {});
+    
+            if (place.physical) {
+                place.location = {
+                    lat: place.lat,
+                    lng: place.lng
+                };
+            }
+    
+            delete place.lat;
+            delete place.lng;
+    
+            if (!place.online) {
+                delete place.url;
+            }
+            return place;
+        } catch(error) {
+            console.log(error);
+            console.log(`Skipping row with index: ${rowIndex}`);
+            return null;
         }
-
-        delete place.lat;
-        delete place.lng;
-
-        if (!place.online) {
-            delete place.url;
-        }
-        return place;
-    });
+    }).filter(place => place);
 
     writeFile(placesPath, JSON.stringify(data));
 
