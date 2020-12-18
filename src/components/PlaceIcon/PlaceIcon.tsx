@@ -44,6 +44,8 @@ export const PlaceIcon: React.FunctionComponent<PlaceIconProps> = (
                 return <LocalMallIcon/>;
             case PlaceType.URBAN_GARDEN:
                 return <SpaIcon/>;
+            default:
+                return (<span>?</span>);
         }
     };
 
