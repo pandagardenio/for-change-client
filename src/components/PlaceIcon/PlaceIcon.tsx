@@ -2,7 +2,7 @@ import EmojiNatureIcon from '@material-ui/icons/EmojiNature';
 import EventAvailableIcon from '@material-ui/icons/EventAvailable';
 import FolderSharedIcon from '@material-ui/icons/FolderShared';
 import ForumIcon from '@material-ui/icons/Forum';
-import GroupIcon from '@material-ui/icons/Group';
+import HotelIcon from '@material-ui/icons/Hotel';
 import HouseIcon from '@material-ui/icons/House';
 import LocalBarIcon from '@material-ui/icons/LocalBar';
 import LocalCafeIcon from '@material-ui/icons/LocalCafe';
@@ -24,8 +24,8 @@ export const PlaceIcon: React.FunctionComponent<PlaceIconProps> = (
 ): JSX.Element => {
     const getIcon = (): JSX.Element => {
         switch (place.type) {
-            case PlaceType.ASSOCIATION:
-                return <GroupIcon/>;
+            case PlaceType.ACCOMMODATION:
+                return <HotelIcon/>;
             case PlaceType.CAFE:
                 return <LocalCafeIcon/>;
             case PlaceType.CLOTHING:

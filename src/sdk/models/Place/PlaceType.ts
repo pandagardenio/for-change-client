@@ -1,5 +1,5 @@
 export enum PlaceType {
-    ASSOCIATION = 'association',
+    ACCOMMODATION = 'accommodation',
     CAFE = 'cafe',
     CLOTHING = 'clothing',
     COMMUNITY = 'community',

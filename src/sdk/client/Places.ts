@@ -19,7 +19,7 @@ export class Places {
 
                 return places.filter((place: Place) => {
                     if (
-                        (place.type === PlaceType.ASSOCIATION && !placeListParams[PlaceType.ASSOCIATION]) ||
+                        (place.type === PlaceType.ACCOMMODATION && !placeListParams[PlaceType.ACCOMMODATION]) ||
                         (place.type === PlaceType.CAFE && !placeListParams[PlaceType.CAFE]) ||
                         (place.type === PlaceType.CLOTHING && !placeListParams[PlaceType.CLOTHING]) ||
                         (place.type === PlaceType.COMMUNITY && !placeListParams[PlaceType.COMMUNITY]) ||

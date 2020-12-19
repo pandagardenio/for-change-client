@@ -37,7 +37,7 @@
     },
     "place": {
         "type": {
-            "association": "Association",
+            "accommodation": "Accommodation",
             "cafe": "Cafe",
             "clothing": "Clothing",
             "community": "Community",
@@ -64,7 +64,7 @@
     "places": {
         "filters": {
             "labels": {
-                "association": "Association",
+                "accommodation": "Accommodation",
                 "cafe": "Cafe",
                 "clothing": "Clothing",
                 "community": "Community",

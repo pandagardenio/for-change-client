@@ -21,7 +21,12 @@ export type PlaceCardProps = {
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
+            display: 'flex',
+            flexDirection: 'column',
             height: '100%',
+        },
+        actions: {
+            marginTop: 'auto'
         },
         avatar: {
             backgroundColor: theme.palette.primary.main,
@@ -56,7 +61,7 @@ export const PlaceCard: React.FunctionComponent<PlaceCardProps> = (
             <CardContent>
                 <Typography variant="body2" color="textSecondary" component="p">{place.description}</Typography>
             </CardContent>
-            <CardActions disableSpacing>
+            <CardActions className={classes.actions} disableSpacing>
                 {place.location && <IconButton aria-label={t('place.directions.label', { name: place.name })} component={Link} href={getDirectionsUrl()} target="_blank" rel="noopener">
                     <DirectionsIcon/>
                 </IconButton>}

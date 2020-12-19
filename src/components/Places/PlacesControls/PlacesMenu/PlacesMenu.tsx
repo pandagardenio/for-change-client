@@ -65,7 +65,7 @@ export const PlacesMenu: React.FunctionComponent<PlacesMenuProps> = (
     const anchorEl = useRef<HTMLButtonElement | null>(null);
     const [selectedPlaces, setSelectedPlaces] = useState<Place[]>([]);
     const [placeTypeFiltersValues, setPlaceTypeFiltersValues] = useState<PlaceTypeFiltersValues>({
-        [PlaceType.ASSOCIATION]: true,
+        [PlaceType.ACCOMMODATION]: true,
         [PlaceType.CAFE]: true,
         [PlaceType.CLOTHING]: true,
         [PlaceType.COMMUNITY]: true,

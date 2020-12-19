@@ -29,7 +29,7 @@ export const Places: React.FunctionComponent = (): JSX.Element => {
     const [places, setPlaces] = useState<Place[]>([]);
     const placeDimension = useSelector(getPlaceDimension);
     const [placeTypeFiltersValues, setPlaceTypeFiltersValues] = useState<Record<PlaceType, boolean>>({
-        [PlaceType.ASSOCIATION]: true,
+        [PlaceType.ACCOMMODATION]: true,
         [PlaceType.CAFE]: true,
         [PlaceType.CLOTHING]: true,
         [PlaceType.COMMUNITY]: true,
