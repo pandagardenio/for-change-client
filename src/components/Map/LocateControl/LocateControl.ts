@@ -9,11 +9,12 @@ export const LocateControl: React.FunctionComponent = () => {
     const map = useMap();
 
     useEffect(() => {
-        // geo locate props
         const locateOptions = {
             flyTo: true,
             position: 'topright',
-            maxZoom: 6,
+            locateOptions: {
+                maxZoom: 14
+            },
             strings: {
                 title: t('map.controls.locate.label')
             }
