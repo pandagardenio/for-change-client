@@ -1,6 +1,5 @@
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, Theme, Paper } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
-import Popover from '@material-ui/core/Popover';
 import Tab from '@material-ui/core/Tab';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import { TabContext, TabList, TabPanel } from '@material-ui/lab';
@@ -42,8 +41,17 @@ const useStyles = makeStyles((theme: Theme) => ({
         padding: 0
     },
     popoverPaper: {
-        maxWidth: `calc(100% - ${theme.spacing(3)}px)`,
-        width: '500px'
+        bottom: `-${theme.spacing(1)}px`,
+        display: 'none',
+        maxWidth: `calc(100vw - ${theme.spacing(3)}px)`,
+        position: 'absolute',
+        right: 0,
+        transform: 'translateY(100%)',
+        width: '500px',
+        zIndex: 10000
+    },
+    popoverPaperOpen: {
+        display: 'block'
     }
 }));
 
@@ -100,10 +108,9 @@ export const PlacesMenu: React.FunctionComponent<PlacesMenuProps> = (
     };
 
     const applySelectedPlaces = (): void => {
+        onChangeOpen(false);
         onChange(placeTypeFiltersValues, selectedPlaces);
     };
-
-    const id = open ? 'places-menu' : undefined;
 
     const classes = useStyles();
 
@@ -121,21 +128,7 @@ export const PlacesMenu: React.FunctionComponent<PlacesMenuProps> = (
             >
                 <FilterListIcon/>
             </IconButton>
-            <Popover
-                classes={{ paper: classes.popoverPaper }}
-                id={id}
-                open={open}
-                anchorEl={anchorEl.current}
-                onClose={handleClose}
-                anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'center',
-                }}
-                transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'center',
-                }}
-            >
+            <Paper className={open ? `${classes.popoverPaperOpen} ${classes.popoverPaper}` : classes.popoverPaper}>
                 <TabContext value={tab}>
                     <TabList onChange={handleTabChange} aria-label={t('places.menu.tabs.label')} variant="fullWidth">
                         <Tab label={t('places.menu.tabs.categories.label')} value={PlacesMenuTab.CATEGORIES}/>
@@ -143,6 +136,7 @@ export const PlacesMenu: React.FunctionComponent<PlacesMenuProps> = (
                     </TabList>
                     <TabPanel value={PlacesMenuTab.CATEGORIES}>
                         <PlacesFilters
+                            className={classes.placesList}
                             placesFiltersValues={placeTypeFiltersValues}
                             onChange={onPlaceTypeFilterChange}
                         />
@@ -159,7 +153,7 @@ export const PlacesMenu: React.FunctionComponent<PlacesMenuProps> = (
                         />
                     </TabPanel>
                 </TabContext>
-            </Popover>
+            </Paper>
         </>
     );
 }

@@ -1,4 +1,4 @@
-import { makeStyles, Theme } from '@material-ui/core';
+import { ClickAwayListener, makeStyles, Theme } from '@material-ui/core';
 import React, { useState } from 'react';
 
 import { PlacesMenu, PlacesMenuOnChange, PlacesMenuTab } from './PlacesMenu';
@@ -17,7 +17,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     root: {
         border: `1px solid black`,
         borderRadius: `${theme.shape.borderRadius * 8}px`,
-        display: 'inline-flex'
+        display: 'inline-flex',
+        position: 'relative'
     },
     menu: {
         borderLeft: `1px solid black`,
@@ -42,6 +43,14 @@ export const PlacesControls: React.FunctionComponent<PlacesControlsProps> = (
         });
     };
 
+    const onSearchFocus = (): void => {
+        setMenuState({
+            ...menuState,
+            open: true,
+            tab: PlacesMenuTab.PLACES
+        });
+    };
+
     const onChangeOpen = (open: boolean): void => {
         setMenuState({
             ...menuState,
@@ -56,18 +65,27 @@ export const PlacesControls: React.FunctionComponent<PlacesControlsProps> = (
         });
     };
 
+    const handleClickAway = (): void => {
+        setMenuState({
+            ...menuState,
+            open: false
+        });
+    };
+
     return (
-        <div className={classes.root}>
-            <PlacesSearch onChange={onSearchChange}/>
-            <PlacesMenu
-                {...menuState}
-                className={classes.menu}
-                onChange={onChange}
-                onChangeTab={onChangeTab}
-                onChangeOpen={onChangeOpen}
-                originalSelectedPlaces={originalSelectedPlaces}
-                places={places}
-            />
-        </div>
+        <ClickAwayListener onClickAway={handleClickAway}>
+            <div className={classes.root}>
+                <PlacesSearch onChange={onSearchChange} onFocus={onSearchFocus}/>
+                <PlacesMenu
+                    {...menuState}
+                    className={classes.menu}
+                    onChange={onChange}
+                    onChangeTab={onChangeTab}
+                    onChangeOpen={onChangeOpen}
+                    originalSelectedPlaces={originalSelectedPlaces}
+                    places={places}
+                />
+            </div>
+        </ClickAwayListener>
     );
 };

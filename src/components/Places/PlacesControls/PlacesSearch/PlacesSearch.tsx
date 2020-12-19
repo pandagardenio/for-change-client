@@ -7,12 +7,12 @@ import { useTranslation } from 'react-i18next';
 
 export type PlacesSearchProps = {
     onChange: (value: string) => void;
-    onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
+    onFocus: (event: React.FocusEvent<HTMLInputElement>) => void;
 };
 
 const useStyles = makeStyles((theme: Theme) => ({
     input: {
-        marginLeft: theme.spacing(2)
+        padding: `0 ${theme.spacing(2)}px`
     }
 }));
 
@@ -27,8 +27,8 @@ export const PlacesSearch: React.FunctionComponent<PlacesSearchProps> = (
         onChange(event.currentTarget.value);
     }
 
-    const handleFocus = (): void => {
-
+    const handleFocus = (event: React.FocusEvent<HTMLInputElement>): void => {
+        onFocus(event);
     };
 
     return (

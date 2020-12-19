@@ -32,7 +32,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     list: {
         listStyle: 'none',
-        padding: 0
+        padding: `0 ${theme.spacing(2)}px`,
+        textAlign: 'left'
     },
     chipList: {
         display: 'flex',

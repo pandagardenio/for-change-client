@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 export type PlacesFiltersValues<T> = T;
 
 export type PlacesFiltersProps<T> = {
+    className?: string;
     placesFiltersValues: PlacesFiltersValues<T>;
     onChange: (placesFiltersValues: PlacesFiltersValues<T>) => void;
 };
@@ -26,7 +27,7 @@ export const PlacesFilters = <T extends { [key: string]: boolean; }, >(
         };
 
     return (
-        <FormGroup>
+        <FormGroup className={props.className}>
             {Object.keys(placesFiltersValues).map((key: string, i: number) => (
                 <FormControlLabel
                     control={<Switch checked={placesFiltersValues[key]} onChange={onChange(key)}/>}
