@@ -1,50 +1,44 @@
-import { Tabs, Tab, makeStyles } from '@material-ui/core';
+import { makeStyles, Button, Theme } from '@material-ui/core';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { NavLink as BrowserLink } from 'react-router-dom';
 
-import { PlaceDimension } from '../../../sdk/models/Place';
-import { useDispatch, useSelector } from 'react-redux';
-import { setPlaceDimension } from '../../../store/actions/status';
-import { getPlaceDimension } from '../../../store/selectors/status';
+import { AppRoutes } from '../../../utils/Router';
 
-const useStylesTabs = makeStyles(() => ({
-    indicator: {
-        display: 'none'
-    },
+const useStyles = makeStyles((theme: Theme) => ({
     root: {
         marginLeft: 'auto'
-    }
-}));
-
-const useStylesTab = makeStyles(() => ({
-    root: {
+    },
+    link: {
         textTransform: 'none'
+    },
+    activeLink: {
+        color: theme.palette.secondary.main,
     }
 }));
 
 export const Nav: React.FunctionComponent = (): JSX.Element => {
-    const placeDimension = useSelector(getPlaceDimension);
     const { t } = useTranslation();
-    const dispatch = useDispatch();
-
-    const handleChange = (_event: React.ChangeEvent<{}>, newDimension: string) => {
-        dispatch(setPlaceDimension(newDimension as PlaceDimension))
-    };
-
-    const tabsClasses = useStylesTabs();
-    const tabClasses = useStylesTab();
+    const classes = useStyles();
 
     return (
-        <Tabs
-            classes={tabsClasses}
-            value={placeDimension}
-            onChange={handleChange}
-            variant="standard"
-            textColor="secondary"
-            aria-label="icon label tabs example"
-        >
-            <Tab classes={tabClasses} label={t('header.nav.dimensions.physical')} value={PlaceDimension.PHYSICAL} />
-            <Tab classes={tabClasses} label={t('header.nav.dimensions.online')} value={PlaceDimension.ONLINE} />
-        </Tabs>
+        <nav className={classes.root}>
+            <Button
+                className={classes.link}
+                component={BrowserLink}
+                to={AppRoutes.PLACES_PHYSICAL}
+                activeClassName={classes.activeLink}
+            >
+                {t('header.nav.dimensions.physical')}
+            </Button>
+            <Button
+                className={classes.link}
+                component={BrowserLink}
+                to={AppRoutes.PLACES_ONLINE}
+                activeClassName={classes.activeLink}
+            >
+                {t('header.nav.dimensions.online')}
+            </Button>
+        </nav>
     );
 }

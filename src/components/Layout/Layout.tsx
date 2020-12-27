@@ -4,7 +4,7 @@ import { Footer } from '../Footer';
 import { Header } from '../Header';
 
 export type LayoutProps = {
-    children: JSX.Element[];
+    children: JSX.Element[] | JSX.Element;
 }
 
 export const Layout: React.FunctionComponent<LayoutProps> = (

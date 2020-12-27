@@ -38,7 +38,7 @@ const auth = new google.auth.GoogleAuth({
 const sheets = google.sheets({version: 'v4', auth});
 sheets.spreadsheets.values.get({
     spreadsheetId: process.env.FOR_CHANGE_GOOGLE_SHEETS_DATASOURCE,
-    range: 'Places!A1:J',
+    range: 'Places!A1:P',
 }, (err, res) => {
     if (err) {
         removeCredentials()

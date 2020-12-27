@@ -11,7 +11,6 @@ import { PhysicalPlaces } from './PhysicalPlaces';
 import { OnlinePlaces } from './OnlinePlaces';
 import { PlaceListParams } from '../../sdk/dto';
 import { getLovedPlaces, getSelectedPlaces } from '../../store/selectors';
-import { getPlaceDimension } from '../../store/selectors/status';
 import { PlacesControls, PlaceTypeFiltersValues } from './PlacesControls';
 import { setSelectedPlaces } from '../../store/actions';
 
@@ -25,9 +24,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     }
 }));
 
-export const Places: React.FunctionComponent = (): JSX.Element => {
+export type PlacesProps = {
+    placeDimension?: PlaceDimension;
+}
+
+export const Places: React.FunctionComponent<PlacesProps> = (
+    { placeDimension = PlaceDimension.PHYSICAL }: PlacesProps
+): JSX.Element => {
     const [places, setPlaces] = useState<Place[]>([]);
-    const placeDimension = useSelector(getPlaceDimension);
     const [placeTypeFiltersValues, setPlaceTypeFiltersValues] = useState<Record<PlaceType, boolean>>({
         [PlaceType.ACCOMMODATION]: true,
         [PlaceType.CAFE]: true,
@@ -109,7 +113,7 @@ export const Places: React.FunctionComponent = (): JSX.Element => {
                         </FormGroup>
                     </Container>
                 </header>
-                <TabPanel classes={classes} value={PlaceDimension.PHYSICAL} dir={theme.direction}>
+                <TabPanel classes={{ root: classes.root }} value={PlaceDimension.PHYSICAL} dir={theme.direction}>
                     <PhysicalPlaces places={placesToRender.filter((place: Place) => place.physical)}/>
                 </TabPanel>
                 <TabPanel value={PlaceDimension.ONLINE} dir={theme.direction}>

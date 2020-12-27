@@ -28,7 +28,8 @@ i18n
         fallbackLng: fallbackLanguage,
         interpolation: {
             escapeValue: false
-        }
+        },
+        keySeparator: false
     });
 
 export default i18n;

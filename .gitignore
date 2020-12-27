@@ -11,6 +11,7 @@
 # production
 /build
 /public/places.json
+/src/utils/i18n/translations
 
 # misc
 .DS_Store

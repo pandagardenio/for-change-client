@@ -34,12 +34,3 @@ export const getGroupedPlacesByType = (places: Place[]): GroupedPlacesByType => 
         }
     }, {}) as GroupedPlacesByType;
 };
-
-export const getGroupedPlacesByTypeCount = (places: Place[], groupedPlacesByType = getGroupedPlacesByType(places)): GroupedPlacesByTypeCount => {
-    return Object.keys(groupedPlacesByType).reduce<Partial<GroupedPlacesByTypeCount>>((groupedPlaces: Partial<GroupedPlacesByTypeCount>, placeType: string): Partial<GroupedPlacesByTypeCount> => {
-        return {
-            ...groupedPlaces,
-            [placeType]: groupedPlacesByType[placeType as PlaceType].length
-        }
-    }, {} as Partial<GroupedPlacesByTypeCount>) as GroupedPlacesByTypeCount;
-};

@@ -42,7 +42,10 @@
     "build": "yarn import-data && react-scripts build ",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "import-data": "node utils/import-data.js"
+    "import-data": "yarn import-places && yarn import-translations",
+    "import-places": "node utils/import-places.js",
+    "preimport-translations": "mkdir -p src/utils/i18n/translations",
+    "import-translations": "node utils/import-translations.js"
   },
   "eslintConfig": {
     "extends": [
