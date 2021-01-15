@@ -54,7 +54,7 @@ export const PlaceCard: React.FunctionComponent<PlaceCardProps> = (
     return (
         <Card className={[classes.root, className].join(' ')} raised={raised}>
             <CardHeader
-                avatar={<Avatar aria-label="place" className={classes.avatar}><PlaceIcon place={place}/></Avatar>}
+                avatar={<Avatar aria-label="place" className={classes.avatar}><PlaceIcon placeType={place.type}/></Avatar>}
                 title={place.name}
                 subheader={t(`place.type.${place.type}`)}
             />

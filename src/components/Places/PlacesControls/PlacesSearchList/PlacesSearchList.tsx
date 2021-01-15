@@ -1,19 +1,19 @@
 import { makeStyles, Theme, Chip } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { PlacesSearchListOption } from './PlacesSearchListOption';
-import { Place } from '../../../../../sdk/models/Place';
+import { Place } from '../../../../sdk/models/Place';
+import { setSelectedPlaces } from '../../../../store/actions';
+import { getSelectedPlaces } from '../../../../store/selectors/places';
 
 export type PlacesSearchListProps = {
-    applySelectedPlaces: () => void;
     className?: string;
-    handleClose: () => void;
-    onChangeSelectedPlaces: (places: Place[]) => void;
+    hideItems?: boolean;
+    itemsToShow?: number;
     places: Place[];
+    rawPlaces: Place[];
     searchQuery: string;
-    selectedPlaces: Place[];
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -31,9 +31,16 @@ const useStyles = makeStyles((theme: Theme) => ({
         paddingTop: theme.spacing(3)
     },
     list: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
         listStyle: 'none',
-        padding: `0 ${theme.spacing(2)}px`,
+        padding: 0,
         textAlign: 'left'
+    },
+    listItem: {
+        padding: `0 ${theme.spacing(1)}px`,
+        width: '45%'
     },
     chipList: {
         display: 'flex',
@@ -50,11 +57,16 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export const PlacesSearchList: React.FunctionComponent<PlacesSearchListProps> = (
     {
-        applySelectedPlaces, className, handleClose, onChangeSelectedPlaces, places, searchQuery, selectedPlaces
+        className, hideItems = true, itemsToShow = 8, places, rawPlaces, searchQuery
     }: PlacesSearchListProps
 ): JSX.Element => {
     const classes = useStyles();
-    const { t } = useTranslation();
+    const dispatch = useDispatch();
+
+    const selectedPlaces = useSelector(getSelectedPlaces);
+    const onChangeSelectedPlaces = (changedSelectedPlaces: Place[]): void => {
+        dispatch(setSelectedPlaces(changedSelectedPlaces));
+    };
 
     const isSelected = (place: Place): boolean =>
         !!selectedPlaces.filter((placeToFilter: Place) => place.id === placeToFilter.id).length
@@ -74,11 +86,14 @@ export const PlacesSearchList: React.FunctionComponent<PlacesSearchListProps> = 
     };
 
     const getPlacesToRender = (): Place[] => {
-        if (searchQuery) {
-            return places.filter((place: Place): boolean => new RegExp(searchQuery, 'i').test(place.name));
+        const placesToRender = searchQuery ?
+            rawPlaces.filter((place: Place): boolean => new RegExp(searchQuery, 'i').test(place.name)) :
+            rawPlaces;
+        
+        if (hideItems) {
+            return placesToRender.slice(0, itemsToShow);
         }
-
-        return places;
+       return placesToRender;
     };
 
     return (
@@ -98,31 +113,11 @@ export const PlacesSearchList: React.FunctionComponent<PlacesSearchListProps> = 
             </header>
             <ul className={className ? `${className} ${classes.list}` : classes.list}>
                 {getPlacesToRender().map((place: Place): JSX.Element => (
-                    <li key={place.id}>
+                    <li className={classes.listItem} key={place.id}>
                         <PlacesSearchListOption onChange={handleChange} place={place} selected={isSelected(place)}/>
                     </li>
                 ))}
             </ul>
-            <footer className={classes.actions}>
-                <Button
-                    className={classes.actionsButton}
-                    size="large"
-                    fullWidth={true}
-                    variant="outlined"
-                    onClick={handleClose}
-                >
-                    {t('places.menu.actions.close')}
-                </Button>
-                <Button
-                    className={classes.actionsButton}
-                    size="large"
-                    fullWidth={true}
-                    variant="outlined"
-                    onClick={applySelectedPlaces}
-                >
-                    {t('places.menu.actions.apply')}
-                </Button>
-            </footer>
         </section>
     );
 };

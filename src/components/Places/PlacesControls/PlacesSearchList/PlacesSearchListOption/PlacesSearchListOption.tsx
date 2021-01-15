@@ -1,7 +1,7 @@
 import { Checkbox, makeStyles, Theme, FormControlLabel } from '@material-ui/core';
 import React from 'react';
 
-import { Place } from '../../../../../../sdk/models/Place';
+import { Place } from '../../../../../sdk/models/Place';
 
 export type PlacesSearchListOptionChange = (place: Place, selected: boolean) => void;
 

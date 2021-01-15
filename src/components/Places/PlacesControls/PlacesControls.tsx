@@ -1,91 +1,79 @@
-import { ClickAwayListener, makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, Typography, Button } from '@material-ui/core';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
-import { PlacesMenu, PlacesMenuOnChange, PlacesMenuTab } from './PlacesMenu';
 import { PlacesSearch } from './PlacesSearch';
 import { Place } from '../../../sdk/models/Place';
-
-export type PlacesControlsOnChange = PlacesMenuOnChange;
+import { PlacesSearchList } from './PlacesSearchList';
+import { PlacesFilters } from './PlacesFilters';
+import { LovedPlaces } from './LovedPlaces';
+import { theme } from '../../../utils/theme';
 
 export type PlacesControlsProps = {
-    onChange: PlacesControlsOnChange;
-    originalSelectedPlaces: Place[];
     places: Place[];
+    rawPlaces: Place[];
 };
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(() => ({
     root: {
-        border: `1px solid black`,
-        borderRadius: `${theme.shape.borderRadius * 8}px`,
-        display: 'inline-flex',
         position: 'relative'
     },
-    menu: {
-        borderLeft: `1px solid black`,
-        borderRadius: 0
+    withMargin: {
+        marginBottom: theme.spacing(4)
+    },
+    showMoreButton: {
+        textTransform: 'none'
     }
 }));
 
 export const PlacesControls: React.FunctionComponent<PlacesControlsProps> = (
-    { onChange, originalSelectedPlaces, places }: PlacesControlsProps
+    { places, rawPlaces }: PlacesControlsProps
 ): JSX.Element => {
-    const [menuState, setMenuState] = useState<{ open: boolean, searchQuery: string, tab: PlacesMenuTab }>({
-        open: false,
-        searchQuery: '',
-        tab: PlacesMenuTab.CATEGORIES
+    const { t } = useTranslation();
+    const [controlsState, setControlsState] = useState<{ hidePlaces: boolean, searchQuery: string }>({
+        hidePlaces: true,
+        searchQuery: ''
     });
     const classes = useStyles();
 
     const onSearchChange = (searchQuery: string): void => {
-        setMenuState({
-            ...menuState,
+        setControlsState({
+            ...controlsState,
             searchQuery
         });
     };
 
-    const onSearchFocus = (): void => {
-        setMenuState({
-            ...menuState,
-            open: true,
-            tab: PlacesMenuTab.PLACES
-        });
-    };
-
-    const onChangeOpen = (open: boolean): void => {
-        setMenuState({
-            ...menuState,
-            open
-        });
-    };
-
-    const onChangeTab = (tab: PlacesMenuTab): void => {
-        setMenuState({
-            ...menuState,
-            tab
-        });
-    };
-
-    const handleClickAway = (): void => {
-        setMenuState({
-            ...menuState,
-            open: false
-        });
+    const onShowMoreClick = (): void => {
+        setControlsState({
+            ...controlsState,
+            hidePlaces: !controlsState.hidePlaces
+        })
     };
 
     return (
-        <ClickAwayListener onClickAway={handleClickAway}>
-            <div className={classes.root}>
-                <PlacesSearch onChange={onSearchChange} onFocus={onSearchFocus}/>
-                <PlacesMenu
-                    {...menuState}
-                    className={classes.menu}
-                    onChange={onChange}
-                    onChangeTab={onChangeTab}
-                    onChangeOpen={onChangeOpen}
-                    originalSelectedPlaces={originalSelectedPlaces}
-                    places={places}
-                />
-            </div>
-        </ClickAwayListener>
+        <div className={classes.root}>
+            <PlacesSearch className={classes.withMargin} onChange={onSearchChange}/>
+            <Typography variant="h6" component="h3">{t('places-controls.label.categories')}</Typography>
+            <PlacesFilters className={classes.withMargin}/>
+            <Typography variant="h6" component="h3">{t('places-controls.label.loved-places')}</Typography>
+            <LovedPlaces className={classes.withMargin}/>
+            <Typography variant="h6" component="h3">{t('places-controls.label.places')}</Typography>
+            <PlacesSearchList
+                hideItems={controlsState.hidePlaces}
+                places={places}
+                rawPlaces={rawPlaces}
+                searchQuery={controlsState.searchQuery}
+            />
+            {controlsState.hidePlaces && (
+                <Button
+                    className={classes.showMoreButton}
+                    color="secondary"
+                    onClick={onShowMoreClick}
+                    variant="text"
+                >
+                    {t('places-search-list.label.more')}
+                </Button>
+            )}
+        </div>
     );
 };

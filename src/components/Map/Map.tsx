@@ -14,8 +14,8 @@ export type MapProps = {
 
 const useStyles = makeStyles((theme: Theme) => ({
     leafletContainer: {
-        height: theme.spacing(60),
-        maxHeight: '80vh'
+        height: '80vh',
+        width: '100%'
     }
 }));
 
@@ -26,26 +26,24 @@ export const Map: React.FunctionComponent<MapProps> = ({ places, Marker = MapMar
 
     return (
         <>
-            <section>
-                <MapContainer center={center} className={classes.leafletContainer} zoom={zoom} scrollWheelZoom={false}>
-                    <TileLayer
-                        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    />
-                    <LocateControl/>
-                    {/*@ts-ignore*/}
-                    <MarkerClusterGroup>
-                        {places.filter((place: Place) => {
-                            return place.physical ?
-                                place.location.lat &&
-                                place.location.lat as number | '-' !== '-' &&
-                                place.location.lng &&
-                                place.location.lng as number | '-' !== '-' :
-                                false
-                        }).map((place: Place, i: number) => <Marker key={i} place={place}/>)}
-                    </MarkerClusterGroup>
-                </MapContainer>
-            </section>
+            <MapContainer center={center} className={classes.leafletContainer} zoom={zoom} scrollWheelZoom={false}>
+                <TileLayer
+                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+                <LocateControl/>
+                {/*@ts-ignore*/}
+                <MarkerClusterGroup>
+                    {places.filter((place: Place) => {
+                        return place.physical ?
+                            place.location.lat &&
+                            place.location.lat as number | '-' !== '-' &&
+                            place.location.lng &&
+                            place.location.lng as number | '-' !== '-' :
+                            false
+                    }).map((place: Place, i: number) => <Marker key={i} place={place}/>)}
+                </MarkerClusterGroup>
+            </MapContainer>
         </>
     );
 };

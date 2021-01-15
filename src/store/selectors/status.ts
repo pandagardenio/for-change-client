@@ -1,4 +1,5 @@
-import { PlaceDimension } from "../../sdk/models";
+import { PlaceType } from "../../sdk/models";
 import { AppState } from "../reducers";
 
-export const getPlaceDimension = (state: AppState): PlaceDimension => state.status.placeDimension;
+export const getPlacesFilters = (state: AppState): Record<PlaceType, boolean> => state.status.placesFilters;
+export const getShowOnlyLovedPlaces = (state: AppState): boolean => state.status.showOnlyLovedPlaces;
