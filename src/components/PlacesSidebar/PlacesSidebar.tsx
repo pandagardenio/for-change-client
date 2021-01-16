@@ -16,7 +16,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     root: {
         padding: `${theme.spacing(3)}px 0`,
-        height: '80vh',
         overflow: 'auto'
     }
 }));

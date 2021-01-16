@@ -2,12 +2,13 @@ import { makeStyles, Typography, Button } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { PlacesSearch } from './PlacesSearch';
 import { Place } from '../../../sdk/models/Place';
+import { theme } from '../../../utils/theme';
+import { PlacesSearch } from './PlacesSearch';
 import { PlacesSearchList } from './PlacesSearchList';
 import { PlacesFilters } from './PlacesFilters';
 import { LovedPlaces } from './LovedPlaces';
-import { theme } from '../../../utils/theme';
+import { CityControls } from './CityControls';
 
 export type PlacesControlsProps = {
     places: Place[];
@@ -57,6 +58,8 @@ export const PlacesControls: React.FunctionComponent<PlacesControlsProps> = (
             <PlacesFilters className={classes.withMargin}/>
             <Typography variant="h6" component="h3">{t('places-controls.label.loved-places')}</Typography>
             <LovedPlaces className={classes.withMargin}/>
+            <Typography variant="h6" component="h3">{t('places-controls.label.city-controls')}</Typography>
+            <CityControls/>
             <Typography variant="h6" component="h3">{t('places-controls.label.places')}</Typography>
             <PlacesSearchList
                 hideItems={controlsState.hidePlaces}

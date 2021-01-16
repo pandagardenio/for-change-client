@@ -4,13 +4,15 @@ import { PlaceType } from "./PlaceType";
 export type GroupedPlacesByType = Record<PlaceType, Place[]>;
 export type GroupedPlacesByTypeCount = Record<PlaceType, number>;
 
+export type PlaceLocation = {
+    lat: number;
+    lng: number;
+}
+
 export type Place = {
     description: string;
     id: string;
-    location: {
-        lat: number;
-        lng: number;
-    };
+    location: PlaceLocation;
     [PlaceDimension.ONLINE]: boolean;
     [PlaceDimension.PHYSICAL]: boolean;
     name: string;

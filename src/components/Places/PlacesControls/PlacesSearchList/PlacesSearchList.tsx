@@ -19,8 +19,7 @@ export type PlacesSearchListProps = {
 const useStyles = makeStyles((theme: Theme) => ({
     root: {
         display: 'flex',
-        flexDirection: 'column',
-        maxHeight: '80vh'
+        flexDirection: 'column'
     },
     actions: {
         display: 'flex'
