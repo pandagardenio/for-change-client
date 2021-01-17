@@ -25,7 +25,7 @@ export const FiltersControl: React.FunctionComponent = (): JSX.Element => {
             const div = document.createElement('div');
             div.className = 'leaflet-bar leaflet-control';
             const button = document.createElement('button');
-            button.setAttribute('aria-label', t('filters-control.button.label'));
+            button.setAttribute('aria-label', t('map.controls.filters.label'));
             button.onclick = onClick;
             button.innerHTML = renderToStaticMarkup((
                 <FilterListIcon fontSize="small"/>
