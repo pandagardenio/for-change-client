@@ -7,7 +7,16 @@ import { useDispatch } from 'react-redux';
 import { useMap } from 'react-leaflet';
 
 import { togglesPlaceFilters } from '../../../store/actions/status';
-import { useTheme, useMediaQuery } from '@material-ui/core';
+import { useTheme, useMediaQuery, makeStyles, Theme } from '@material-ui/core';
+
+const useStyles = makeStyles((theme: Theme) => ({
+    button: {
+        background: theme.palette.background.paper,
+        border: 0,
+        padding: theme.spacing(0.5),
+        width: 30
+    }
+}));
 
 export const FiltersControl: React.FunctionComponent = (): JSX.Element => {
     const { t } = useTranslation();
@@ -15,6 +24,7 @@ export const FiltersControl: React.FunctionComponent = (): JSX.Element => {
     const dispatch = useDispatch();
     const theme = useTheme();
     const isDesktop = useMediaQuery(theme.breakpoints.up('sm'));
+    const classes = useStyles();
 
     const filtersControl = useMemo(() => {
         const getFiltersControlHtmlElement = (): HTMLElement => {
@@ -25,6 +35,7 @@ export const FiltersControl: React.FunctionComponent = (): JSX.Element => {
             const div = document.createElement('div');
             div.className = 'leaflet-bar leaflet-control';
             const button = document.createElement('button');
+            button.className = classes.button;
             button.setAttribute('aria-label', t('map.controls.filters.label'));
             button.onclick = onClick;
             button.innerHTML = renderToStaticMarkup((
@@ -39,7 +50,7 @@ export const FiltersControl: React.FunctionComponent = (): JSX.Element => {
         }))({
             position: 'topright'
         });
-    }, [dispatch, t]);
+    }, [classes.button, dispatch, t]);
 
     useEffect((): () => void => {
         filtersControl.addTo(map);
