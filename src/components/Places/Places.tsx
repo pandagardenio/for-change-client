@@ -48,7 +48,7 @@ export const Places: React.FunctionComponent<PlacesProps> = (
                 return true;
             }
             
-            return !!selectedPlaces.filter((placeToFilter: Place) => place.id === placeToFilter.id).length; 
+            return !!selectedPlaces.filter((placeToFilter: Place) => place.slug === placeToFilter.slug).length; 
         });
     };
 
@@ -59,11 +59,11 @@ export const Places: React.FunctionComponent<PlacesProps> = (
         switch (placeDimension) {
             case PlaceDimension.PHYSICAL:
                 return(
-                    <PhysicalPlaces rawPlaces={places} places={placesToRender.filter((place: Place) => place.physical)}/>
+                    <PhysicalPlaces rawPlaces={places} places={placesToRender.filter((place: Place) => place.isPhysical)}/>
                 );
             case PlaceDimension.ONLINE:
                 return (
-                    <OnlinePlaces places={placesToRender.filter((place: Place) => place.online)}/>
+                    <OnlinePlaces places={placesToRender.filter((place: Place) => place.isOnline)}/>
                 );
         }
     };

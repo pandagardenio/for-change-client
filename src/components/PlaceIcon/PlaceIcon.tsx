@@ -13,44 +13,44 @@ import PaletteIcon from '@material-ui/icons/Palette';
 import SpaIcon from '@material-ui/icons/Spa';
 import React from 'react';
 
-import { PlaceType } from '../../sdk/models';
+import { PlaceCategory } from '../../sdk/models';
 
 export type PlaceIconProps = {
     className?: string;
-    placeType: PlaceType;
+    placeCategory: PlaceCategory;
 }
 
 export const PlaceIcon: React.FunctionComponent<PlaceIconProps> = (
-    { className, placeType }: PlaceIconProps
+    { className, placeCategory }: PlaceIconProps
 ): JSX.Element => {
     const getIcon = (): JSX.Element => {
-        switch (placeType) {
-            case PlaceType.ACCOMMODATION:
-                return <HotelIcon className={className}/>;
-            case PlaceType.CAFE:
-                return <LocalCafeIcon className={className}/>;
-            case PlaceType.CLOTHING:
-                return <LoyaltyIcon className={className}/>;
-            case PlaceType.COMMUNITY:
-                return <ForumIcon className={className}/>;
-            case PlaceType.COSMETICS:
-                return <PaletteIcon className={className}/>;
-            case PlaceType.EVENT:
-                return <EventAvailableIcon className={className}/>;
-            case PlaceType.FARMING:
-                return <EmojiNatureIcon className={className}/>;
-            case PlaceType.GROCERIES:
-                return <LocalGroceryStoreIcon className={className}/>;
-            case PlaceType.HOUSING:
-                return <HouseIcon className={className}/>;
-            case PlaceType.PROJECTS:
-                return <FolderSharedIcon className={className}/>;
-            case PlaceType.SHOPPING:
-                return <LocalMallIcon className={className}/>;
-            case PlaceType.URBAN_GARDEN:
-                return <SpaIcon className={className}/>;
-            case PlaceType.WINE_CELLAR:
-                return <LocalBarIcon className={className}/>;
+        switch (placeCategory) {
+            case PlaceCategory.ACCOMMODATION:
+                return <HotelIcon/>;
+            case PlaceCategory.CAFE:
+                return <LocalCafeIcon/>;
+            case PlaceCategory.CLOTHING:
+                return <LoyaltyIcon/>;
+            case PlaceCategory.COMMUNITY:
+                return <ForumIcon/>;
+            case PlaceCategory.COSMETICS:
+                return <PaletteIcon/>;
+            case PlaceCategory.EVENT:
+                return <EventAvailableIcon/>;
+            case PlaceCategory.FARMING:
+                return <EmojiNatureIcon/>;
+            case PlaceCategory.GROCERIES:
+                return <LocalGroceryStoreIcon/>;
+            case PlaceCategory.HOUSING:
+                return <HouseIcon/>;
+            case PlaceCategory.PROJECTS:
+                return <FolderSharedIcon/>;
+            case PlaceCategory.SHOPPING:
+                return <LocalMallIcon/>;
+            case PlaceCategory.URBAN_GARDEN:
+                return <SpaIcon/>;
+            case PlaceCategory.WINE_CELLAR:
+                return <LocalBarIcon/>;
             default:
                 return (<span className={className}>?</span>);
         }

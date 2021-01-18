@@ -2,7 +2,7 @@ import { makeStyles, Theme, createStyles, Typography } from '@material-ui/core';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Place, PlaceType, getGroupedPlacesByType } from '../../sdk/models/Place';
+import { Place, PlaceCategory, getGroupedPlacesByCategory } from '../../sdk/models/Place';
 import { PlaceCard } from '../PlaceCard';
 
 export type OnlinePlacesProps = {
@@ -31,16 +31,16 @@ export const OnlinePlaces: React.FunctionComponent<OnlinePlacesProps> = (
     const classes = useStyles();
     const { t } = useTranslation();
 
-    const groupedPlacesByType = getGroupedPlacesByType(places);
+    const groupedPlacesByType = getGroupedPlacesByCategory(places);
 
     return (
         <>
-            {Object.keys(groupedPlacesByType).map((placeType: string): JSX.Element => (
-                <article key={placeType}>
-                    <Typography variant="h4">{t(`place.type.${placeType}`)} ({groupedPlacesByType[placeType as PlaceType].length})</Typography>
+            {Object.keys(groupedPlacesByType).map((PlaceCategory: string): JSX.Element => (
+                <article key={PlaceCategory}>
+                    <Typography variant="h4">{t(`place.type.${PlaceCategory}`)} ({groupedPlacesByType[PlaceCategory as PlaceCategory].length})</Typography>
                     <ul className={classes.root}>
-                        {(groupedPlacesByType[placeType as PlaceType] as Place[]).map((place: Place) => (
-                            <li className={classes.element} key={place.id}><PlaceCard place={place}/></li>
+                        {(groupedPlacesByType[PlaceCategory as PlaceCategory] as Place[]).map((place: Place) => (
+                            <li className={classes.element} key={place.slug}><PlaceCard place={place}/></li>
                         ))}
                     </ul>
                 </article>

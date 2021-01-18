@@ -8,7 +8,7 @@ export const LocateControl: React.FunctionComponent = () => {
     const { t } = useTranslation();
     const map = useMap();
 
-    useEffect(() => {
+    useEffect((): () => void => {
         const locateOptions = {
             flyTo: true,
             position: 'topright',
@@ -22,6 +22,8 @@ export const LocateControl: React.FunctionComponent = () => {
 
         const lc = new Locate(locateOptions);
         lc.addTo(map);
+
+        return (): void => { lc.remove(); };
     }, [map, t]);
 
     return null;

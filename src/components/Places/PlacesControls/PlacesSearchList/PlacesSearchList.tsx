@@ -68,19 +68,19 @@ export const PlacesSearchList: React.FunctionComponent<PlacesSearchListProps> = 
     };
 
     const isSelected = (place: Place): boolean =>
-        !!selectedPlaces.filter((placeToFilter: Place) => place.id === placeToFilter.id).length
+        !!selectedPlaces.filter((placeToFilter: Place) => place.slug === placeToFilter.slug).length
 
     const handleChange = (place: Place, selected: boolean): void => {
         onChangeSelectedPlaces(
             selected ?
                 [...selectedPlaces, place] :
-                selectedPlaces.filter((placeToFilter: Place) => placeToFilter.id !== place.id)
+                selectedPlaces.filter((placeToFilter: Place) => placeToFilter.slug !== place.slug)
         );
     };
 
     const deleteSelectedPlace = (place: Place): () => void => () => {
         onChangeSelectedPlaces(
-            selectedPlaces.filter((placeToFilter: Place) => placeToFilter.id !== place.id)
+            selectedPlaces.filter((placeToFilter: Place) => placeToFilter.slug !== place.slug)
         );
     };
 
@@ -100,7 +100,7 @@ export const PlacesSearchList: React.FunctionComponent<PlacesSearchListProps> = 
             <header>
                 <ul className={classes.chipList}>
                     {selectedPlaces.map((place: Place): JSX.Element => (
-                        <li key={place.id}>
+                        <li key={place.slug}>
                             <Chip
                                 label={place.name}
                                 onDelete={deleteSelectedPlace(place)}

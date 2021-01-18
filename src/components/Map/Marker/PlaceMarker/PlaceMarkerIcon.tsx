@@ -50,7 +50,7 @@ export const PlaceMarkerIcon: React.FunctionComponent<PlaceMarkerIconProps> = (
         <>
             <div className={classes.pin}/>
             <div className={classes.icon}>
-                <PlaceIcon placeType={place.type}/>
+                <PlaceIcon placeCategory={place.category}/>
             </div>
         </>
     );

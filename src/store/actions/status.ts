@@ -1,4 +1,4 @@
-import { PlaceType } from "../../sdk/models";
+import { PlaceCategory } from "../../sdk/models";
 import { MapStatusState } from "../reducers/status";
 
 export const SET_PLACE_FILTERS = 'SET_PLACE_FILTERS';
@@ -9,7 +9,7 @@ export const SET_MAP_CENTER = 'SET_MAP_CENTER';
 export const SET_MAP_ZOOM = 'SET_MAP_ZOOM';
 
 export type SetPlaceFiltersAction = {
-    payload: Record<PlaceType, boolean>;
+    payload: Record<PlaceCategory, boolean>;
     type: typeof SET_PLACE_FILTERS;
 };
 
@@ -44,7 +44,7 @@ export type StatusAction = SetPlaceFiltersAction |
     SetMapCenterAction |
     SetMapZoomAction;
 
-export const setPlaceFilters = (placeFilters: Record<PlaceType, boolean>): SetPlaceFiltersAction => ({
+export const setPlaceFilters = (placeFilters: Record<PlaceCategory, boolean>): SetPlaceFiltersAction => ({
     payload: placeFilters,
     type: SET_PLACE_FILTERS
 });

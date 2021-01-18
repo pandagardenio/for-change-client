@@ -2,12 +2,12 @@ import { makeStyles, Theme } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { PlaceType } from '../../../../sdk/models';
+import { PlaceCategory } from '../../../../sdk/models';
 import { getPlacesFilters } from '../../../../store/selectors/status';
 import { setPlaceFilters } from '../../../../store/actions/status';
 import { PlaceFilter } from './PlaceFilter';
 
-export type PlacesFiltersValues = Record<PlaceType, boolean>;
+export type PlacesFiltersValues = Record<PlaceCategory, boolean>;
 
 export type PlacesFiltersProps = {
     className?: string;
@@ -39,7 +39,7 @@ export const PlacesFilters: React.FunctionComponent<PlacesFiltersProps> = (
     (): void => {
         const newPlacesFilters = {
             ...placesFilters,
-            [key]: !placesFilters[key as PlaceType]
+            [key]: !placesFilters[key as PlaceCategory]
         };
         dispatch(setPlaceFilters(newPlacesFilters));
     };
@@ -56,8 +56,8 @@ export const PlacesFilters: React.FunctionComponent<PlacesFiltersProps> = (
                 <li className={classes.listItem} key={key}>
                     <PlaceFilter
                         onChange={handleOnChange(key)}
-                        placeType={key as PlaceType}
-                        selected={placesFilters[key as PlaceType]}
+                        placeCategory={key as PlaceCategory}
+                        selected={placesFilters[key as PlaceCategory]}
                     />
                 </li>
             ))}

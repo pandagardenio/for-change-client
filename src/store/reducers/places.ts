@@ -25,7 +25,7 @@ export const reducer = (state: PlacesState = initialState, action: PlacesAction)
         case REMOVE_LOVED_PLACE: {
             return {
                 ...state,
-                loved: state.loved.filter((place: Place) => place.id !== action.payload)
+                loved: state.loved.filter((place: Place) => place.slug !== action.payload)
             }
         }
         case SET_LOVED_PLACES: {

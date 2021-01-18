@@ -4,12 +4,12 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { PlaceIcon } from '../../../../PlaceIcon';
-import { PlaceType } from '../../../../../sdk/models';
+import { PlaceCategory } from '../../../../../sdk/models';
 
 export type PlaceFilterProps = {
     isMoreButton?: boolean;
-    onChange: (placeType: PlaceType) => void;
-    placeType?: PlaceType;
+    onChange: (placeCategory: PlaceCategory) => void;
+    placeCategory?: PlaceCategory;
     selected?: boolean;
 };
 
@@ -49,12 +49,12 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 export const PlaceFilter: React.FunctionComponent<PlaceFilterProps> = (
-    { isMoreButton, placeType, onChange, selected }: PlaceFilterProps
+    { isMoreButton, placeCategory, onChange, selected }: PlaceFilterProps
 ): JSX.Element => {
     const { t } = useTranslation();
     const classes = useStyles();
 
-    const handleClick = () => { onChange(placeType as PlaceType); };
+    const handleClick = () => { onChange(placeCategory as PlaceCategory); };
 
     const getIcon = (): JSX.Element => {
         if (isMoreButton) {
@@ -67,7 +67,7 @@ export const PlaceFilter: React.FunctionComponent<PlaceFilterProps> = (
         return (
             <PlaceIcon
                 className={selected ? `${classes.iconSelected} ${classes.icon}`: classes.icon}
-                placeType={placeType as PlaceType}
+                placeCategory={placeCategory as PlaceCategory}
             />
         );
     };
@@ -84,7 +84,7 @@ export const PlaceFilter: React.FunctionComponent<PlaceFilterProps> = (
                         className={selected ? `${classes.figcaptionSelected} ${classes.figcaption}`: classes.figcaption}
                         variant="caption"
                     >
-                        {t(`places.filters.labels.${isMoreButton ? 'more' : placeType}`)}
+                        {t(`places.filters.labels.${isMoreButton ? 'more' : placeCategory}`)}
                     </Typography>
                 </figcaption>
             </figure>

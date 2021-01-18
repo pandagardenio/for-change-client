@@ -1,8 +1,24 @@
-import { PlaceDimension } from './PlaceDimension';
-import { PlaceType } from "./PlaceType";
+import { PlaceCategory } from "./PlaceCategory";
 
-export type GroupedPlacesByType = Record<PlaceType, Place[]>;
-export type GroupedPlacesByTypeCount = Record<PlaceType, number>;
+export type GroupedPlacesByCategory = Record<PlaceCategory, Place[]>;
+
+export type PlaceLogo = {
+    sizes: {
+        thumbnail: {
+            url: string;
+        };
+        full: {
+            url: string;
+        };
+    };
+};
+
+export type PlaceShop = {
+    name: string;
+    address: string;
+    lat: number;
+    lng: number;
+}
 
 export type PlaceLocation = {
     lat: number;
@@ -10,29 +26,38 @@ export type PlaceLocation = {
 }
 
 export type Place = {
+    id: number;
     description: string;
-    id: string;
-    location: PlaceLocation;
-    [PlaceDimension.ONLINE]: boolean;
-    [PlaceDimension.PHYSICAL]: boolean;
+    isOnline: boolean;
+    isPhysical: boolean;
     name: string;
-    url: string;
-    type: PlaceType;
+    siteUrl: string;
+    ecommerceUrl: string;
+    category: PlaceCategory;
+    slug: string;
+    logo: PlaceLogo;
+    isVerified: boolean;
+    linkedin: string;
+    facebook: string;
+    instagram: string;
+    vimeo: string;
+    youtube: string;
+    shops: PlaceShop[];
 }
 
-export const getGroupedPlacesByType = (places: Place[]): GroupedPlacesByType => {
-    return places.reduce((groupedPlacesByType: Partial<GroupedPlacesByType>, place: Place): Partial<GroupedPlacesByType> => {
-        let placesByPlaceType = groupedPlacesByType[place.type];
+export const getGroupedPlacesByCategory = (places: Place[]): GroupedPlacesByCategory => {
+    return places.reduce((groupedPlacesByType: Partial<GroupedPlacesByCategory>, place: Place): Partial<GroupedPlacesByCategory> => {
+        let placesByPlaceCategory = groupedPlacesByType[place.category];
 
-        if (!placesByPlaceType) {
-            placesByPlaceType = [];
+        if (!placesByPlaceCategory) {
+            placesByPlaceCategory = [];
         }
 
-        placesByPlaceType.push(place);
+        placesByPlaceCategory.push(place);
 
         return {
             ...groupedPlacesByType,
-            [place.type]: placesByPlaceType
+            [place.category]: placesByPlaceCategory
         }
-    }, {}) as GroupedPlacesByType;
+    }, {}) as GroupedPlacesByCategory;
 };

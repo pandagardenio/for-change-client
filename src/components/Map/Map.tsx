@@ -4,7 +4,7 @@ import { MapContainer, TileLayer } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import { useSelector } from 'react-redux';
 
-import { Place } from '../../sdk/models/Place';
+import { Place, PlaceShop } from '../../sdk/models/Place';
 import { LocateControl } from './LocateControl';
 import { MapMarker, MapMarkerProps } from './MapMarker';
 import { getMapCenter, getMapZoom } from '../../store/selectors';
@@ -28,6 +28,8 @@ export const Map: React.FunctionComponent<MapProps> = ({ places, Marker = MapMar
     const mapCenter: [number, number] = useSelector(getMapCenter);
     const mapZoom = useSelector(getMapZoom);
 
+    const physicalPlaces = places.filter((place: Place) => place.isPhysical);
+
     return (
         <>
             <MapContainer center={mapCenter} className={classes.leafletContainer} zoom={mapZoom} scrollWheelZoom={false}>
@@ -40,14 +42,13 @@ export const Map: React.FunctionComponent<MapProps> = ({ places, Marker = MapMar
                 <FiltersControl/>
                 {/*@ts-ignore*/}
                 <MarkerClusterGroup>
-                    {places.filter((place: Place) => {
-                        return place.physical ?
-                            place.location.lat &&
-                            place.location.lat as number | '-' !== '-' &&
-                            place.location.lng &&
-                            place.location.lng as number | '-' !== '-' :
-                            false
-                    }).map((place: Place, i: number) => <Marker key={i} place={place}/>)}
+                        {physicalPlaces
+                            .filter((physicalPlace: Place) => !!physicalPlace.shops)
+                            .map((place: Place, i: number) => {
+                                return place.shops.map((shop: PlaceShop) => (
+                                    <Marker key={i} place={place} shop={shop}/>
+                                ));
+                        })}
                 </MarkerClusterGroup>
             </MapContainer>
         </>

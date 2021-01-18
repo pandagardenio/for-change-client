@@ -1,4 +1,4 @@
-import { PlaceType } from '../../sdk/models';
+import { PlaceCategory } from '../../sdk/models';
 import { SET_PLACE_FILTERS, StatusAction, SET_SHOW_ONLY_LOVED_PLACES, SET_MAP_CENTER, SET_MAP_ZOOM, SET_MAP, TOGGLE_PLACES_FILTERS } from '../actions/status';
 
 export type MapStatusState = {
@@ -8,7 +8,7 @@ export type MapStatusState = {
 
 export type StatusState = {
     map: MapStatusState;
-    placesFilters: Record<PlaceType, boolean>;
+    placesFilters: Record<PlaceCategory, boolean>;
     showPlacesFilters: boolean,
     showOnlyLovedPlaces: boolean;
 }
@@ -19,19 +19,19 @@ export const initialState: StatusState = {
         zoom: 6
     },
     placesFilters: {
-        [PlaceType.ACCOMMODATION]: true,
-        [PlaceType.CAFE]: true,
-        [PlaceType.CLOTHING]: true,
-        [PlaceType.COMMUNITY]: true,
-        [PlaceType.COSMETICS]: true,
-        [PlaceType.EVENT]: true,
-        [PlaceType.FARMING]: true,
-        [PlaceType.GROCERIES]: true,
-        [PlaceType.HOUSING]: true,
-        [PlaceType.PROJECTS]: true,
-        [PlaceType.SHOPPING]: true,
-        [PlaceType.URBAN_GARDEN]: true,
-        [PlaceType.WINE_CELLAR]: true
+        [PlaceCategory.ACCOMMODATION]: true,
+        [PlaceCategory.CAFE]: true,
+        [PlaceCategory.CLOTHING]: true,
+        [PlaceCategory.COMMUNITY]: true,
+        [PlaceCategory.COSMETICS]: true,
+        [PlaceCategory.EVENT]: true,
+        [PlaceCategory.FARMING]: true,
+        [PlaceCategory.GROCERIES]: true,
+        [PlaceCategory.HOUSING]: true,
+        [PlaceCategory.PROJECTS]: true,
+        [PlaceCategory.SHOPPING]: true,
+        [PlaceCategory.URBAN_GARDEN]: true,
+        [PlaceCategory.WINE_CELLAR]: true
     },
     showPlacesFilters: false,
     showOnlyLovedPlaces: false

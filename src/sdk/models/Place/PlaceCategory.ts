@@ -1,4 +1,4 @@
-export enum PlaceType {
+export enum PlaceCategory {
     ACCOMMODATION = 'accommodation',
     CAFE = 'cafe',
     CLOTHING = 'clothing',

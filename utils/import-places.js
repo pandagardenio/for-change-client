@@ -1,81 +1,68 @@
 const fs = require('fs');
 const path = require('path');
 
-const base64 = require('base-64');
-const { google } = require('googleapis');
+const axios = require('axios');
 
-const credentialsPath = path.resolve(__dirname, './credentials.json');
+const baseUrl = 'http://for-change.pandagarden.es/wp-json/wp/v2/posts';
 const placesPath = path.resolve(__dirname, '../public/places.json');
 
 function writeFile (path, content) {
     fs.writeFileSync(path, content, 'utf-8');
 }
 
-function removeCredentials () {
-    fs.unlinkSync(credentialsPath);
+function getPlace (placeData) {
+    const placeBlock = placeData.blocks.filter(block => block.blockName === 'for-change/place')[0];
+    return placeBlock ? placeBlock.attrs : null;
 }
 
-function parseValue (key, value) {
-    switch(key) {
-        case 'lat':
-        case 'lng': 
-            return parseFloat(value);
-        case 'online':
-        case 'physical':
-            return (value && value.toUpperCase()) === 'YES' ? true : false;
-        default:
-            return value;
-    }
+function hasNextPage (currentPage, { headers }) {
+    return currentPage < parseInt(headers['x-wp-totalpages'], 10);
 }
 
-writeFile(credentialsPath, base64.decode(process.env.FOR_CHANGE_GOOGLE_SERVICE_ACCOUNT));
+function parsePlaces (placesData) {
+    return placesData.map(parsePlace);
+}
 
-const auth = new google.auth.GoogleAuth({
-    keyFile: credentialsPath,
-    scopes: ['https://www.googleapis.com/auth/cloud-platform', 'https://www.googleapis.com/auth/spreadsheets.readonly'],
-});
+function parseShops (shops = []) {
+    return shops.map(({ latitude, longitude, ...rest }) => ({
+        ...rest,
+        lat: latitude,
+        lng: longitude
+    }));
+}
 
-const sheets = google.sheets({version: 'v4', auth});
-sheets.spreadsheets.values.get({
-    spreadsheetId: process.env.FOR_CHANGE_GOOGLE_SHEETS_DATASOURCE,
-    range: 'Places!A1:P',
-}, (err, res) => {
-    if (err) {
-        removeCredentials()
-        return console.log('The API returned an error: ' + err);
-    }
-    const rows = res.data.values;
-    const headers = rows.shift();
-    const data = rows.map((row, rowIndex) => {
-        try {
-            const place = row.reduce((rowData, cellValue, index) => {
-                const key = headers[index];
-                rowData[key] = parseValue(key, cellValue);
-                return rowData;
-            }, {});
-    
-            if (place.physical) {
-                place.location = {
-                    lat: place.lat,
-                    lng: place.lng
-                };
-            }
-    
-            delete place.lat;
-            delete place.lng;
-    
-            if (!place.online) {
-                delete place.url;
-            }
-            return place;
-        } catch(error) {
-            console.log(error);
-            console.log(`Skipping row with index: ${rowIndex}`);
-            return null;
+function parsePlace (placeData) {
+    const place = getPlace(placeData);
+    const { physicalShops, ...rest} = place;
+    return {
+        ...rest,
+        shops: parseShops(physicalShops),
+        slug: placeData.slug,
+        id: placeData.id
+    };
+}
+
+async function processPage (page) {
+    const response = await axios.get(baseUrl, {
+        params: {
+            page
         }
-    }).filter(place => place);
+    });
+    const places = parsePlaces(response.data);
+    if (hasNextPage(page, response)) {
+        const nextPagePlaces = await processPage(page + 1);
+        return places.concat(nextPagePlaces);
+    }
+    return places;
+}
 
-    writeFile(placesPath, JSON.stringify(data));
+function processContent () {
+    return processPage(1);
+}
 
-    removeCredentials();
-});
+processContent()
+    .then(places => places.filter(place => place))
+    .then(places => {
+        writeFile(placesPath, JSON.stringify(places));
+        console.log(`${places.length} place written`);
+    });
