@@ -1,5 +1,6 @@
 const WPAPI = require('wpapi');
 
+const categories = require('./categories.json');
 const places = require('./places.json');
 
 const wp = new WPAPI({
@@ -8,11 +9,9 @@ const wp = new WPAPI({
     password: process.env.FOR_CHANGE_DATA_WORDPRESS_PASSWORD,
     auth: true
 });
-console.log({
-    endpoint: process.env.FOR_CHANGE_DATA_WORDPRESS_BASE_URL,
-    username: process.env.FOR_CHANGE_DATA_WORDPRESS_USERNAME,
-    password: process.env.FOR_CHANGE_DATA_WORDPRESS_PASSWORD
-})
+
+const getCategoryId = categorySlug => categories.filter(category => category.slug === categorySlug)[0].id;
+
 const parseContent = place => {
     return `<!-- wp:for-change/place ${JSON.stringify(transformPlaceToPostPlace(place))}  /-->`
 }
@@ -58,6 +57,7 @@ const transformPlaceToPostPlace = place => {
 
 const transformPlaceToPost = place => ({
     title: place.name,
+    categories: [getCategoryId(place.type)],
     content: parseContent(place),
     status: 'publish'
 });

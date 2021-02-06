@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
-import { AppRouter } from './utils/Router';
+import { AppRouter } from './components/Router';
 import { theme } from './utils/theme';
 import './utils/i18n';
 import { ApiClient, SdkProvider, Sdk } from './sdk';

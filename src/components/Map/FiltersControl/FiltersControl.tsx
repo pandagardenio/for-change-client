@@ -7,12 +7,13 @@ import { useDispatch } from 'react-redux';
 import { useMap } from 'react-leaflet';
 
 import { togglesPlaceFilters } from '../../../store/actions/status';
-import { useTheme, useMediaQuery, makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) => ({
     button: {
         background: theme.palette.background.paper,
         border: 0,
+        cursor: 'pointer',
         padding: theme.spacing(0.5),
         width: 30
     }
@@ -22,8 +23,6 @@ export const FiltersControl: React.FunctionComponent = (): JSX.Element => {
     const { t } = useTranslation();
     const map = useMap();
     const dispatch = useDispatch();
-    const theme = useTheme();
-    const isDesktop = useMediaQuery(theme.breakpoints.up('sm'));
     const classes = useStyles();
 
     const filtersControl = useMemo(() => {
@@ -56,15 +55,6 @@ export const FiltersControl: React.FunctionComponent = (): JSX.Element => {
         filtersControl.addTo(map);
         return (): void => { filtersControl.remove(); }
     }, [filtersControl, map]);
-
-
-    useEffect((): void => {
-        if (!isDesktop) {
-            filtersControl.addTo(map);
-        } else {
-            filtersControl.remove();
-        }
-    }, [filtersControl, isDesktop, map]);
 
     return (
         <></>

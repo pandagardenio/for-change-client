@@ -36,6 +36,7 @@ function parsePlace (placeData) {
     const { physicalShops, ...rest} = place;
     return {
         ...rest,
+        categories: placeData.categories,
         shops: parseShops(physicalShops),
         slug: placeData.slug,
         id: placeData.id

@@ -1,9 +1,10 @@
-import { Packlink } from '@packlink/packlink-sdk';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
 import { useSdk } from '../useSdk';
 import { SdkProvider } from '../../components';
+import { Sdk } from '../../../Sdk';
+import { ApiClient } from '../../../ApiClient';
 
 describe('useSdk', (): void => {
     const Component: React.FunctionComponent = (): JSX.Element => {
@@ -24,7 +25,9 @@ describe('useSdk', (): void => {
     });
 
     it('Returns the sdk passed by the provider', (): void => {
-        const sdk = new Packlink({ url: 'https://api.fake.url' });
+        const sdk = new Sdk(new ApiClient({
+            baseUrl: 'https://api.fake.url'
+        }));
         render(
             <SdkProvider sdk={sdk}>
                 <Component />

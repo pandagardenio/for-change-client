@@ -1,16 +1,28 @@
 import { PlaceCategory } from "../../sdk/models";
 import { MapStatusState } from "../reducers/status";
 
+export const LIGHT_PLACE_FILTER = 'LIGHT_PLACE_FILTER';
 export const SET_PLACE_FILTERS = 'SET_PLACE_FILTERS';
+export const SET_PLACE_FILTER = 'SET_PLACE_FILTER';
 export const TOGGLE_PLACES_FILTERS = 'TOGGLE_PLACE_FILTERS';
 export const SET_SHOW_ONLY_LOVED_PLACES = 'SET_SHOW_ONLY_LOVED_PLACES';
 export const SET_MAP = 'SET_MAP';
 export const SET_MAP_CENTER = 'SET_MAP_CENTER';
 export const SET_MAP_ZOOM = 'SET_MAP_ZOOM';
 
+export type LightPlaceFilterAction = {
+    payload: PlaceCategory;
+    type: typeof LIGHT_PLACE_FILTER;
+};
+
 export type SetPlaceFiltersAction = {
     payload: Record<PlaceCategory, boolean>;
     type: typeof SET_PLACE_FILTERS;
+};
+
+export type SetPlaceFilterAction = {
+    payload: Partial<Record<PlaceCategory, boolean>>;
+    type: typeof SET_PLACE_FILTER;
 };
 
 export type TogglePlacesFiltersAction = {
@@ -37,16 +49,28 @@ export type SetMapZoomAction = {
     type: typeof SET_MAP_ZOOM;
 }
 
-export type StatusAction = SetPlaceFiltersAction |
+export type StatusAction = LightPlaceFilterAction |
+    SetPlaceFiltersAction |
+    SetPlaceFilterAction |
     TogglePlacesFiltersAction |
     SetShowLovedPlacesAction |
     SetMapction |
     SetMapCenterAction |
     SetMapZoomAction;
 
+export const lightPlaceFilter = (placeFilter: PlaceCategory): LightPlaceFilterAction => ({
+    payload: placeFilter,
+    type: LIGHT_PLACE_FILTER
+});
+
 export const setPlaceFilters = (placeFilters: Record<PlaceCategory, boolean>): SetPlaceFiltersAction => ({
     payload: placeFilters,
     type: SET_PLACE_FILTERS
+});
+
+export const setPlaceFilter = (placeFilter: Record<PlaceCategory, boolean>): SetPlaceFilterAction => ({
+    payload: placeFilter,
+    type: SET_PLACE_FILTER
 });
 
 export const togglesPlaceFilters = (): TogglePlacesFiltersAction => ({

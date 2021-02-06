@@ -1,9 +1,10 @@
 import { makeStyles, Theme, createStyles, Typography } from '@material-ui/core';
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Place, PlaceCategory, getGroupedPlacesByCategory } from '../../sdk/models/Place';
 import { PlaceCard } from '../PlaceCard';
+import { PlacesSearch } from './PlacesControls';
 
 export type OnlinePlacesProps = {
     places: Place[];
@@ -30,11 +31,24 @@ export const OnlinePlaces: React.FunctionComponent<OnlinePlacesProps> = (
 ): JSX.Element => {
     const classes = useStyles();
     const { t } = useTranslation();
+    const [placesSearch, setPlacesSearch] = useState('');
 
-    const groupedPlacesByType = getGroupedPlacesByCategory(places);
+    const handlePlacesSearchChange = (value: string): void => {
+        setPlacesSearch(value);
+    };
+
+    const getPlacesToRender = (): Place[] => {
+        if (!placesSearch) {
+            return places;
+        }
+        return places.filter((place: Place) => place.name.indexOf(placesSearch) > -1);
+    };
+
+    const groupedPlacesByType = getGroupedPlacesByCategory(getPlacesToRender());
 
     return (
         <>
+            <PlacesSearch onChange={handlePlacesSearchChange}/>
             {Object.keys(groupedPlacesByType).map((PlaceCategory: string): JSX.Element => (
                 <article key={PlaceCategory}>
                     <Typography variant="h4">{t(`place.type.${PlaceCategory}`)} ({groupedPlacesByType[PlaceCategory as PlaceCategory].length})</Typography>

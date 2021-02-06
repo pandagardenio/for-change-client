@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Link as BrowserLink } from 'react-router-dom';
 
 import hero from './hero.jpg';
-import { AppRoutes } from '../../../utils/Router';
+import { AppRoutes } from '../../../components/Router';
 
 const useStyles = makeStyles((theme: Theme) => ({
     root: {

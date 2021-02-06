@@ -1,5 +1,5 @@
 import { PlaceCategory } from '../../sdk/models';
-import { SET_PLACE_FILTERS, StatusAction, SET_SHOW_ONLY_LOVED_PLACES, SET_MAP_CENTER, SET_MAP_ZOOM, SET_MAP, TOGGLE_PLACES_FILTERS } from '../actions/status';
+import { SET_PLACE_FILTERS, StatusAction, SET_SHOW_ONLY_LOVED_PLACES, SET_MAP_CENTER, SET_MAP_ZOOM, SET_MAP, TOGGLE_PLACES_FILTERS, SET_PLACE_FILTER, LIGHT_PLACE_FILTER } from '../actions/status';
 
 export type MapStatusState = {
     center: [number, number];
@@ -39,10 +39,40 @@ export const initialState: StatusState = {
 
 export const reducer = (state: StatusState = initialState, action: StatusAction): StatusState => {
     switch (action.type) {
+        case LIGHT_PLACE_FILTER: {
+            return {
+                ...state,
+                placesFilters: {
+                    [PlaceCategory.ACCOMMODATION]: false,
+                    [PlaceCategory.CAFE]: false,
+                    [PlaceCategory.CLOTHING]: false,
+                    [PlaceCategory.COMMUNITY]: false,
+                    [PlaceCategory.COSMETICS]: false,
+                    [PlaceCategory.EVENT]: false,
+                    [PlaceCategory.FARMING]: false,
+                    [PlaceCategory.GROCERIES]: false,
+                    [PlaceCategory.HOUSING]: false,
+                    [PlaceCategory.PROJECTS]: false,
+                    [PlaceCategory.SHOPPING]: false,
+                    [PlaceCategory.URBAN_GARDEN]: false,
+                    [PlaceCategory.WINE_CELLAR]: false,
+                    [action.payload]: true
+                }
+            };
+        }
         case SET_PLACE_FILTERS: {
             return {
                 ...state,
                 placesFilters: action.payload
+            };
+        }
+        case SET_PLACE_FILTER: {
+            return {
+                ...state,
+                placesFilters: {
+                    ...state.placesFilters,
+                    ...action.payload
+                }
             };
         }
         case TOGGLE_PLACES_FILTERS: {

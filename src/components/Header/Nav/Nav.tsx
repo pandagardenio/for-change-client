@@ -3,7 +3,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink as BrowserLink } from 'react-router-dom';
 
-import { AppRoutes } from '../../../utils/Router';
+import { AppRoutes } from '../../Router';
 
 const useStyles = makeStyles((theme: Theme) => ({
     root: {

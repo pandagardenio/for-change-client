@@ -53,7 +53,9 @@ export const PhysicalPlaces: React.FunctionComponent<PhysicalPlacesProps> = (
     const getPlacesSidebar = () => {
         if (isDesktop) {
             return (
-                <PlacesSidebar className={classes.sidebar} rawPlaces={rawPlaces} places={places}/>
+                showPlacesFilters ? 
+                    <PlacesSidebar className={classes.sidebar} rawPlaces={rawPlaces} places={places}/> :
+                    <></>
             );
         }
         return (

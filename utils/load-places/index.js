@@ -1,1 +1,1 @@
-require('load-places');
+require('./load-places');
