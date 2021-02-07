@@ -69,7 +69,7 @@ export const PlaceCard: React.FunctionComponent<PlaceCardProps> = (
             <CardHeader
                 avatar={getAvatar()}
                 title={place.name}
-                subheader={t(`place.type.${place.category}`)}
+                subheader={t(`place.type.${place.categories[0]}`)}
             />
             <CardContent className={classes.content}>
                 <Typography

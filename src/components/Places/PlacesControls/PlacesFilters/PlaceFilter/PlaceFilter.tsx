@@ -4,12 +4,12 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { PlaceIcon } from '../../../../PlaceIcon';
-import { PlaceCategory } from '../../../../../sdk/models';
+import { PlaceCategorySlug } from '../../../../../sdk/models';
 
 export type PlaceFilterProps = {
     isMoreButton?: boolean;
-    onChange: (placeCategory: PlaceCategory) => void;
-    placeCategory?: PlaceCategory;
+    onChange: (placeCategorySlug: PlaceCategorySlug) => void;
+    placeCategorySlug?: PlaceCategorySlug;
     selected?: boolean;
 };
 
@@ -49,12 +49,12 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 export const PlaceFilter: React.FunctionComponent<PlaceFilterProps> = (
-    { isMoreButton, placeCategory, onChange, selected }: PlaceFilterProps
+    { isMoreButton, placeCategorySlug, onChange, selected }: PlaceFilterProps
 ): JSX.Element => {
     const { t } = useTranslation();
     const classes = useStyles();
 
-    const handleClick = () => { onChange(placeCategory as PlaceCategory); };
+    const handleClick = () => { onChange(placeCategorySlug as PlaceCategorySlug); };
 
     const getIcon = (): JSX.Element => {
         if (isMoreButton) {
@@ -67,7 +67,7 @@ export const PlaceFilter: React.FunctionComponent<PlaceFilterProps> = (
         return (
             <PlaceIcon
                 className={selected ? `${classes.iconSelected} ${classes.icon}`: classes.icon}
-                placeCategory={placeCategory as PlaceCategory}
+                placeCategorySlug={placeCategorySlug as PlaceCategorySlug}
             />
         );
     };
@@ -84,7 +84,7 @@ export const PlaceFilter: React.FunctionComponent<PlaceFilterProps> = (
                         className={selected ? `${classes.figcaptionSelected} ${classes.figcaption}`: classes.figcaption}
                         variant="caption"
                     >
-                        {t(`places.filters.labels.${isMoreButton ? 'more' : placeCategory}`)}
+                        {t(`places.filters.labels.${isMoreButton ? 'more' : placeCategorySlug}`)}
                     </Typography>
                 </figcaption>
             </figure>

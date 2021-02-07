@@ -2,9 +2,10 @@ import { makeStyles, Theme, createStyles, Typography } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Place, PlaceCategory, getGroupedPlacesByCategory } from '../../sdk/models/Place';
+import { Place, PlaceCategorySlug } from '../../sdk/models';
 import { PlaceCard } from '../PlaceCard';
 import { PlacesSearch } from './PlacesControls';
+import { useGroupedPlaces } from '../../hooks';
 
 export type OnlinePlacesProps = {
     places: Place[];
@@ -44,16 +45,17 @@ export const OnlinePlaces: React.FunctionComponent<OnlinePlacesProps> = (
         return places.filter((place: Place) => place.name.indexOf(placesSearch) > -1);
     };
 
-    const groupedPlacesByType = getGroupedPlacesByCategory(getPlacesToRender());
+    const groupedPlacesByType = useGroupedPlaces(getPlacesToRender());
 
+    console.log(groupedPlacesByType);
     return (
         <>
             <PlacesSearch onChange={handlePlacesSearchChange}/>
-            {Object.keys(groupedPlacesByType).map((PlaceCategory: string): JSX.Element => (
-                <article key={PlaceCategory}>
-                    <Typography variant="h4">{t(`place.type.${PlaceCategory}`)} ({groupedPlacesByType[PlaceCategory as PlaceCategory].length})</Typography>
+            {Object.keys(groupedPlacesByType).map((placeCategorySlug: string): JSX.Element => (
+                <article key={placeCategorySlug}>
+                    <Typography variant="h4">{t(`place.type.${placeCategorySlug}`)} ({groupedPlacesByType[placeCategorySlug as PlaceCategorySlug].length})</Typography>
                     <ul className={classes.root}>
-                        {(groupedPlacesByType[PlaceCategory as PlaceCategory] as Place[]).map((place: Place) => (
+                        {(groupedPlacesByType[placeCategorySlug as PlaceCategorySlug] || []).map((place: Place) => (
                             <li className={classes.element} key={place.slug}><PlaceCard place={place}/></li>
                         ))}
                     </ul>

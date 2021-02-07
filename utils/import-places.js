@@ -3,6 +3,8 @@ const path = require('path');
 
 const axios = require('axios');
 
+const { processContent: processPlaceCategories } = require('./import-categories');
+
 const baseUrl = 'http://for-change.pandagarden.es/wp-json/wp/v2/posts';
 const placesPath = path.resolve(__dirname, '../public/places.json');
 
@@ -19,8 +21,8 @@ function hasNextPage (currentPage, { headers }) {
     return currentPage < parseInt(headers['x-wp-totalpages'], 10);
 }
 
-function parsePlaces (placesData) {
-    return placesData.map(parsePlace);
+function parsePlaces (placesData, categories) {
+    return placesData.map(placeData => parsePlace(placeData, categories));
 }
 
 function parseShops (shops = []) {
@@ -31,37 +33,43 @@ function parseShops (shops = []) {
     }));
 }
 
-function parsePlace (placeData) {
+function parsePlace (placeData, categories) {
     const place = getPlace(placeData);
     const { physicalShops, ...rest} = place;
+    delete rest.category;
     return {
         ...rest,
-        categories: placeData.categories,
+        categories: placeData.categories.map(categoryId => getCategorySlug(categories, categoryId)),
         shops: parseShops(physicalShops),
         slug: placeData.slug,
         id: placeData.id
     };
 }
 
-async function processPage (page) {
+function getCategorySlug (categories, categoryId) {
+    return categories.filter(category => category.id === categoryId)[0].slug;
+}
+
+async function processPage (page, categories) {
     const response = await axios.get(baseUrl, {
         params: {
             page
         }
     });
-    const places = parsePlaces(response.data);
+    const places = parsePlaces(response.data, categories);
     if (hasNextPage(page, response)) {
-        const nextPagePlaces = await processPage(page + 1);
+        const nextPagePlaces = await processPage(page + 1, categories);
         return places.concat(nextPagePlaces);
     }
     return places;
 }
 
-function processContent () {
-    return processPage(1);
+function processContent (categories) {
+    return processPage(1, categories);
 }
 
-processContent()
+processPlaceCategories()
+    .then(categories => processContent(categories))
     .then(places => places.filter(place => place))
     .then(places => {
         writeFile(placesPath, JSON.stringify(places));

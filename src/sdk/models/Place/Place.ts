@@ -1,6 +1,6 @@
-import { PlaceCategory } from "./PlaceCategory";
+import { PlaceCategorySlug } from "../PlaceCategory";
 
-export type GroupedPlacesByCategory = Record<PlaceCategory, Place[]>;
+export type GroupedPlacesByCategory = Record<PlaceCategorySlug, Place[]>;
 
 export type PlaceLogo = {
     sizes: {
@@ -33,7 +33,7 @@ export type Place = {
     name: string;
     siteUrl: string;
     ecommerceUrl: string;
-    category: PlaceCategory;
+    categories: PlaceCategorySlug[];
     slug: string;
     logo: PlaceLogo;
     isVerified: boolean;
@@ -44,20 +44,3 @@ export type Place = {
     youtube: string;
     shops: PlaceShop[];
 }
-
-export const getGroupedPlacesByCategory = (places: Place[]): GroupedPlacesByCategory => {
-    return places.reduce((groupedPlacesByType: Partial<GroupedPlacesByCategory>, place: Place): Partial<GroupedPlacesByCategory> => {
-        let placesByPlaceCategory = groupedPlacesByType[place.category];
-
-        if (!placesByPlaceCategory) {
-            placesByPlaceCategory = [];
-        }
-
-        placesByPlaceCategory.push(place);
-
-        return {
-            ...groupedPlacesByType,
-            [place.category]: placesByPlaceCategory
-        }
-    }, {}) as GroupedPlacesByCategory;
-};

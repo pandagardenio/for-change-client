@@ -20,14 +20,23 @@ const transformPlaceToPostPlace = place => {
     const postPlace = {
         name: place.name,
         description: place.description,
-        isOnline: place.online,
-        isPhysical: place.physical,
-        category: place.type,
         linkedin: place.linkedin,
         facebook: place.facebook,
         instagram: place.instagram,
         vimeo: place.vimeo
     };
+
+    if (place.online && place.online === 'YES') {
+        postPlace.isOnline = true;
+    } else {
+        postPlace.isOnline = false;
+    }
+
+    if (place.physical && place.physical === 'YES') {
+        postPlace.isPhysical = true;
+    } else {
+        postPlace.isPhysical = false;
+    }
 
     if (place.verified && place.verified === 'YES') {
         postPlace.isVerified = true;
@@ -43,12 +52,12 @@ const transformPlaceToPostPlace = place => {
         postPlace.ecommerceUrl = place.ecommerceUrl
     }
 
-    if (place.physical && place.location && place.location.lat && place.location.lng) {
+    if (place.physical === 'YES' && place.lat && place.lng) {
         postPlace.physicalShops = [{
             address: '',
-            name: place.online,
-            latitude: place.location.lat,
-            longitude: place.location.lng
+            name: place.name,
+            latitude: place.lat,
+            longitude: place.lng
         }];
     }
 

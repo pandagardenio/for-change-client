@@ -1,7 +1,7 @@
 import { AxiosResponse } from "axios";
 
 import { ApiClient } from "../ApiClient";
-import { Place, PlaceCategory } from "../models/Place";
+import { Place, PlaceCategorySlug } from "../models";
 import { PlaceListParams } from "../dto";
 
 export class Places {
@@ -19,19 +19,19 @@ export class Places {
 
                 return places.filter((place: Place) => {
                     if (
-                        (place.category === PlaceCategory.ACCOMMODATION && !placeListParams[PlaceCategory.ACCOMMODATION]) ||
-                        (place.category === PlaceCategory.CAFE && !placeListParams[PlaceCategory.CAFE]) ||
-                        (place.category === PlaceCategory.CLOTHING && !placeListParams[PlaceCategory.CLOTHING]) ||
-                        (place.category === PlaceCategory.COMMUNITY && !placeListParams[PlaceCategory.COMMUNITY]) ||
-                        (place.category === PlaceCategory.COSMETICS && !placeListParams[PlaceCategory.COSMETICS]) ||
-                        (place.category === PlaceCategory.EVENT && !placeListParams[PlaceCategory.EVENT]) ||
-                        (place.category === PlaceCategory.FARMING && !placeListParams[PlaceCategory.FARMING]) ||
-                        (place.category === PlaceCategory.GROCERIES && !placeListParams[PlaceCategory.GROCERIES]) ||
-                        (place.category === PlaceCategory.HOUSING && !placeListParams[PlaceCategory.HOUSING]) ||
-                        (place.category === PlaceCategory.PROJECTS && !placeListParams[PlaceCategory.PROJECTS]) ||
-                        (place.category === PlaceCategory.SHOPPING && !placeListParams[PlaceCategory.SHOPPING]) ||
-                        (place.category === PlaceCategory.URBAN_GARDEN && !placeListParams[PlaceCategory.URBAN_GARDEN]) ||
-                        (place.category === PlaceCategory.WINE_CELLAR && !placeListParams[PlaceCategory.WINE_CELLAR])
+                        (place.categories.indexOf(PlaceCategorySlug.ACCOMMODATION) > -1  && !placeListParams[PlaceCategorySlug.ACCOMMODATION]) ||
+                        (place.categories.indexOf(PlaceCategorySlug.CAFE) > -1 && !placeListParams[PlaceCategorySlug.CAFE]) ||
+                        (place.categories.indexOf(PlaceCategorySlug.CLOTHING) > -1 && !placeListParams[PlaceCategorySlug.CLOTHING]) ||
+                        (place.categories.indexOf(PlaceCategorySlug.COMMUNITY) > -1 && !placeListParams[PlaceCategorySlug.COMMUNITY]) ||
+                        (place.categories.indexOf(PlaceCategorySlug.COSMETICS) > -1 && !placeListParams[PlaceCategorySlug.COSMETICS]) ||
+                        (place.categories.indexOf(PlaceCategorySlug.EVENT) > -1 && !placeListParams[PlaceCategorySlug.EVENT]) ||
+                        (place.categories.indexOf(PlaceCategorySlug.FARMING) > -1 && !placeListParams[PlaceCategorySlug.FARMING]) ||
+                        (place.categories.indexOf(PlaceCategorySlug.GROCERIES) > -1 && !placeListParams[PlaceCategorySlug.GROCERIES]) ||
+                        (place.categories.indexOf(PlaceCategorySlug.HOUSING) > -1 && !placeListParams[PlaceCategorySlug.HOUSING]) ||
+                        (place.categories.indexOf(PlaceCategorySlug.PROJECTS) > -1 && !placeListParams[PlaceCategorySlug.PROJECTS]) ||
+                        (place.categories.indexOf(PlaceCategorySlug.SHOPPING) > -1 && !placeListParams[PlaceCategorySlug.SHOPPING]) ||
+                        (place.categories.indexOf(PlaceCategorySlug.URBAN_GARDEN) > -1 && !placeListParams[PlaceCategorySlug.URBAN_GARDEN]) ||
+                        (place.categories.indexOf(PlaceCategorySlug.WINE_CELLAR) > -1 && !placeListParams[PlaceCategorySlug.WINE_CELLAR])
                     ) {
                         return false;
                     }

@@ -3,11 +3,12 @@ import Promise from 'bluebird';
 
 import { ApiClient } from './ApiClient';
 import { RegisterDto } from './dto';
-import { Places } from './client/Places';
-import { Auth, IAuthApiResponse } from './models/Auth';
+import { PlaceCategories, Places } from './client';
+import { Auth, IAuthApiResponse } from './models';
 
 export class Sdk {
     public places: Places = new Places(this.apiClient);
+    public placeCategories: PlaceCategories = new PlaceCategories(this.apiClient);
 
     constructor(
         private apiClient: ApiClient

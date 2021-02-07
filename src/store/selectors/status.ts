@@ -1,8 +1,8 @@
-import { PlaceCategory } from "../../sdk/models";
+import { PlaceCategorySlug } from "../../sdk/models";
 import { AppState } from "../reducers";
 import { MapStatusState } from "../reducers/status";
 
-export const getPlacesFilters = (state: AppState): Record<PlaceCategory, boolean> => state.status.placesFilters;
+export const getPlacesFilters = (state: AppState): Record<PlaceCategorySlug, boolean> => state.status.placesFilters;
 export const getShowPlacesFilters = (state: AppState): boolean => state.status.showPlacesFilters;
 export const getShowOnlyLovedPlaces = (state: AppState): boolean => state.status.showOnlyLovedPlaces;
 export const getMap = (state: AppState): MapStatusState => state.status.map;

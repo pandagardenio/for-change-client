@@ -41,13 +41,16 @@ async function processPage (page) {
     return categories;
 }
 
-function processContent () {
-    return processPage(1);
+async function processContent () {
+    return processPage(1)
+        .then(categories => categories.filter(category => !!category))
+        .then(categories => {
+            writeFile(categoriesPath, JSON.stringify(categories));
+            console.log(`${categories.length} categories written`);
+            return categories;
+        });
 }
 
-processContent()
-    .then(categories => categories.filter(category => !!category))
-    .then(categories => {
-        writeFile(categoriesPath, JSON.stringify(categories));
-        console.log(`${categories.length} categories written`);
-    });
+module.exports = {
+    processContent
+};

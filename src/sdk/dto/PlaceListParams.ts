@@ -1,3 +1,3 @@
-import { PlaceCategory } from "../models/Place";
+import { PlaceCategorySlug } from "../models";
 
-export type PlaceListParams = Record<PlaceCategory, boolean>;
+export type PlaceListParams = Record<PlaceCategorySlug, boolean>;

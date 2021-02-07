@@ -1,4 +1,4 @@
-import { PlaceCategory } from "../../sdk/models";
+import { PlaceCategorySlug } from "../../sdk/models";
 import { MapStatusState } from "../reducers/status";
 
 export const LIGHT_PLACE_FILTER = 'LIGHT_PLACE_FILTER';
@@ -11,17 +11,17 @@ export const SET_MAP_CENTER = 'SET_MAP_CENTER';
 export const SET_MAP_ZOOM = 'SET_MAP_ZOOM';
 
 export type LightPlaceFilterAction = {
-    payload: PlaceCategory;
+    payload: PlaceCategorySlug;
     type: typeof LIGHT_PLACE_FILTER;
 };
 
 export type SetPlaceFiltersAction = {
-    payload: Record<PlaceCategory, boolean>;
+    payload: Record<PlaceCategorySlug, boolean>;
     type: typeof SET_PLACE_FILTERS;
 };
 
 export type SetPlaceFilterAction = {
-    payload: Partial<Record<PlaceCategory, boolean>>;
+    payload: Partial<Record<PlaceCategorySlug, boolean>>;
     type: typeof SET_PLACE_FILTER;
 };
 
@@ -58,17 +58,17 @@ export type StatusAction = LightPlaceFilterAction |
     SetMapCenterAction |
     SetMapZoomAction;
 
-export const lightPlaceFilter = (placeFilter: PlaceCategory): LightPlaceFilterAction => ({
+export const lightPlaceFilter = (placeFilter: PlaceCategorySlug): LightPlaceFilterAction => ({
     payload: placeFilter,
     type: LIGHT_PLACE_FILTER
 });
 
-export const setPlaceFilters = (placeFilters: Record<PlaceCategory, boolean>): SetPlaceFiltersAction => ({
+export const setPlaceFilters = (placeFilters: Record<PlaceCategorySlug, boolean>): SetPlaceFiltersAction => ({
     payload: placeFilters,
     type: SET_PLACE_FILTERS
 });
 
-export const setPlaceFilter = (placeFilter: Record<PlaceCategory, boolean>): SetPlaceFilterAction => ({
+export const setPlaceFilter = (placeFilter: Record<PlaceCategorySlug, boolean>): SetPlaceFilterAction => ({
     payload: placeFilter,
     type: SET_PLACE_FILTER
 });

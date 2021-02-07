@@ -1,7 +1,7 @@
 import { makeStyles, Theme } from '@material-ui/core';
 import React from 'react';
 
-import { Place } from '../../../../sdk/models/Place';
+import { Place } from '../../../../sdk/models';
 import { PlaceIcon } from '../../../PlaceIcon';
 
 export type PlaceMarkerIconProps = {
@@ -50,7 +50,7 @@ export const PlaceMarkerIcon: React.FunctionComponent<PlaceMarkerIconProps> = (
         <>
             <div className={classes.pin}/>
             <div className={classes.icon}>
-                <PlaceIcon placeCategory={place.category}/>
+                <PlaceIcon placeCategorySlug={place.categories[0]}/>
             </div>
         </>
     );

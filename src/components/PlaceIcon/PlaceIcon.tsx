@@ -13,43 +13,43 @@ import PaletteIcon from '@material-ui/icons/Palette';
 import SpaIcon from '@material-ui/icons/Spa';
 import React from 'react';
 
-import { PlaceCategory } from '../../sdk/models';
+import { PlaceCategorySlug } from '../../sdk/models';
 
 export type PlaceIconProps = {
     className?: string;
-    placeCategory: PlaceCategory;
+    placeCategorySlug: PlaceCategorySlug;
 }
 
 export const PlaceIcon: React.FunctionComponent<PlaceIconProps> = (
-    { className, placeCategory }: PlaceIconProps
+    { className, placeCategorySlug }: PlaceIconProps
 ): JSX.Element => {
     const getIcon = (): JSX.Element => {
-        switch (placeCategory) {
-            case PlaceCategory.ACCOMMODATION:
+        switch (placeCategorySlug) {
+            case PlaceCategorySlug.ACCOMMODATION:
                 return <HotelIcon/>;
-            case PlaceCategory.CAFE:
+            case PlaceCategorySlug.CAFE:
                 return <LocalCafeIcon/>;
-            case PlaceCategory.CLOTHING:
+            case PlaceCategorySlug.CLOTHING:
                 return <LoyaltyIcon/>;
-            case PlaceCategory.COMMUNITY:
+            case PlaceCategorySlug.COMMUNITY:
                 return <ForumIcon/>;
-            case PlaceCategory.COSMETICS:
+            case PlaceCategorySlug.COSMETICS:
                 return <PaletteIcon/>;
-            case PlaceCategory.EVENT:
+            case PlaceCategorySlug.EVENT:
                 return <EventAvailableIcon/>;
-            case PlaceCategory.FARMING:
+            case PlaceCategorySlug.FARMING:
                 return <EmojiNatureIcon/>;
-            case PlaceCategory.GROCERIES:
+            case PlaceCategorySlug.GROCERIES:
                 return <LocalGroceryStoreIcon/>;
-            case PlaceCategory.HOUSING:
+            case PlaceCategorySlug.HOUSING:
                 return <HouseIcon/>;
-            case PlaceCategory.PROJECTS:
+            case PlaceCategorySlug.PROJECTS:
                 return <FolderSharedIcon/>;
-            case PlaceCategory.SHOPPING:
+            case PlaceCategorySlug.SHOPPING:
                 return <LocalMallIcon/>;
-            case PlaceCategory.URBAN_GARDEN:
+            case PlaceCategorySlug.URBAN_GARDEN:
                 return <SpaIcon/>;
-            case PlaceCategory.WINE_CELLAR:
+            case PlaceCategorySlug.WINE_CELLAR:
                 return <LocalBarIcon/>;
             default:
                 return (<span className={className}>?</span>);

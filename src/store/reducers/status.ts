@@ -1,4 +1,4 @@
-import { PlaceCategory } from '../../sdk/models';
+import { PlaceCategorySlug } from '../../sdk/models';
 import { SET_PLACE_FILTERS, StatusAction, SET_SHOW_ONLY_LOVED_PLACES, SET_MAP_CENTER, SET_MAP_ZOOM, SET_MAP, TOGGLE_PLACES_FILTERS, SET_PLACE_FILTER, LIGHT_PLACE_FILTER } from '../actions/status';
 
 export type MapStatusState = {
@@ -8,7 +8,7 @@ export type MapStatusState = {
 
 export type StatusState = {
     map: MapStatusState;
-    placesFilters: Record<PlaceCategory, boolean>;
+    placesFilters: Record<PlaceCategorySlug, boolean>;
     showPlacesFilters: boolean,
     showOnlyLovedPlaces: boolean;
 }
@@ -19,19 +19,19 @@ export const initialState: StatusState = {
         zoom: 6
     },
     placesFilters: {
-        [PlaceCategory.ACCOMMODATION]: true,
-        [PlaceCategory.CAFE]: true,
-        [PlaceCategory.CLOTHING]: true,
-        [PlaceCategory.COMMUNITY]: true,
-        [PlaceCategory.COSMETICS]: true,
-        [PlaceCategory.EVENT]: true,
-        [PlaceCategory.FARMING]: true,
-        [PlaceCategory.GROCERIES]: true,
-        [PlaceCategory.HOUSING]: true,
-        [PlaceCategory.PROJECTS]: true,
-        [PlaceCategory.SHOPPING]: true,
-        [PlaceCategory.URBAN_GARDEN]: true,
-        [PlaceCategory.WINE_CELLAR]: true
+        [PlaceCategorySlug.ACCOMMODATION]: true,
+        [PlaceCategorySlug.CAFE]: true,
+        [PlaceCategorySlug.CLOTHING]: true,
+        [PlaceCategorySlug.COMMUNITY]: true,
+        [PlaceCategorySlug.COSMETICS]: true,
+        [PlaceCategorySlug.EVENT]: true,
+        [PlaceCategorySlug.FARMING]: true,
+        [PlaceCategorySlug.GROCERIES]: true,
+        [PlaceCategorySlug.HOUSING]: true,
+        [PlaceCategorySlug.PROJECTS]: true,
+        [PlaceCategorySlug.SHOPPING]: true,
+        [PlaceCategorySlug.URBAN_GARDEN]: true,
+        [PlaceCategorySlug.WINE_CELLAR]: true
     },
     showPlacesFilters: false,
     showOnlyLovedPlaces: false
@@ -43,19 +43,19 @@ export const reducer = (state: StatusState = initialState, action: StatusAction)
             return {
                 ...state,
                 placesFilters: {
-                    [PlaceCategory.ACCOMMODATION]: false,
-                    [PlaceCategory.CAFE]: false,
-                    [PlaceCategory.CLOTHING]: false,
-                    [PlaceCategory.COMMUNITY]: false,
-                    [PlaceCategory.COSMETICS]: false,
-                    [PlaceCategory.EVENT]: false,
-                    [PlaceCategory.FARMING]: false,
-                    [PlaceCategory.GROCERIES]: false,
-                    [PlaceCategory.HOUSING]: false,
-                    [PlaceCategory.PROJECTS]: false,
-                    [PlaceCategory.SHOPPING]: false,
-                    [PlaceCategory.URBAN_GARDEN]: false,
-                    [PlaceCategory.WINE_CELLAR]: false,
+                    [PlaceCategorySlug.ACCOMMODATION]: false,
+                    [PlaceCategorySlug.CAFE]: false,
+                    [PlaceCategorySlug.CLOTHING]: false,
+                    [PlaceCategorySlug.COMMUNITY]: false,
+                    [PlaceCategorySlug.COSMETICS]: false,
+                    [PlaceCategorySlug.EVENT]: false,
+                    [PlaceCategorySlug.FARMING]: false,
+                    [PlaceCategorySlug.GROCERIES]: false,
+                    [PlaceCategorySlug.HOUSING]: false,
+                    [PlaceCategorySlug.PROJECTS]: false,
+                    [PlaceCategorySlug.SHOPPING]: false,
+                    [PlaceCategorySlug.URBAN_GARDEN]: false,
+                    [PlaceCategorySlug.WINE_CELLAR]: false,
                     [action.payload]: true
                 }
             };

@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 
 import { Layout } from '../../components/Layout';
-import { PlaceCategory, PlaceDimension } from '../../sdk/models';
+import { PlaceCategorySlug, PlaceDimension } from '../../sdk/models';
 import { lightPlaceFilter } from '../../store/actions/status';
 import { Places } from '../../components/Places';
 
@@ -12,14 +12,14 @@ export const Discover: React.FunctionComponent = (): JSX.Element => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const [step, setStep] = useState<1 | 2>(1);
-    const getPlaceCategory = (placeCategoryKey: string) => {
+    const getPlaceCategorySlug = (placeCategoryKey: string) => {
         //@ts-ignore
-        return PlaceCategory[placeCategoryKey];
+        return PlaceCategorySlug[placeCategoryKey];
     };
 
     const handleChange = (event: React.ChangeEvent<{ name?: string, value: unknown}>): void => {
         console.log(event.target.value);
-        dispatch(lightPlaceFilter(event.target.value as PlaceCategory));
+        dispatch(lightPlaceFilter(event.target.value as PlaceCategorySlug));
         setStep(2);
     };
 
@@ -36,9 +36,9 @@ export const Discover: React.FunctionComponent = (): JSX.Element => {
                     }}
                 >
                     <option aria-label={t('search.selector.none')} value=""/>
-                    {Object.keys(PlaceCategory).map((key: string) => (
-                        <option value={getPlaceCategory(key)} key={key}>
-                            {t(`places.filters.labels.${getPlaceCategory(key)}`)}
+                    {Object.keys(PlaceCategorySlug).map((key: string) => (
+                        <option value={getPlaceCategorySlug(key)} key={key}>
+                            {t(`places.filters.labels.${getPlaceCategorySlug(key)}`)}
                         </option>
                     ))}
                 </Select>

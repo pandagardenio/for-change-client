@@ -10,6 +10,7 @@ import { theme } from './utils/theme';
 import './utils/i18n';
 import { ApiClient, SdkProvider, Sdk } from './sdk';
 import { store, persistor } from './store';
+import { PlaceCategoriesProvider } from './providers';
 
 function App() {
     const { t, i18n } = useTranslation();
@@ -22,15 +23,17 @@ function App() {
         <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>
                 <SdkProvider sdk={sdk}>
-                    <ThemeProvider theme={theme}>
-                        <CssBaseline/>
-                        <Helmet>
-                            <html lang={i18n.language}/>
-                            <title>{t('meta.title')}</title>
-                            <meta name="description" content={t('meta.description')}/>
-                        </Helmet>
-                        <AppRouter/>
-                    </ThemeProvider>
+                    <PlaceCategoriesProvider>
+                        <ThemeProvider theme={theme}>
+                            <CssBaseline/>
+                            <Helmet>
+                                <html lang={i18n.language}/>
+                                <title>{t('meta.title')}</title>
+                                <meta name="description" content={t('meta.description')}/>
+                            </Helmet>
+                            <AppRouter/>
+                        </ThemeProvider>
+                    </PlaceCategoriesProvider>
                 </SdkProvider>
             </PersistGate>
         </Provider>
