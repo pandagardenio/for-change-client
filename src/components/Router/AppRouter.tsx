@@ -7,6 +7,7 @@ import { PlacesPhysical } from '../../pages/PlacesPhysical';
 import { PlacesOnline } from '../../pages/PlacesOnline';
 import { Search } from '../../pages/Search';
 import { Discover } from '../../pages/Discover';
+import { Place } from '../../pages/Place';
 
 export const AppRouter: React.FunctionComponent = (): JSX.Element => {
     return (
@@ -15,6 +16,7 @@ export const AppRouter: React.FunctionComponent = (): JSX.Element => {
                 <Route path={AppRoutes.HOME} exact component={Home}/>
                 <Route path={AppRoutes.PLACES_PHYSICAL} exact component={PlacesPhysical}/>
                 <Route path={AppRoutes.PLACES_ONLINE} exact component={PlacesOnline}/>
+                <Route path={AppRoutes.PLACE} exact component={Place}/>
                 <Route path={AppRoutes.SEARCH} exact component={Search}/>
                 <Route path={AppRoutes.DISCOVER} exact component={Discover}/>
                 <Redirect from={AppRoutes.PLACES} exact to={AppRoutes.PLACES_PHYSICAL}/>

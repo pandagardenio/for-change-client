@@ -40,4 +40,15 @@ export class Places {
                 });
             });
     }
+
+    async get(placeSlug: string): Promise<Place> {
+        return this.all()
+            .then((places: Place[]) => places.filter((place: Place) => place.slug === placeSlug)[0])
+            .then((place: Place | undefined) => {
+                if (!place) {
+                    throw new Error();
+                }
+                return place;
+            });
+    }
 }

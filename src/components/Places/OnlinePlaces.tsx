@@ -47,7 +47,6 @@ export const OnlinePlaces: React.FunctionComponent<OnlinePlacesProps> = (
 
     const groupedPlacesByType = useGroupedPlaces(getPlacesToRender());
 
-    console.log(groupedPlacesByType);
     return (
         <>
             <PlacesSearch onChange={handlePlacesSearchChange}/>
