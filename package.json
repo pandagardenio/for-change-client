@@ -1,7 +1,15 @@
 {
-  "name": "@pandagardenio/for-change",
+  "name": "@pandagardenio/for-change-client",
   "version": "0.1.0",
-  "private": true,
+  "author": "pandagardenio",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pandagardenio/for-change-client.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pandagardenio/for-change-client/issues"
+  },
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
@@ -66,6 +74,12 @@
     ]
   },
   "devDependencies": {
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/commit-analyzer": "^8.0.1",
+    "@semantic-release/git": "^9.0.0",
+    "@semantic-release/github": "^7.2.0",
+    "@semantic-release/npm": "^7.0.10",
+    "@semantic-release/release-notes-generator": "^9.0.1",
     "@types/bluebird": "^3.5.33",
     "@types/leaflet": "^1.5.19",
     "@types/pubsub-js": "^1.8.1",

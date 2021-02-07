@@ -1,0 +1,96 @@
+---
+version: 2.1
+
+executors:
+    base:
+        docker:
+            - image: circleci/node:dubnium
+
+jobs:
+    install:
+        executor: base
+
+        steps:
+            - checkout
+
+            - restore_cache:
+                  keys:
+                      - packlink-dependencies-{{ checksum "yarn.lock" }}
+
+            - run:
+                  name: Add NPM token
+                  command: npm set //registry.npmjs.org/:_authToken=$NPM_READ_TOKEN
+
+            - run:
+                  name: Install dependencies
+                  command: yarn install --frozen-lockfile
+
+            - save_cache:
+                  paths:
+                      - node_modules
+
+                  key: packlink-dependencies-{{ checksum "yarn.lock" }}
+
+            - persist_to_workspace:
+                  root: .
+                  paths:
+                      - .
+    build:
+        executor: base
+
+        working_directory: ~/app
+
+        steps:
+            - attach_workspace:
+                  at: .
+
+            - run:
+                  name: Build
+                  command: |
+                      yarn build
+
+            - persist_to_workspace:
+                  root: .
+                  paths:
+                      - build
+
+    release:
+        executor: base
+
+        working_directory: ~/app
+
+        steps:
+            - attach_workspace:
+                  at: .
+
+            - run:
+                  name: Run Semantic Release
+                  command: npx semantic-release
+
+workflows:
+    version: 2
+
+    for-change-client:
+        jobs:
+            - install:
+                  filters:
+                      tags:
+                          only: /.*/
+
+            - build:
+                  requires:
+                      - install
+                  filters:
+                      tags:
+                          only: /.*/
+
+            - release:
+                  context:
+                      - GitHub
+                  requires:
+                      - build
+                  filters:
+                      branches:
+                          only: master
+                      tags:
+                          ignore: /.*/
