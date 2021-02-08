@@ -2,10 +2,11 @@ import { makeStyles, Theme } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { PlaceCategorySlug } from '../../../../sdk/models';
+import { PlaceCategorySlug, PlaceCategory } from '../../../../sdk/models';
 import { getPlacesFilters } from '../../../../store/selectors/status';
 import { setPlaceFilters } from '../../../../store/actions/status';
 import { PlaceFilter } from './PlaceFilter';
+import { usePlaceCategories } from '../../../../hooks';
 
 export type PlacesFiltersValues = Record<PlaceCategorySlug, boolean>;
 
@@ -30,6 +31,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 export const PlacesFilters: React.FunctionComponent<PlacesFiltersProps> = (
     { className }: PlacesFiltersProps
 ): JSX.Element => {
+    const placeCategories = usePlaceCategories();
     const placesFilters = useSelector(getPlacesFilters);
     const classes = useStyles();
     const dispatch = useDispatch();
@@ -48,20 +50,22 @@ export const PlacesFilters: React.FunctionComponent<PlacesFiltersProps> = (
         setFileCount(fileCount + 1);
     };
 
-    const filterKeys = Object.keys(placesFilters);
+    const getPlaceCategories = (): PlaceCategory[] => placeCategories.filter(
+        (placeCategory: PlaceCategory) => placeCategory.count
+    );
 
     return (
         <ul className={`${className ? `${classes.list} ${className}` : classes.list}`}>
-            {filterKeys.slice(0, 4 * fileCount - 1).map((key: string, i: number) => (
-                <li className={classes.listItem} key={key}>
+            {getPlaceCategories().slice(0, 4 * fileCount - 1).map((placeCategory: PlaceCategory, i: number) => (
+                <li className={classes.listItem} key={placeCategory.slug}>
                     <PlaceFilter
-                        onChange={handleOnChange(key)}
-                        placeCategorySlug={key as PlaceCategorySlug}
-                        selected={placesFilters[key as PlaceCategorySlug]}
+                        onChange={handleOnChange(placeCategory.slug)}
+                        placeCategorySlug={placeCategory.slug}
+                        selected={placesFilters[placeCategory.slug]}
                     />
                 </li>
             ))}
-            {(fileCount * 4 < filterKeys.length) && (
+            {(fileCount * 4 < getPlaceCategories().length) && (
                 <li className={classes.listItem}>
                     <PlaceFilter
                         onChange={handleMoreClick}

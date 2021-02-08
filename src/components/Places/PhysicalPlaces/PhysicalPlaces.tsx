@@ -3,7 +3,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import { useTheme } from '@material-ui/core/styles';
 import React from 'react';
 
-import { Place } from '../../../sdk/models/Place';
+import { LatLngBoundsTuple, Place } from '../../../sdk/models';
 import { Map } from '../../Map';
 import { PlacesSidebar } from '../../PlacesSidebar';
 import { useSelector, useDispatch } from 'react-redux';
@@ -12,6 +12,7 @@ import { togglesPlaceFilters } from '../../../store/actions/status';
 import { useTranslation } from 'react-i18next';
 
 export type PhysicalPlacesProps = {
+    bounds?: LatLngBoundsTuple;
     places: Place[];
     rawPlaces: Place[];
 }
@@ -37,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 export const PhysicalPlaces: React.FunctionComponent<PhysicalPlacesProps> = (
-    { places, rawPlaces }: PhysicalPlacesProps
+    { bounds, places, rawPlaces }: PhysicalPlacesProps
 ): JSX.Element => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
@@ -71,7 +72,7 @@ export const PhysicalPlaces: React.FunctionComponent<PhysicalPlacesProps> = (
     return (
         <div className={classes.root}>
             {getPlacesSidebar()}
-            <Map places={places}/>
+            <Map bounds={bounds} places={places}/>
         </div>
     );
 };

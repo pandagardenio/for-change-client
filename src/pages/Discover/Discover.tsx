@@ -1,26 +1,20 @@
-import { FormControl, InputLabel, Select } from '@material-ui/core';
+import { FormControl, InputLabel, Select, DialogContent, Dialog } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
 
 import { Layout } from '../../components/Layout';
-import { PlaceCategorySlug, PlaceDimension } from '../../sdk/models';
-import { lightPlaceFilter } from '../../store/actions/status';
-import { Places } from '../../components/Places';
+import { PlaceCategorySlug, PlaceCategory } from '../../sdk/models';
+import { usePlaceCategories } from '../../hooks';
+import { Redirect } from 'react-router';
+import { AppRoutes, getAppRoute } from '../../components/Router';
 
 export const Discover: React.FunctionComponent = (): JSX.Element => {
     const { t } = useTranslation();
-    const dispatch = useDispatch();
-    const [step, setStep] = useState<1 | 2>(1);
-    const getPlaceCategorySlug = (placeCategoryKey: string) => {
-        //@ts-ignore
-        return PlaceCategorySlug[placeCategoryKey];
-    };
+    const placeCategories = usePlaceCategories();
+    const [placeCategorySlug, setPlaceCategorySlug] = useState<PlaceCategorySlug | null>(null);
 
     const handleChange = (event: React.ChangeEvent<{ name?: string, value: unknown}>): void => {
-        console.log(event.target.value);
-        dispatch(lightPlaceFilter(event.target.value as PlaceCategorySlug));
-        setStep(2);
+        setPlaceCategorySlug(event.target.value as PlaceCategorySlug);
     };
 
     const getStep1 = (): JSX.Element => {
@@ -36,9 +30,9 @@ export const Discover: React.FunctionComponent = (): JSX.Element => {
                     }}
                 >
                     <option aria-label={t('search.selector.none')} value=""/>
-                    {Object.keys(PlaceCategorySlug).map((key: string) => (
-                        <option value={getPlaceCategorySlug(key)} key={key}>
-                            {t(`places.filters.labels.${getPlaceCategorySlug(key)}`)}
+                    {placeCategories.map((category: PlaceCategory) => (
+                        <option value={category.slug} key={category.slug}>
+                            {t(`places.filters.labels.${category.slug}`)}
                         </option>
                     ))}
                 </Select>
@@ -46,21 +40,19 @@ export const Discover: React.FunctionComponent = (): JSX.Element => {
         );
     };
 
-    const getStep2 = (): JSX.Element => {
+    if (placeCategorySlug) {
         return (
-            <>
-                <Places/>
-                <Places placeDimension={PlaceDimension.ONLINE}/>
-            </>
+            <Redirect to={getAppRoute(AppRoutes.DISCOVER_RESULTS, { placeCategorySlug })}/>
         );
-    };
+    }
 
     return (
         <Layout>
-            <>
-                {step === 1 && getStep1()}
-                {step === 2 && getStep2()}
-            </>
+            <Dialog fullWidth={true} open={true}>
+                <DialogContent>
+                    {getStep1()}
+                </DialogContent>
+            </Dialog>
         </Layout>
     )
 };

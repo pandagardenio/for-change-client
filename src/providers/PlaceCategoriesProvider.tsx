@@ -18,7 +18,7 @@ export const PlaceCategoriesProvider: React.FunctionComponent = (
 
     return (
         <PlaceCategoriesContext.Provider value={placeCategories}>
-            {placeCategories && children}
+            {placeCategories.length && children}
         </PlaceCategoriesContext.Provider>
     )
 }

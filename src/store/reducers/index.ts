@@ -1,12 +1,17 @@
 import localForage from 'localforage';
 import { persistCombineReducers } from 'redux-persist';
-import { PlacesAction } from '../actions';
+import { PlacesAction, SearchAction, StatusAction } from '../actions';
 
 import {
     PlacesState,
     initialState as placesInitialState,
     reducer as placesReducer
 } from './places';
+import {
+    SearchState,
+    initialState as searchInitialState,
+    reducer as searchReducer
+} from './search';
 import {
     StatusState,
     initialState as statusInitialState,
@@ -15,15 +20,17 @@ import {
 
 export type AppState = {
     places: PlacesState;
-    status: StatusState
+    search: SearchState;
+    status: StatusState;
 }
 
 export const initialState: AppState = {
     places: placesInitialState,
+    search: searchInitialState,
     status: statusInitialState
 };
 
-export type AppAction = PlacesAction;
+export type AppAction = PlacesAction | SearchAction | StatusAction;
 
 const persistConfig = {
     key: 'root',
@@ -31,9 +38,11 @@ const persistConfig = {
     whitelist: ['places.loved']
 };
 
-const rootReducer = persistCombineReducers<AppState>(persistConfig, {
+const rootReducer = persistCombineReducers<AppState, AppAction>(persistConfig, {
     // @ts-ignore
     places: placesReducer,
+    // @ts-ignore
+    search: searchReducer,
     // @ts-ignore
     status: statusReducer
 });

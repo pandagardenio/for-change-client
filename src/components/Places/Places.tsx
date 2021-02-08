@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 
-import { Place, PlaceDimension } from '../../sdk/models/Place';
+import { LatLngBoundsTuple, Place, PlaceDimension } from '../../sdk/models';
 import { useSdk } from '../../sdk';
 import { PhysicalPlaces } from './PhysicalPlaces';
 import { OnlinePlaces } from './OnlinePlaces';
@@ -10,11 +10,12 @@ import { getLovedPlaces, getSelectedPlaces } from '../../store/selectors';
 import { getPlacesFilters, getShowOnlyLovedPlaces } from '../../store/selectors/status';
 
 export type PlacesProps = {
+    bounds?: LatLngBoundsTuple;
     placeDimension?: PlaceDimension;
 }
 
 export const Places: React.FunctionComponent<PlacesProps> = (
-    { placeDimension = PlaceDimension.PHYSICAL }: PlacesProps
+    { bounds, placeDimension = PlaceDimension.PHYSICAL }: PlacesProps
 ): JSX.Element => {
     const [places, setPlaces] = useState<Place[]>([]);
     const showOnlyLovedPlaces = useSelector(getShowOnlyLovedPlaces);
@@ -59,7 +60,11 @@ export const Places: React.FunctionComponent<PlacesProps> = (
         switch (placeDimension) {
             case PlaceDimension.PHYSICAL:
                 return(
-                    <PhysicalPlaces rawPlaces={places} places={placesToRender.filter((place: Place) => place.isPhysical)}/>
+                    <PhysicalPlaces
+                        bounds={bounds}
+                        rawPlaces={places}
+                        places={placesToRender.filter((place: Place) => place.isPhysical)}
+                    />
                 );
             case PlaceDimension.ONLINE:
                 return (

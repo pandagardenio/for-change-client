@@ -4,14 +4,16 @@ import { MapContainer, TileLayer } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import { useSelector } from 'react-redux';
 
-import { Place, PlaceShop } from '../../sdk/models/Place';
+import { LatLngBoundsTuple, Place, PlaceShop } from '../../sdk/models';
 import { LocateControl } from './LocateControl';
 import { MapMarker, MapMarkerProps } from './MapMarker';
 import { getMapCenter, getMapZoom } from '../../store/selectors';
 import { MapView } from './MapView';
 import { FiltersControl } from './FiltersControl';
+import { FlyToBounds } from './FlyToBounds';
 
 export type MapProps = {
+    bounds?: LatLngBoundsTuple;
     Marker?: React.FunctionComponent<MapMarkerProps>
     places: Place[];
 };
@@ -23,7 +25,9 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-export const Map: React.FunctionComponent<MapProps> = ({ places, Marker = MapMarker}: MapProps): JSX.Element => {
+export const Map: React.FunctionComponent<MapProps> = (
+    { bounds, places, Marker = MapMarker
+}: MapProps): JSX.Element => {
     const classes = useStyles();
     const mapCenter: [number, number] = useSelector(getMapCenter);
     const mapZoom = useSelector(getMapZoom);
@@ -40,6 +44,7 @@ export const Map: React.FunctionComponent<MapProps> = ({ places, Marker = MapMar
                 />
                 <LocateControl/>
                 <FiltersControl/>
+                {bounds && <FlyToBounds bounds={bounds}/>}
                 {/*@ts-ignore*/}
                 <MarkerClusterGroup>
                         {physicalPlaces
